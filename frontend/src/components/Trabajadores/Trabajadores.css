@@ -1,0 +1,82 @@
+.trabajadores-container {
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  background-color: #222;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.trabajadores-container h2 {
+  margin-bottom: 30px;
+  text-align: center;
+  color: #fff;
+}
+
+.trabajadores-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.trabajadores-input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.trabajadores-input-container label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.trabajadores-input-container input,
+.trabajadores-input-container select {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  background-color: #444;
+}
+
+.trabajadores-input-container input:focus,
+.trabajadores-input-container select:focus {
+  outline: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  background-color: #555;
+}
+
+.trabajadores-submit-button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #2980b9;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.trabajadores-submit-button:hover {
+  background-color: #3498db;
+}
+
+@media (max-width: 480px) {
+  .trabajadores-container {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 20px 10px;
+  }
+  
+  .trabajadores-input-container input,
+  .trabajadores-input-container select {
+    font-size: 14px;
+  }
+}
