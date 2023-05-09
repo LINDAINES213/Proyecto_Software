@@ -3,6 +3,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from urllib.parse import quote_plus
+from flask_cors import CORS
 
 password = 'Lind@1155'
 password_encoded = quote_plus(password)
@@ -10,6 +11,7 @@ password_encoded = quote_plus(password)
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:{password_encoded}@localhost/proyecto_software'
 db = SQLAlchemy(app)
+CORS(app)
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
