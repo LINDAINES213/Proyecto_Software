@@ -55,9 +55,9 @@
   <body>
       {% extends './base.html' %}
 
-      {% block title %}Crear Maestro{% endblock %}
+      {% block title %}Añadir Maestro{% endblock %}
       {% block body %}
-      <form class="login-form" action="/usuarios2" method="POST">
+      <form class="login-form" action="/maestros2" method="POST">
         {% with messages = get_flashed_messages() %}
 
         {% if messages %}
@@ -71,7 +71,7 @@
         {% endif %}
 
         {% endwith %}
-        <h1>Crear maestro</h1>
+        <h1>Añadir Maestro</h1>
         <div class="form-floating">
           <input type="text" class="form-control" id="id" name="id" placeholder="ID Maestro" required>
           <label for="id">ID Maestro</label>
@@ -94,7 +94,7 @@
         </div>
         
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Crear maestro</button>
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir maestro</button>
 
       </form>
       {% endblock %}
@@ -108,7 +108,7 @@
             <input type="text" id="curso" name="curso" required>
             <label for="salario">Salario:</label>
             <input type="text" id="salario" name="salario" required>
-            <button type="submit">Crear maestro</button>
+            <button type="submit">Añadir maestro</button>
       </form>
     </body>
   </html>

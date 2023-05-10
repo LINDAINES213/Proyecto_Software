@@ -55,9 +55,9 @@
   <body>
       {% extends './base.html' %}
 
-      {% block title %}Crear Usuario{% endblock %}
+      {% block title %}Añadir Trabajador{% endblock %}
       {% block body %}
-      <form class="login-form" action="/usuarios2" method="POST">
+      <form class="login-form" action="/trabajadores2" method="POST">
         {% with messages = get_flashed_messages() %}
 
         {% if messages %}
@@ -71,18 +71,18 @@
         {% endif %}
 
         {% endwith %}
-        <h1>Crear usuario</h1>
+        <h1>Añadir Trabajador</h1>
         <div class="form-floating">
-          <input type="text" class="form-control" id="id" name="id" placeholder="ID Trabajador" required>
-          <label for="id">ID Trabajador</label>
+            <input type="text" class="form-control" id="id_trabajador" name="id_trabajador" placeholder="ID Trabajador" required>
+            <label for="id_trabajador">ID Trabajador</label>
         </div>
         <div class="form-floating">
-          <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
-          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres" required>
+          <label for="nombres">Nombres</label>
         </div>
         <div class="form-floating">
-          <input type="text" class="form-control" name="apellido" placeholder="Apellido" required>
-          <label for="apellido">Apellido</label>
+          <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" required>
+          <label for="apellidos">Apellidos</label>
         </div>
         <div class="form-floating">
             <input type="text" class="form-control" name="cargo" placeholder="Cargo" required>
@@ -102,12 +102,12 @@
         </div>
         
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Crear usuario</button>
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir Trabajador</button>
 
       </form>
       {% endblock %}
-            <label for="id">ID Trabajador:</label>
-            <input type="text" id="id" name="id" required>
+            <label for="id_trabajador">ID Trabajador:</label>
+            <input type="text" id="id_trabajador" name="id_trabajador" required>
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
             <label for="apellido">Apellido:</label>
@@ -120,7 +120,7 @@
             <input type="text" id="metodo_pago" name="metodo_pago" required>
             <label for="bonus">Bonus:</label>
             <input type="text" id="bonus" name="bonus" required>
-            <button type="submit">Crear usuario</button>
+            <button type="submit">Añadir Trabajador</button>
       </form>
     </body>
   </html>

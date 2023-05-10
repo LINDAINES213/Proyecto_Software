@@ -1,5 +1,5 @@
 class Config:
-    SECRET_KEY = 'PROYECTO_SF'
+    SECRET_KEY = 'SOFTWARE_123'
 
 class DevelopmentConfig(Config):
     DEBUG = True
