@@ -12,28 +12,13 @@ csrf = CSRFProtect(app)
 connection = get_connection()
 CORS(app)
 
-
-
 @app.before_request
 def override_method():
     if request.form.get('_method'):
         request.environ['REQUEST_METHOD'] = request.form['_method'].upper()
 
-"""class Event(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.String(200), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-
-    def __repr__(self):
-        return f"Event: {self.description}"
-    
-    def __init__(self, description):
-        self.description = description"""
-
-
-
 @app.route('/')
-def hello():
+def inicio():
     return render_template('inicio.html')
 
 @app.route('/trabajadores')
@@ -113,12 +98,6 @@ def delete_worker(id):
         flash('Ocurrió un error al intentar eliminar el trabajador.', 'error')
         return redirect('/trabajadores3')
 
-
-
-@app.route('/maestros')
-def maestros():
-    return render_template('maestros.html')
-
 @app.route('/trabajadores3')
 def trabajores3():
     with connection.cursor() as cursor:
@@ -127,55 +106,91 @@ def trabajores3():
         rows = cursor.fetchall()
         return render_template('trabajores3.html', rows=rows)
 
+
+@app.route('/maestros')
+def maestros():
+    return render_template('maestros.html')
+
+@app.route('/maestros2', methods=['POST'])
+def mestros2():
+    try:
+        id_maestro = request.form['id_maestro']
+        nombres = request.form['nombres']
+        apellidos = request.form['apellidos']
+        curso = request.form['curso']
+        salario = request.form['salario']
+
+        with connection.cursor() as cursor:
+            cursor.execute("""INSERT INTO maestro VALUES (%s, %s, %s, %s, %s)""", 
+                           (id_maestro, nombres, apellidos, curso, salario))
+            connection.commit()  
+        return redirect('/maestros3')
+    except Exception as ex:
+        return render_template('maestros.html')
+
+@app.route('/maestros2/<id>/edit', methods=['GET', 'POST'])
+def editar_maestro(id):
+    if request.method == 'GET':
+        # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM maestro WHERE id_maestro = %s", (id,))
+            worker = cursor.fetchone()
+
+        if worker:
+            return render_template('editar_maestro.html', worker=worker)
+        else:
+            return 'Trabajador no encontrado'
+
+    elif request.method == 'POST':
+        # Actualizar los datos del trabajador en la base de datos
+        id_maestro = request.form['id_maestro']
+        nombres = request.form['nombres']
+        apellidos = request.form['apellidos']
+        curso = request.form['curso']
+        salario = request.form['salario']
+
+        with connection.cursor() as cursor:
+            cursor.execute("""UPDATE maestro SET
+                nombres = %s,
+                apellidos = %s,
+                curso = %s,
+                salario = %s
+                WHERE id_maestro = %s
+            """, (nombres, apellidos, curso, salario, id_maestro))
+            connection.commit()
+
+        return redirect('/maestros3')
+    
+@app.route('/maestros2/<id>/delete', methods=['GET', 'POST'])
+def eliminar_maestro(id):
+    try:
+        if request.method == 'POST':
+            with connection.cursor() as cursor:
+                cursor.execute("DELETE FROM maestro WHERE id_maestro = %s", (id,))
+                connection.commit()
+
+            flash('El maestro ha sido eliminado exitosamente.', 'success')
+            return redirect('/maestros3')
+
+        return render_template('eliminar_maestro.html', worker_id=id)
+
+    except Exception as ex:
+        flash('Ocurrió un error al intentar eliminar el trabajador.', 'error')
+        return redirect('/maestros3')
+
+@app.route('/maestros3')
+def mestros3():
+    with connection.cursor() as cursor:
+        cursor.execute("""SELECT * FROM maestro
+                        ORDER BY id_maestro ASC""")
+        rows = cursor.fetchall()
+        return render_template('maestros3.html', rows=rows)
+
+
+
 @app.route('/cursos')
 def cursos():
     return render_template('cursos.html')
-
-#create events
-@app.route('/events', methods=['POST'])
-def create_event():
-    description = request.json['description']
-    event = Event(description)
-    db.session.add(event)
-    db.session.commit()
-    return format_event(event)
-
-#get all events
-@app.route('/events', methods=['GET'])
-def get_events():
-    events = Event.query.order_by(Event.created_at.asc()).all()
-    event_list = []
-    for event in events:
-        event_list.append(format_event(event))
-    return {'events': event_list}
-
-#get single event
-@app.route('/events/<id>', methods=['GET'])
-def get_event(id):
-    try:
-        event = Event.query.filter_by(id=id).one()
-    except NoResultFound:
-        return {'error': 'Event not found'}
-    
-    formatted_event = format_event(event)
-    return {'event': formatted_event}
-
-#delete an event
-@app.route('/events/<id>', methods=['DELETE'])
-def delete_event(id):
-     event = Event.query.filter_by(id=id).one()
-     db.session.delete(event)
-     db.session.commit()
-     return f'Event (id: {id}) deleted!'
-
-#edit an event
-@app.route('/events/<id>', methods=['PUT'])
-def update_event(id):
-    event = Event.query.filter_by(id=id)
-    description = request.json['description']
-    event.update(dict(description = description, created_at = datetime.utcnow()))
-    db.session.commit()
-    return {'event': format_event(event.one())}
 
 def page_not_found(error):
     return "<h1>Not found page</h1>", 404

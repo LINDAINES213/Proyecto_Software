@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Maestros</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th, td {
+			padding: 8px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+
+		tr:hover {
+			background-color: #f5f5f5;
+		}
+
+		th {
+			background-color: #4CAF50;
+			color: white;
+		}
+
+		.edit-button {
+			padding: 4px 8px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+
+		.delete-button {
+			padding: 4px 8px;
+			background-color: #f44336;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<h1>Mestros</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nombres</th>
+				<th>Apellidos</th>
+				<th>Curso</th>
+				<th>Salario</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in rows %}
+				<tr>
+					<td>{{ row[0] }}</td>
+					<td>{{ row[1] }}</td>
+					<td>{{ row[2] }}</td>
+					<td>{{ row[3] }}</td>
+					<td>{{ row[4] }}</td>
+					<td>
+						<button class="edit-button" onclick="editar_maestro('{{ row[0] }}')">Editar</button>
+						<button class="delete-button" onclick="eliminar_maestro('{{ row[0] }}')">Eliminar</button>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<script>
+		function editar_maestro(id) {
+			// Redireccionar al formulario de edición con el ID del trabajador
+			window.location.href = '/maestros2/' + id + '/edit';
+		}
+
+		function eliminar_maestro(id) {
+			// Enviar una solicitud de eliminación del trabajador con el ID
+			if (confirm("¿Estás seguro de que deseas eliminar este trabajador?")) {
+				window.location.href = '/maestros2/' + id + '/delete';
+			}
+		}
+	</script>
+</body>
+</html>
