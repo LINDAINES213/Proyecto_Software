@@ -45,3 +45,17 @@ input, button{
   display: block;
   margin: 8px 0;
 }
+
+.page {
+  display: flex;
+}
+
+.sidebar {
+  width: 20%;
+  background-color: #eee;
+}
+
+.main-content {
+  width: 80%;
+  padding: 20px;
+}
