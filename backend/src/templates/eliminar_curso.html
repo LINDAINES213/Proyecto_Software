@@ -11,8 +11,8 @@
 <body>
 	<h1>Confirmar eliminación</h1>
 	<div class="confirmation">
-		<p>¿Estás seguro de que deseas eliminar este maestro?</p>
-		<form action="/maestros2/{{ maestro_id }}/delete" method="POST">
+		<p>¿Estás seguro de que deseas eliminar este curso?</p>
+		<form action="/cursos2/{{ curso_id }}/delete" method="POST">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Eliminar</button>
 		</form>

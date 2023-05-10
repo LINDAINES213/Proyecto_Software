@@ -85,12 +85,12 @@
           <label for="salon">Salon</label>
         </div>
         <div class="form-floating">
-            <input type="time" class="form-control" name="horaInicio" placeholder="Hora de Inicio" required>
-            <label for="horaInicio">Hora de Inicio</label>
+            <input type="time" class="form-control" name="hora_inicio" placeholder="Hora de Inicio" required>
+            <label for="hora_inicio">Hora de Inicio</label>
         </div>
         <div class="form-floating">
-          <input type="time" class="form-control" name="horaFinal" placeholder="Hora del Final" required>
-          <label for="horaFinal">Hora del Final</label>
+          <input type="time" class="form-control" name="hora_fin" placeholder="Hora del Final" required>
+          <label for="hora_fin">Hora del Final</label>
         </div>
         
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
@@ -104,10 +104,10 @@
             <input type="text" id="nombre" name="nombre" required>
             <label for="salon">Salon:</label>
             <input type="text" id="salon" name="salon" required>
-            <label for="horaInicio">Hora de Inicio:</label>
-            <input type="time" id="horaInicio" name="horaInicio" required>
+            <label for="hora_inicio">Hora de Inicio:</label>
+            <input type="time" id="hora_inicio" name="hora_inicio" required>
             <label for="horaFinal">Hora del final:</label>
-            <input type="time" id="horaFinal" name="horaFinal" required>
+            <input type="time" id="hora_fin" name="hora_fin" required>
             <button type="submit">Añadir usuario</button>
       </form>
     </body>
