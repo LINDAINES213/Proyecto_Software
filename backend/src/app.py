@@ -1,19 +1,17 @@
-from flask import Flask, request, jsonify
-from sqlalchemy.orm.exc import NoResultFound
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template, request, redirect, url_for
+from database.db import get_connection
+from flask_wtf.csrf import CSRFProtect
 from datetime import datetime
-from urllib.parse import quote_plus
 from flask_cors import CORS
+from config import config
 
-password = 'Lind@1155'
-password_encoded = quote_plus(password)
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://postgres:{password_encoded}@localhost/proyecto_software'
-db = SQLAlchemy(app)
+csrf = CSRFProtect(app)
+connection = get_connection()
 CORS(app)
 
-class Event(db.Model):
+"""class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(200), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -22,19 +20,43 @@ class Event(db.Model):
         return f"Event: {self.description}"
     
     def __init__(self, description):
-        self.description = description
+        self.description = description"""
 
-def format_event(event):
-    return {
-        'id': event.id,
-        'description': event.description,
-        'created_at': event.created_at
-    }
 
 
 @app.route('/')
 def hello():
-    return 'Hey!'
+    return render_template('inicio.html')
+
+@app.route('/trabajadores')
+def trabajadores():
+    return render_template('trabajadores.html')
+
+@app.route('/trabajadores2', methods=['POST'])
+def trabajadores2():
+    try:
+        id_medico = request.form['id_medico']
+        dpi = request.form['dpi']
+        nombre = request.form['nombre']
+        telefono = request.form['telefono']
+        direccion = request.form['direccion']
+        num_colegiado = request.form['num_colegiado']
+        especialidades = request.form['especialidades']
+        hospital = request.form['hospital']
+        fecha_contratacion = request.form['fecha_contratacion']
+        correo = request.form['correo']
+        contrasena = request.form['contrasena']
+
+        with connection.cursor() as cursor:
+            cursor.execute("""INSERT INTO medicos VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", 
+                           (id_medico, dpi, nombre, telefono, direccion, num_colegiado, especialidades, hospital, fecha_contratacion, correo, contrasena))
+            connection.commit()                
+        cursor.close()
+        return render_template('confirmaciones.html',)
+
+    except Exception as ex:
+        return render_template('usuarios.html')
+
 
 #create events
 @app.route('/events', methods=['POST'])
@@ -82,5 +104,10 @@ def update_event(id):
     db.session.commit()
     return {'event': format_event(event.one())}
 
+def page_not_found(error):
+    return "<h1>Not found page</h1>", 404
+
 if __name__ == '__main__':
+    app.config.from_object(config['development'])
+    app.register_error_handler(404, page_not_found)
     app.run()

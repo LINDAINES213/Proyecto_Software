@@ -1,0 +1,70 @@
+{% extends './base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class="container">
+  <h2>Portal de Servicios Electrónicos</h2>
+  <form action="/inicioadmin" method="GET">
+    <div class="sidebar">
+      <ul>
+        <li><a href="/trabajadores">Trabajadores</a></li>
+        <li><a href="/salones">Salones</a></li>
+        <li><a href="/cursos">Cursos</a></li>
+        <li><a href="/#">Pago Colegiatura</a></li>
+        <li><a href="/#">Pago a Personal</a></li>
+        <li><a href="/#">Asignacion de Salones</a></li>
+        <li><a href="/#">Pago de Salario</a></li>
+      </ul>
+    </div>
+  </form>
+</div>
+
+<style>
+
+    .sidebar {
+    width: 200px;
+    background-color: #f1f1f1;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    }
+
+    ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    }
+
+    li {
+    padding: 10px;
+    }
+
+    a {
+    color: #000;
+    text-decoration: none;
+    display: block;
+    }
+
+    a:hover {
+    color: #fff;
+    background-color: #73AD21;
+    }
+
+
+    h2 {
+    font-size: 2em;
+    margin: 0;
+    text-align: left;
+    margin-top: 10px;
+    }
+
+    form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+  </style>
+  {% endblock %}
+  

@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Traslados</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .login-form {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+        padding: 20px;
+        max-width: 400px;
+        width: 100%;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+
+      .login-form h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .login-form input[type=text], .login-form input[type=password], .login-form[type=date] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+      }
+
+      .login-form button[type=submit] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+      {% extends './base.html' %}
+
+      {% block title %}Crear Usuario{% endblock %}
+      {% block body %}
+      <form class="login-form" action="/usuarios2" method="POST">
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        <br />
+        {% for message in messages %}
+        <div class="alert alert-primary alert-dismissible" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% endwith %}
+        <h1>Crear usuario</h1>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="id_medico" name="id_medico" placeholder="ID Medico" required>
+          <label for="id_medico">ID Medico</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="dpi" name="dpi" placeholder="DPI" required>
+          <label for="dpi">DPI</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" name="nombre" placeholder="Nombre" required>
+          <label for="nombre">Nombre</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="telefono" placeholder="Telefono" required>
+            <label for="telefono">Telefono</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" name="direccion" placeholder="Direccion" required>
+          <label for="direccion">Direccion</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" name="num_colegiado" placeholder="Numero de Colegiado" required>
+          <label for="num_colegiado">Numero de Colegiado</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" name="especialidades" placeholder="Especialidad" required>
+          <label for="especialidades">Especialidad</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" name="hospital" placeholder="Hospital" required>
+          <label for="hospital">Hospital</label>
+        </div>
+        <div class="form-floating">
+          <input type="date" class="form-control" name="fecha_contratacion" placeholder="Fecha de Contratacion" required>
+          <label for="fecha_contratacion">Fecha de Contratacion</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" name="correo" placeholder="Correo" required>
+          <label for="correo">Correo</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" name="contrasena" placeholder="Contrasena" required>
+          <label for="contrasena">Contrasena</label>
+        </div>
+        
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Crear usuario</button>
+
+      </form>
+      {% endblock %}
+            <label for="id_medico">ID Medico:</label>
+            <input type="text" id="id_medico" name="id_medico" required>
+            <label for="dpi">DPI:</label>
+            <input type="text" id="dpi" name="dpi" required>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <label for="telefono">Telefono:</label>
+            <input type="text" id="telefono" name="telefono" required>
+            <label for="direccion">Direccion:</label>
+            <input type="text" id="direccion" name="direccion" required>
+            <label for="num_colegiado">Numero de Colegiado:</label>
+            <input type="text" id="num_colegiado" name="num_colegiado" required>
+            <label for="especialidad">Especialidad:</label>
+            <input type="text" id="especialidad" name="especialidad" required>
+            <label for="hospital_actual">Hospital Actual:</label>
+            <input type="text" id="hospital_actual" name="hospital_actual " required>
+            <label for="fecha_contratacion">Fecha de Contratacion:</label>
+            <input type="date" id="fecha_contratacion" name="fecha_contratacion" required>
+            <label for="correo">Correo:</label>
+            <input type="text" id="correo" name="correo" required>
+            <label for="contrasena">Contrasena:</label>
+            <input type="password" id="contrasena" name="contrasena" required>
+            <button type="submit">Crear usuario</button>
+      </form>
+    </body>
+  </html>
