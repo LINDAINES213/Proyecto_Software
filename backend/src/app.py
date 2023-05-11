@@ -268,7 +268,7 @@ def cursos3():
         return render_template('cursos3.html', rows=rows)
 
 def page_not_found(error):
-    return "<h1>Not found page</h1>", 404
+    return f"<h1 style={{text-align: 'center'}}>UNDER CONSTRUCTION 🛠️</h1>", 404
 
 if __name__ == '__main__':
     app.config.from_object(config['development'])
