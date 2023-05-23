@@ -48,8 +48,10 @@
 				<th>ID</th>
 				<th>Nombres</th>
 				<th>Apellidos</th>
-				<th>Curso</th>
+				<th>Curso 1</th>
+				<th>Curso 2</th>
 				<th>Salario</th>
+				<th>Fecha de Contratacion</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
@@ -61,6 +63,8 @@
 					<td>{{ row[2] }}</td>
 					<td>{{ row[3] }}</td>
 					<td>{{ row[4] }}</td>
+					<td>{{ row[5] }}</td>
+					<td>{{ row[6] }}</td>
 					<td>
 						<button class="edit-button" onclick="editar_maestro('{{ row[0] }}')">Editar</button>
 						<button class="delete-button" onclick="eliminar_maestro('{{ row[0] }}')">Eliminar</button>
@@ -71,15 +75,15 @@
 	</table>
 
 	<script>
-		function editar_maestro(id) {
+		function editar_maestro(dpi) {
 			// Redireccionar al formulario de edición con el ID del trabajador
-			window.location.href = '/maestros2/' + id + '/edit';
+			window.location.href = '/maestros2/' + dpi + '/edit';
 		}
 
-		function eliminar_maestro(id) {
+		function eliminar_maestro(dpi) {
 			// Enviar una solicitud de eliminación del trabajador con el ID
 			if (confirm("¿Estás seguro de que deseas eliminar este trabajador?")) {
-				window.location.href = '/maestros2/' + id + '/delete';
+				window.location.href = '/maestros2/' + dpi + '/delete';
 			}
 		}
 	</script>

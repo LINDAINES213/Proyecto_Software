@@ -6,8 +6,8 @@
 <body>
 	<h1>Editar Maestro</h1>
 	<form action="/maestros2/{{ maestro[0] }}/edit" method="POST">
-		<label for="id_maestro">ID Maestro:</label>
-		<input type="text" id="id_maestro" name="id_maestro" value="{{ maestro[0] }}" readonly>
+		<label for="dpi">DPI:</label>
+		<input type="text" id="dpi" name="dpi" value="{{ maestro[0] }}" readonly>
 		<br>
 		<label for="nombres">Nombres:</label>
 		<input type="text" id="nombres" name="nombres" value="{{ maestro[1] }}">
@@ -15,11 +15,17 @@
 		<label for="apellidos">Apellidos:</label>
 		<input type="text" id="apellidos" name="apellidos" value="{{ maestro[2] }}">
 		<br>
-		<label for="curso">Curso:</label>
-		<input type="text" id="curso" name="curso" value="{{ maestro[3] }}">
+		<label for="curso_1">Curso 1:</label>
+		<input type="text" id="curso_1" name="curso_1" value="{{ maestro[3] }}">
+		<br>
+		<label for="curso_2">Curso 2:</label>
+		<input type="text" id="curso_2" name="curso_2" value="{{ maestro[4] }}">
 		<br>
 		<label for="salario">Salario:</label>
-		<input type="text" id="salario" name="salario" value="{{ maestro[4] }}">
+		<input type="number" id="salario" name="salario" value="{{ maestro[5] }}">
+		<br>
+		<label for="fecha_contratacion">Fecha de Contratacion:</label>
+		<input type="date" id="fecha_contratacion" name="fecha_contratacion" value="{{ maestro[6] }}" readonly>
 		<br>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Guardar</button>
