@@ -186,8 +186,6 @@ def mestros3():
         rows = cursor.fetchall()
         return render_template('maestros3.html', rows=rows)
 
-
-
 @app.route('/cursos')
 def cursos():
     return render_template('cursos.html')
@@ -266,6 +264,88 @@ def cursos3():
                         ORDER BY id_curso ASC""")
         rows = cursor.fetchall()
         return render_template('cursos3.html', rows=rows)
+
+@app.route('/salones')
+def salones():
+    return render_template('salones.html')
+
+@app.route('/salones2', methods=['POST'])
+def salones2():
+    try:
+        id_salon = request.form['id_salon']
+        salon = request.form['salon']
+        aforo = request.form['aforo']
+        dpi_maestro = request.form['dpi_maestro']
+        grado_asignado = request.form['grado_asignado']
+        seccion_asignada = request.form['seccion_asignada']
+
+        with connection.cursor() as cursor:
+            cursor.execute("""INSERT INTO salon VALUES (%s, %s, %s, %s, %s, %s)""", 
+                           (id_salon, salon, aforo, dpi_maestro, grado_asignado, seccion_asignada))
+            connection.commit()  
+        return redirect('/salones3')
+    except Exception as ex:
+        return render_template('salones.html')
+
+@app.route('/salones2/<id>/edit', methods=['GET', 'POST'])
+def editar_salon(id):
+    if request.method == 'GET':
+        # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM salon WHERE id_salon = %s", (id,))
+            salon = cursor.fetchone()
+
+        if salon:
+            return render_template('editar_salon.html', salon=salon)
+        else:
+            return 'Salon no encontrado'
+
+    elif request.method == 'POST':
+        # Actualizar los datos del salon en la base de datos
+        id_salon = request.form['id_salon']
+        salon = request.form['salon']
+        aforo = request.form['aforo']
+        dpi_maestro = request.form['dpi_maestro']
+        grado_asignado = request.form['grado_asignado']
+        seccion_asignada = request.form['seccion_asignada']
+
+        with connection.cursor() as cursor:
+            cursor.execute("""UPDATE salon SET
+                salon = %s,
+                aforo = %s,
+                dpi_maestro = %s,
+                grado_asignado = %s,
+                seccion_asignada = %s
+                WHERE id_salon = %s
+            """, (salon, aforo, dpi_maestro, grado_asignado, seccion_asignada, id_salon))
+            connection.commit()
+
+        return redirect('/salones3')
+    
+@app.route('/salones2/<id>/delete', methods=['GET', 'POST'])
+def eliminar_salon(id):
+    try:
+        if request.method == 'POST':
+            with connection.cursor() as cursor:
+                cursor.execute("DELETE FROM salon WHERE id_salon = %s", (id,))
+                connection.commit()
+
+            flash('El salon ha sido eliminado exitosamente.', 'success')
+            return redirect('/salones3')
+
+        return render_template('eliminar_salon.html', salon_id=id)
+
+    except Exception as ex:
+        flash('Ocurrió un error al intentar eliminar el salon.', 'error')
+        return redirect('/salones3')
+
+@app.route('/salones3')
+def salones3():
+    with connection.cursor() as cursor:
+        cursor.execute("""SELECT * FROM salon
+                        ORDER BY id_salon ASC""")
+        rows = cursor.fetchall()
+        return render_template('salones3.html', rows=rows)
 
 def page_not_found(error):
     return f"<h1 style={{text-align: 'center'}}>UNDER CONSTRUCTION 🛠️</h1>", 404
