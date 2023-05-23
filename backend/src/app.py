@@ -28,28 +28,29 @@ def trabajadores():
 @app.route('/trabajadores2', methods=['POST'])
 def trabajadores2():
     try:
-        id_trabajador = request.form['id_trabajador']
+        dpi = request.form['dpi']
         nombres = request.form['nombres']
         apellidos = request.form['apellidos']
         cargo = request.form['cargo']
         salario = request.form['salario']
-        metodo_pago = request.form['metodo_pago']
+        metodo_de_pago = request.form['metodo_de_pago']
         bonus = request.form['bonus']
+        fecha_contratacion = request.form['fecha_contratacion']
 
         with connection.cursor() as cursor:
-            cursor.execute("""INSERT INTO trabajador VALUES (%s, %s, %s, %s, %s, %s, %s)""", 
-                           (id_trabajador, nombres, apellidos, cargo, salario, metodo_pago, bonus))
+            cursor.execute("""INSERT INTO trabajadores VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""", 
+                           (dpi, nombres, apellidos, cargo, salario, metodo_de_pago, bonus, fecha_contratacion))
             connection.commit()  
         return redirect('/trabajadores3')
     except Exception as ex:
         return render_template('trabajadores.html')
 
-@app.route('/trabajadores2/<id>/edit', methods=['GET', 'POST'])
-def edit_worker(id):
+@app.route('/trabajadores2/<dpi>/edit', methods=['GET', 'POST'])
+def edit_worker(dpi):
     if request.method == 'GET':
         # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
         with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM trabajador WHERE id_trabajador = %s", (id,))
+            cursor.execute("SELECT * FROM trabajadores WHERE dpi = %s", (dpi,))
             worker = cursor.fetchone()
 
         if worker:
@@ -59,40 +60,40 @@ def edit_worker(id):
 
     elif request.method == 'POST':
         # Actualizar los datos del trabajador en la base de datos
-        id_trabajador = request.form['id_trabajador']
+        dpi = request.form['dpi']
         nombres = request.form['nombres']
         apellidos = request.form['apellidos']
         cargo = request.form['cargo']
         salario = request.form['salario']
-        metodo_pago = request.form['metodo_pago']
+        metodo_de_pago = request.form['metodo_de_pago']
         bonus = request.form['bonus']
 
         with connection.cursor() as cursor:
-            cursor.execute("""UPDATE trabajador SET
+            cursor.execute("""UPDATE trabajadores SET
                 nombres = %s,
                 apellidos = %s,
                 cargo = %s,
                 salario = %s,
-                metodo_pago = %s,
+                metodo_de_pago = %s,
                 bonus = %s
-                WHERE id_trabajador = %s
-            """, (nombres, apellidos, cargo, salario, metodo_pago, bonus, id_trabajador))
+                WHERE dpi = %s
+            """, (nombres, apellidos, cargo, salario, metodo_de_pago, bonus, dpi))
             connection.commit()
 
         return redirect('/trabajadores3')
     
-@app.route('/trabajadores2/<id>/delete', methods=['GET', 'POST'])
-def delete_worker(id):
+@app.route('/trabajadores2/<dpi>/delete', methods=['GET', 'POST'])
+def delete_worker(dpi):
     try:
         if request.method == 'POST':
             with connection.cursor() as cursor:
-                cursor.execute("DELETE FROM trabajador WHERE id_trabajador = %s", (id,))
+                cursor.execute("DELETE FROM trabajadores WHERE dpi = %s", (dpi,))
                 connection.commit()
 
             flash('El trabajador ha sido eliminado exitosamente.', 'success')
             return redirect('/trabajadores3')
 
-        return render_template('eliminar_trabajador.html', worker_id=id)
+        return render_template('eliminar_trabajador.html', worker_dpi=dpi)
 
     except Exception as ex:
         flash('Ocurrió un error al intentar eliminar el trabajador.', 'error')
@@ -101,8 +102,8 @@ def delete_worker(id):
 @app.route('/trabajadores3')
 def trabajores3():
     with connection.cursor() as cursor:
-        cursor.execute("""SELECT * FROM trabajador
-                        ORDER BY id_trabajador ASC""")
+        cursor.execute("""SELECT * FROM trabajadores
+                        ORDER BY dpi ASC""")
         rows = cursor.fetchall()
         return render_template('trabajores3.html', rows=rows)
 

@@ -6,8 +6,8 @@
 <body>
 	<h1>Editar Trabajador</h1>
 	<form action="/trabajadores2/{{ worker[0] }}/edit" method="POST">
-		<label for="id_trabajador">ID Trabajador:</label>
-		<input type="text" id="id_trabajador" name="id_trabajador" value="{{ worker[0] }}" readonly>
+		<label for="dpi">DPI:</label>
+		<input type="text" id="dpi" name="dpi" value="{{ worker[0] }}" readonly>
 		<br>
 		<label for="nombres">Nombres:</label>
 		<input type="text" id="nombres" name="nombres" value="{{ worker[1] }}">
@@ -19,13 +19,13 @@
 		<input type="text" id="cargo" name="cargo" value="{{ worker[3] }}">
 		<br>
 		<label for="salario">Salario:</label>
-		<input type="text" id="salario" name="salario" value="{{ worker[4] }}">
+		<input type="number" id="salario" name="salario" value="{{ worker[4] }}">
 		<br>
-		<label for="metodo_pago">Método de Pago:</label>
-		<input type="text" id="metodo_pago" name="metodo_pago" value="{{ worker[5] }}">
+		<label for="metodo_de_pago">Método de Pago:</label>
+		<input type="text" id="metodo_de_pago" name="metodo_de_pago" value="{{ worker[5] }}">
 		<br>
 		<label for="bonus">Bonus:</label>
-		<input type="text" id="bonus" name="bonus" value="{{ worker[6] }}">
+		<input type="number" id="bonus" name="bonus" value="{{ worker[6] }}">
 		<br>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Guardar</button>

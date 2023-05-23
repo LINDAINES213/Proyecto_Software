@@ -30,7 +30,7 @@
         margin-bottom: 20px;
       }
 
-      .login-form input[type=text], .login-form input[type=password], .login-form[type=date] {
+      .login-form input[type=text], .login-form input[type=password], .login-form input[type=number], .login-form input[type=date] {
         display: block;
         width: 100%;
         padding: 10px;
@@ -73,8 +73,8 @@
         {% endwith %}
         <h1>Añadir Trabajador</h1>
         <div class="form-floating">
-            <input type="text" class="form-control" id="id_trabajador" name="id_trabajador" placeholder="ID Trabajador" required>
-            <label for="id_trabajador">ID Trabajador</label>
+            <input type="text" class="form-control" id="dpi" name="dpi" placeholder="DPI" required>
+            <label for="dpi">DPI</label>
         </div>
         <div class="form-floating">
           <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres" required>
@@ -89,37 +89,42 @@
             <label for="cargo">Cargo</label>
         </div>
         <div class="form-floating">
-          <input type="text" class="form-control" name="salario" placeholder="Salario" required>
+          <input type="number" class="form-control" name="salario" placeholder="Salario" required>
           <label for="salario">Salario</label>
         </div>
         <div class="form-floating">
-          <input type="text" class="form-control" name="metodo_pago" placeholder="Metodo de Pago" required>
-          <label for="metodo_pago">Metodo de Pago</label>
+          <input type="text" class="form-control" name="metodo_de_pago" placeholder="Metodo de Pago" required>
+          <label for="metodo_de_pago">Metodo de Pago</label>
         </div>
         <div class="form-floating">
-          <input type="text" class="form-control" name="bonus" placeholder="Bonus" required>
+          <input type="number" class="form-control" name="bonus" placeholder="Bonus" required>
           <label for="bonus">Bonus</label>
         </div>
-        
+        <div class="form-floating">
+          <input type="date" class="form-control" name="fecha_contratacion" placeholder="fecha_contratacion" required>
+          <label for="fecha_contratacion">Fecha de Contratacion</label>
+        </div>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir Trabajador</button>
 
       </form>
       {% endblock %}
-            <label for="id_trabajador">ID Trabajador:</label>
-            <input type="text" id="id_trabajador" name="id_trabajador" required>
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required>
-            <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" name="apellido" required>
+            <label for="dpi">DPI:</label>
+            <input type="text" id="dpi" name="dpi" required>
+            <label for="nombres">Nombre:</label>
+            <input type="text" id="nombres" name="nombres" required>
+            <label for="apellidos">Apellido:</label>
+            <input type="text" id="apellidos" name="apellidos" required>
             <label for="cargo">Cargo:</label>
             <input type="text" id="cargo" name="cargo" required>
             <label for="salario">Salario:</label>
-            <input type="text" id="salario" name="salario" required>
-            <label for="metodo_pago">Metodo de Pago:</label>
-            <input type="text" id="metodo_pago" name="metodo_pago" required>
+            <input type="number" id="salario" name="salario" required>
+            <label for="metodo_de_pago">Metodo de Pago:</label>
+            <input type="text" id="metodo_de_pago" name="metodo_de_pago" required>
             <label for="bonus">Bonus:</label>
-            <input type="text" id="bonus" name="bonus" required>
+            <input type="number" id="bonus" name="bonus" required>
+            <label for="fecha_contratacion">Fecha de Contratacion:</label>
+            <input type="date" id="fecha_contratacion" name="fecha_contratacion" required>
             <button type="submit">Añadir Trabajador</button>
       </form>
     </body>
