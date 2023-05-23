@@ -77,28 +77,12 @@
           <label for="dpi">DPI</label>
         </div>
         <div class="form-floating">
-          <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres" required>
-          <label for="nombres">Nombres</label>
-        </div>
-        <div class="form-floating">
-          <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" required>
-          <label for="apellidos">Apellidos</label>
-        </div>
-        <div class="form-floating">
             <input type="text" class="form-control" name="curso_1" placeholder="curso_1" required>
             <label for="curso_1">Curso 1</label>
         </div>
         <div class="form-floating">
           <input type="text" class="form-control" name="curso_2" placeholder="curso_2">
           <label for="curso_2">Curso 2</label>
-        </div>
-        <div class="form-floating">
-          <input type="number" class="form-control" name="salario" placeholder="Salario" required>
-          <label for="salario">Salario</label>
-        </div>
-        <div class="form-floating">
-          <input type="date" class="form-control" name="fecha_contratacion" placeholder="Fecha de Contratacion" required>
-          <label for="fecha_contratacion">Fecha de Contratacion</label>
         </div>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir maestro</button>
@@ -107,18 +91,10 @@
       {% endblock %}
             <label for="dpi">DPI:</label>
             <input type="text" id="dpi" name="dpi" required>
-            <label for="nombres">Nombres:</label>
-            <input type="text" id="nombres" name="nombres" required>
-            <label for="apellidos">Apellidos:</label>
-            <input type="text" id="apellidos" name="apellidos" required>
             <label for="curso_1">Curso 1:</label>
             <input type="text" id="curso_1" name="curso_1" required>
             <label for="curso_2">Curso 2:</label>
             <input type="text" id="curso_2" name="curso_2">
-            <label for="salario">Salario:</label>
-            <input type="number" id="salario" name="salario" required>
-            <label for="fecha_contratacion">Fecha de Contratacion:</label>
-            <input type="date" id="fecha_contratacion" name="fecha_contratacion" required>
             <button type="submit">Añadir maestro</button>
       </form>
     </body>

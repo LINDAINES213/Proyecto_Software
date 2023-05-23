@@ -116,16 +116,12 @@ def maestros():
 def mestros2():
     try:
         dpi = request.form['dpi']
-        nombres = request.form['nombres']
-        apellidos = request.form['apellidos']
         curso_1 = request.form['curso_1']
         curso_2 = request.form['curso_2']
-        salario = request.form['salario']
-        fecha_contratacion = request.form['fecha_contratacion']
 
         with connection.cursor() as cursor:
-            cursor.execute("""INSERT INTO maestros VALUES (%s, %s, %s, %s, %s, %s, %s)""", 
-                           (dpi, nombres, apellidos, curso_1, curso_2, salario, fecha_contratacion))
+            cursor.execute("""INSERT INTO maestros VALUES (%s, %s, %s)""", 
+                           (dpi, curso_1, curso_2))
             connection.commit()  
         return redirect('/maestros3')
     except Exception as ex:
@@ -147,21 +143,15 @@ def editar_maestro(dpi):
     elif request.method == 'POST':
         # Actualizar los datos del trabajador en la base de datos
         dpi = request.form['dpi']
-        nombres = request.form['nombres']
-        apellidos = request.form['apellidos']
         curso_1 = request.form['curso_1']
         curso_2 = request.form['curso_2']
-        salario = request.form['salario']
 
         with connection.cursor() as cursor:
             cursor.execute("""UPDATE maestros SET
-                nombres = %s,
-                apellidos = %s,
                 curso_1 = %s,
-                curso_2 = %s,
-                salario = %s
+                curso_2 = %s
                 WHERE dpi = %s
-            """, (nombres, apellidos, curso_1, curso_2, salario, dpi))
+            """, (curso_1, curso_2, dpi))
             connection.commit()
 
         return redirect('/maestros3')
@@ -186,7 +176,8 @@ def eliminar_maestro(dpi):
 @app.route('/maestros3')
 def mestros3():
     with connection.cursor() as cursor:
-        cursor.execute("""SELECT * FROM maestros
+        cursor.execute("""SELECT t.dpi, CONCAT(t.nombres,' ', t.apellidos) AS maestro, curso_1, curso_2 FROM maestros
+                        LEFT JOIN trabajadores t ON t.dpi = maestros.dpi
                         ORDER BY dpi ASC""")
         rows = cursor.fetchall()
         return render_template('maestros3.html', rows=rows)
