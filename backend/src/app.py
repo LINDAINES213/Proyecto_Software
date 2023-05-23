@@ -267,7 +267,9 @@ def eliminar_curso(id):
 @app.route('/cursos3')
 def cursos3():
     with connection.cursor() as cursor:
-        cursor.execute("""SELECT * FROM curso
+        cursor.execute("""SELECT id_curso, nombre, CONCAT(m.nombres,' ', m.apellidos) AS maestro, salon, hora_inicio, hora_fin 
+                        FROM curso
+                        LEFT JOIN maestros m ON m.dpi = curso.maestro
                         ORDER BY id_curso ASC""")
         rows = cursor.fetchall()
         return render_template('cursos3.html', rows=rows)
