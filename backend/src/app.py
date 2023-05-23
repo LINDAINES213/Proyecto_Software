@@ -221,8 +221,8 @@ def editar_curso(id):
         # Actualizar los datos del trabajador en la base de datos
         id_curso = request.form['id_curso']
         nombre = request.form['nombre']
-        salon = request.form['salon']
         maestro = request.form['maestro']
+        salon = request.form['salon']
         hora_inicio = request.form['hora_inicio']
         hora_final = request.form['hora_fin']
 
@@ -234,7 +234,7 @@ def editar_curso(id):
                 hora_inicio = %s,
                 hora_fin = %s
                 WHERE id_curso = %s
-            """, (nombre, maestro, salon,hora_inicio, hora_final, id_curso))
+            """, (nombre, maestro, salon, hora_inicio, hora_final, id_curso))
             connection.commit()
 
         return redirect('/cursos3')
