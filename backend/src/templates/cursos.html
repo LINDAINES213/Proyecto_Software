@@ -30,7 +30,7 @@
         margin-bottom: 20px;
       }
 
-      .login-form input[type=text], .login-form input[type=password], .login-form input[type=date],  .login-form input[type=time]{
+      .login-form input[type=text], .login-form input[type=password], .login-form input[type=date],  .login-form input[type=time], .login-form input[type=number]{
         display: block;
         width: 100%;
         padding: 10px;
@@ -73,12 +73,16 @@
         {% endwith %}
         <h1>Añadir curso</h1>
         <div class="form-floating">
-          <input type="text" class="form-control" id="id_curso" name="id_curso" placeholder="ID Curso" required>
+          <input type="number" class="form-control" id="id_curso" name="id_curso" placeholder="ID Curso" required>
           <label for="id_curso">ID Curso</label>
         </div>
         <div class="form-floating">
           <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
           <label for="nombre">Nombre</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="maestro" name="maestro" placeholder="Maestro" required>
+          <label for="maestro">Maestro</label>
         </div>
         <div class="form-floating">
           <input type="text" class="form-control" name="salon" placeholder="Salon" required>
@@ -99,9 +103,11 @@
       </form>
       {% endblock %}
             <label for="id_curso">ID Curso:</label>
-            <input type="text" id="id_curso" name="id_curso" required>
+            <input type="number" id="id_curso" name="id_curso" required>
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
+            <label for="maestro">Maestro:</label>
+            <input type="text" id="maestro" name="maestro" required>
             <label for="salon">Salon:</label>
             <input type="text" id="salon" name="salon" required>
             <label for="hora_inicio">Hora de Inicio:</label>

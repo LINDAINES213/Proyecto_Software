@@ -200,13 +200,14 @@ def cursos2():
     try:
         id_curso = request.form['id_curso']
         nombre = request.form['nombre']
+        maestro = request.form['maestro']
         salon = request.form['salon']
         hora_inicio = request.form['hora_inicio']
         hora_fin = request.form['hora_fin']
 
         with connection.cursor() as cursor:
-            cursor.execute("""INSERT INTO curso VALUES (%s, %s, %s, %s, %s)""", 
-                           (id_curso, nombre, salon, hora_inicio, hora_fin))
+            cursor.execute("""INSERT INTO curso VALUES (%s, %s, %s, %s, %s, %s)""", 
+                           (id_curso, nombre, maestro, salon, hora_inicio, hora_fin))
             connection.commit()  
         return redirect('/cursos3')
     except Exception as ex:
@@ -236,6 +237,7 @@ def editar_curso(id):
         with connection.cursor() as cursor:
             cursor.execute("""UPDATE curso SET
                 nombre = %s,
+                maestro = %s,
                 salon = %s,
                 hora_inicio = %s,
                 hora_fin = %s

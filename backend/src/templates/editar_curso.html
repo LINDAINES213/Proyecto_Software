@@ -12,14 +12,17 @@
 		<label for="nombre">Nombre:</label>
 		<input type="text" id="nombre" name="nombre" value="{{ cur[1] }}">
 		<br>
+		<label for="maestro">Maestro:</label>
+		<input type="text" id="maestro" name="maestro" value="{{ cur[2] }}">
+		<br>
 		<label for="salon">Salon:</label>
-		<input type="text" id="salon" name="salon" value="{{ cur[2] }}">
+		<input type="text" id="salon" name="salon" value="{{ cur[3] }}">
 		<br>
 		<label for="hora_inicio">Hora de Inicio:</label>
-		<input type="text" id="hora_inicio" name="hora_inicio" value="{{ cur[3] }}">
+		<input type="text" id="hora_inicio" name="hora_inicio" value="{{ cur[4] }}">
 		<br>
 		<label for="hora_fin">Hora de Final:</label>
-		<input type="text" id="hora_fin" name="hora_fin" value="{{ cur[4] }}">
+		<input type="text" id="hora_fin" name="hora_fin" value="{{ cur[5] }}">
 		<br>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Guardar</button>
