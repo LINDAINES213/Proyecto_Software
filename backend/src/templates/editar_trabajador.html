@@ -30,6 +30,9 @@
 		<label for="fecha_contratacion">Fecha de Contratacion:</label>
 		<input type="date" id="fecha_contratacion" name="fecha_contratacion" value="{{ worker[7] }}" readonly>
 		<br>
+		<label for="fecha_pago">Fecha de Pgo:</label>
+		<input type="date" id="fecha_pago" name="fecha_pago" value="{{ worker[8] }}" readonly>
+		<br>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Guardar</button>
 	</form>
