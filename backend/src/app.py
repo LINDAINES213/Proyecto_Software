@@ -529,6 +529,75 @@ def grados3():
         rows = cursor.fetchall()
         return render_template('grados3.html', rows=rows)
     
+@app.route('/secciones')
+def secciones():
+    return render_template('secciones.html')
+
+@app.route('/secciones2', methods=['POST'])
+def secciones2():
+    try:
+        id_seccion = request.form['id_seccion']
+        id_grado = request.form['id_grado']
+        seccion = request.form['seccion']
+
+        with connection.cursor() as cursor:
+            cursor.execute("""INSERT INTO seccion VALUES (%s, %s, %s)""", 
+                           (id_seccion, id_grado, seccion))
+            connection.commit()  
+        return redirect('/secciones3')
+    except Exception as ex:
+        return render_template('secciones.html')
+
+@app.route('/secciones2/<id>/edit', methods=['GET', 'POST'])
+def editar_seccion(id):
+    if request.method == 'GET':
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM seccion WHERE id_seccion = %s", (id,))
+            seccion = cursor.fetchone()
+
+        if seccion:
+            return render_template('editar_seccion.html', seccion=seccion)
+        else:
+            return 'Seccion no encontrado'
+
+    elif request.method == 'POST':
+        id_seccion = request.form['id_seccion']
+        seccion = request.form['seccion']
+
+        with connection.cursor() as cursor:
+            cursor.execute("""UPDATE seccion SET
+                seccion = %s
+                WHERE id_seccion = %s
+            """, (seccion, id_seccion))
+            connection.commit()
+
+        return redirect('/secciones3')
+    
+@app.route('/secciones2/<id>/delete', methods=['GET', 'POST'])
+def eliminar_seccion(id):
+    try:
+        if request.method == 'POST':
+            with connection.cursor() as cursor:
+                cursor.execute("DELETE FROM seccion WHERE id_seccion = %s", (id,))
+                connection.commit()
+
+            flash('El salon ha sido eliminado exitosamente.', 'success')
+            return redirect('/secciones3')
+
+        return render_template('eliminar_seccion.html', id_seccion=id)
+
+    except Exception as ex:
+        flash('Ocurrió un error al intentar eliminar el salon.', 'error')
+        return redirect('/secciones3')
+
+@app.route('/secciones3')
+def secciones3():
+    with connection.cursor() as cursor:
+        cursor.execute("""SELECT * FROM seccion
+                        ORDER BY id_seccion ASC""")
+        rows = cursor.fetchall()
+        return render_template('secciones3.html', rows=rows)
+
 @app.route('/pagoP')
 def pagoP():
     with connection.cursor() as cursor:

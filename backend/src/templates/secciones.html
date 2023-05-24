@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Grados</title>
+    <title>Secciones</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -54,9 +55,9 @@
   <body>
       {% extends './base.html' %}
 
-      {% block title %}Añadir Grado{% endblock %}
+      {% block title %}Añadir Seccion{% endblock %}
       {% block body %}
-      <form class="login-form" action="/grados2" method="POST">
+      <form class="login-form" action="/secciones2" method="POST">
         {% with messages = get_flashed_messages() %}
 
         {% if messages %}
@@ -70,25 +71,31 @@
         {% endif %}
 
         {% endwith %}
-        <h1>Añadir Grado</h1>
+        <h1>Añadir Seccion</h1>
+        <div class="form-floating">
+            <input type="number" class="form-control" id="id_seccion" name="id_seccion" placeholder="ID Seccion" required>
+            <label for="id_seccion">ID Seccion</label>
+          </div>
         <div class="form-floating">
           <input type="number" class="form-control" id="id_grado" name="id_grado" placeholder="ID Grado" required>
           <label for="id_grado">ID Grado</label>
         </div>
         <div class="form-floating">
-            <input type="text" class="form-control" name="grado" placeholder="grado" required>
-            <label for="grado">Grado</label>
+            <input type="text" class="form-control" name="seccion" placeholder="seccion" required>
+            <label for="seccion">Seccion</label>
         </div>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir maestro</button>
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir Seccion</button>
 
       </form>
       {% endblock %}
+            <label for="id_seccion">ID Seccion:</label>
+            <input type="number" id="id_seccion" name="id_seccion" required>
             <label for="id_grado">ID Grado:</label>
             <input type="number" id="id_grado" name="id_grado" required>
-            <label for="grado">Grado:</label>
-            <input type="text" id="grado" name="grado" required>
-            <button type="submit">Añadir Grado</button>
+            <label for="seccion">Seccion:</label>
+            <input type="text" id="seccion" name="seccion" required>
+            <button type="submit">Añadir Seccion</button>
       </form>
     </body>
   </html>
