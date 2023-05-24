@@ -6,7 +6,7 @@ class DevelopmentConfig(Config):
     PGSQL_HOST = 'localhost'
     PGSQL_USER = 'postgres'
     PGSQL_PASSWORD = 'Lind@1155'
-    PGSQL_DATABASE = 'proyecto_software1'
+    PGSQL_DATABASE = 'proyecto_software2'
 
 config = {
     'development': DevelopmentConfig

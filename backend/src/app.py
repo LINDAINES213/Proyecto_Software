@@ -36,10 +36,11 @@ def trabajadores2():
         metodo_de_pago = request.form['metodo_de_pago']
         bonus = request.form['bonus']
         fecha_contratacion = request.form['fecha_contratacion']
+        fecha_pago = request.form['fecha_pago']
 
         with connection.cursor() as cursor:
-            cursor.execute("""INSERT INTO trabajadores VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""", 
-                           (dpi, nombres, apellidos, cargo, salario, metodo_de_pago, bonus, fecha_contratacion))
+            cursor.execute("""INSERT INTO trabajadores VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)""", 
+                           (dpi, nombres, apellidos, cargo, salario, metodo_de_pago, bonus, fecha_contratacion, fecha_pago))
             connection.commit()  
         return redirect('/trabajadores3')
     except Exception as ex:
@@ -106,6 +107,117 @@ def trabajores3():
                         ORDER BY dpi ASC""")
         rows = cursor.fetchall()
         return render_template('trabajores3.html', rows=rows)
+    
+@app.route('/estudiantes')
+def estudiantes():
+    return render_template('estudiantes.html')
+
+@app.route('/estudiantes2', methods=['POST'])
+def estudiantes2():
+    try:
+        id_estudiante = request.form['id_estudiante']
+        nombres = request.form['nombres']
+        apellidos = request.form['apellidos']
+        fecha_nacimiento = request.form['fecha_nacimiento']
+        grado = request.form['grado']
+        seccion = request.form['seccion']
+        curso1 = request.form['curso1']
+        curso2 = request.form['curso2']
+        curso3 = request.form['curso3']
+        curso4 = request.form['curso4']
+        curso5 = request.form['curso5']
+        curso6 = request.form['curso6']
+        curso7 = request.form['curso7']
+        curso8 = request.form['curso8']
+        curso9 = request.form['curso9']
+        curso10 = request.form['curso10']
+        with connection.cursor() as cursor:
+            cursor.execute("""INSERT INTO estudiantes VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", 
+                           (id_estudiante, nombres, apellidos, fecha_nacimiento, grado, seccion, curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8, curso9, curso10))
+            connection.commit()  
+        return redirect('/trabajadores3')
+    except Exception as ex:
+        return render_template('trabajadores.html')
+
+@app.route('/estudiantes2/<id>/edit', methods=['GET', 'POST'])
+def editar_estudiante(id):
+    if request.method == 'GET':
+        # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM estudiantes WHERE id_estudiante = %s", (id,))
+            estudiante = cursor.fetchone()
+
+        if estudiante:
+            return render_template('editar_estudiante.html', estudiante=estudiante)
+        else:
+            return 'Trabajador no encontrado'
+
+    elif request.method == 'POST':
+        # Actualizar los datos del trabajador en la base de datos
+        id_estudiante = request.form['id_estudiante']
+        nombres = request.form['nombres']
+        apellidos = request.form['apellidos']
+        fecha_nacimiento = request.form['fecha_nacimiento']
+        grado = request.form['grado']
+        seccion = request.form['seccion']
+        curso1 = request.form['curso1']
+        curso2 = request.form['curso2']
+        curso3 = request.form['curso3']
+        curso4 = request.form['curso4']
+        curso5 = request.form['curso5']
+        curso6 = request.form['curso6']
+        curso7 = request.form['curso7']
+        curso8 = request.form['curso8']
+        curso9 = request.form['curso9']
+        curso10 = request.form['curso10']
+
+        with connection.cursor() as cursor:
+            cursor.execute("""UPDATE trabajadores SET
+                nombres = %s,
+                apellidos = %s,
+                fecha_nacimiento = %s,
+                grado = %s,
+                seccion = %s,
+                curso1 = %s,
+                curso2 = %s,
+                curso3 = %s,
+                curso4 = %s, 
+                curso5 = %s,
+                curso6 = %s,
+                curso7 = %s,
+                curso8 = %s,
+                curso9 = %s,
+                curso10 = %s
+                WHERE id_estudiante = %s
+            """, (nombres, apellidos, fecha_nacimiento, grado, seccion, curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8, curso9, curso10, id_estudiante))
+            connection.commit()
+
+        return redirect('/estudiantes3')
+    
+@app.route('/estudiantes2/<id>/delete', methods=['GET', 'POST'])
+def eliminar_estudiante(id):
+    try:
+        if request.method == 'POST':
+            with connection.cursor() as cursor:
+                cursor.execute("DELETE FROM estudiantes WHERE id_estudiante = %s", (id,))
+                connection.commit()
+
+            flash('El trabajador ha sido eliminado exitosamente.', 'success')
+            return redirect('/estudiantes3')
+
+        return render_template('eliminar_trabajador.html', id=id)
+
+    except Exception as ex:
+        flash('Ocurrió un error al intentar eliminar el trabajador.', 'error')
+        return redirect('/estudiantes3')
+
+@app.route('/estudiantes3')
+def estudiantes3():
+    with connection.cursor() as cursor:
+        cursor.execute("""SELECT * FROM estudiantes
+                        ORDER BY id_estudiante ASC""")
+        rows = cursor.fetchall()
+        return render_template('estudiantes3.html', rows=rows)
 
 
 @app.route('/maestros')
@@ -346,6 +458,84 @@ def salones3():
                         ORDER BY id_salon ASC""")
         rows = cursor.fetchall()
         return render_template('salones3.html', rows=rows)
+    
+@app.route('/grados')
+def grados():
+    return render_template('grados.html')
+
+@app.route('/grados2', methods=['POST'])
+def grados2():
+    try:
+        id_grado = request.form['id_grado']
+        grado = request.form['grado']
+
+        with connection.cursor() as cursor:
+            cursor.execute("""INSERT INTO grado VALUES (%s, %s)""", 
+                           (id_grado, grado))
+            connection.commit()  
+        return redirect('/grados3')
+    except Exception as ex:
+        return render_template('grados.html')
+
+@app.route('/grados2/<id>/edit', methods=['GET', 'POST'])
+def editar_grado(id):
+    if request.method == 'GET':
+        # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM grado WHERE id_grado = %s", (id,))
+            grado = cursor.fetchone()
+
+        if grado:
+            return render_template('editar_grado.html', grado=grado)
+        else:
+            return 'Grado no encontrado'
+
+    elif request.method == 'POST':
+        # Actualizar los datos del salon en la base de datos
+        id_grado = request.form['id_grado']
+        grado = request.form['grado']
+
+        with connection.cursor() as cursor:
+            cursor.execute("""UPDATE grado SET
+                grado = %s
+                WHERE id_grado = %s
+            """, (grado, id_grado))
+            connection.commit()
+
+        return redirect('/grados3')
+    
+@app.route('/grados2/<id>/delete', methods=['GET', 'POST'])
+def eliminar_grado(id):
+    try:
+        if request.method == 'POST':
+            with connection.cursor() as cursor:
+                cursor.execute("DELETE FROM grado WHERE id_grado = %s", (id,))
+                connection.commit()
+
+            flash('El salon ha sido eliminado exitosamente.', 'success')
+            return redirect('/grados3')
+
+        return render_template('eliminar_grado.html', id_grado=id)
+
+    except Exception as ex:
+        flash('Ocurrió un error al intentar eliminar el salon.', 'error')
+        return redirect('/grados3')
+
+@app.route('/grados3')
+def grados3():
+    with connection.cursor() as cursor:
+        cursor.execute("""SELECT * FROM grado
+                        ORDER BY id_grado ASC""")
+        rows = cursor.fetchall()
+        return render_template('grados3.html', rows=rows)
+    
+@app.route('/pagoP')
+def pagoP():
+    with connection.cursor() as cursor:
+        cursor.execute("""SELECT * FROM trabajadores
+                        ORDER BY dpi ASC""")
+        rows = cursor.fetchall()
+        return render_template('pagoP.html', rows=rows)
 
 def page_not_found(error):
     return f"<h1 style={{text-align: 'center'}}>UNDER CONSTRUCTION 🛠️</h1>", 404
