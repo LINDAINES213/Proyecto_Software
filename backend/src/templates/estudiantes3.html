@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Estudiantes</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th, td {
+			padding: 8px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+
+		tr:hover {
+			background-color: #f5f5f5;
+		}
+
+		th {
+			background-color: #4CAF50;
+			color: white;
+		}
+
+		.edit-button {
+			padding: 4px 8px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+
+		.delete-button {
+			padding: 4px 8px;
+			background-color: #f44336;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<h1>Estudiantes</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nombres</th>
+				<th>Apellidos</th>
+                <th>Fecha Nacimiento</th>
+                <th>Edad</th>
+				<th>Grado</th>
+                <th>Seccion</th>
+				<th>curso1</th>
+                <th>curso2</th>
+				<th>curso3</th>
+                <th>curso4</th>
+				<th>curso5</th>
+                <th>curso6</th>
+				<th>curso7</th>
+                <th>curso8</th>
+                <th>curso9</th>
+				<th>curso10</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in rows %}
+				<tr>
+					<td>{{ row[0] }}</td>
+                    <th>{{ row[1] }}</th>
+                    <th>{{ row[2] }}</th>
+                    <th>{{ row[3] }}</th>
+                    <th>{{ row[4] }}</th>
+                    <th>{{ row[5] }}</th>
+                    <th>{{ row[6] }}</th>
+                    <th>{{ row[7] }}</th>
+                    <th>{{ row[8] }}</th>
+                    <th>{{ row[9] }}</th>
+                    <th>{{ row[10] }}</th>
+                    <th>{{ row[11] }}</th>
+                    <th>{{ row[12] }}</th>
+                    <th>{{ row[13] }}</th>
+                    <th>{{ row[14] }}</th>
+                    <th>{{ row[15] }}</th>
+                    <th>{{ row[16] }}</th>
+					<td>
+						<button class="edit-button" onclick="editar_estudiante('{{ row[0] }}')">Editar</button>
+						<button class="delete-button" onclick="eliminar_estudiante('{{ row[0] }}')">Eliminar</button>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<script>
+		function editar_estudiante(id) {
+			// Redireccionar al formulario de edición con el ID del trabajador
+			window.location.href = '/estudiantes2/' + id + '/edit';
+		}
+
+		function eliminar_estudiante(id) {
+			// Enviar una solicitud de eliminación del trabajador con el ID
+			if (confirm("¿Estás seguro de que deseas eliminar este trabajador?")) {
+				window.location.href = '/estudiantes2/' + id + '/delete';
+			}
+		}
+	</script>
+</body>
+</html>
