@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Estudiantes</title>
+	<title>Trabajadores</title>
 	<style>
 		table {
 			border-collapse: collapse;
@@ -12,10 +12,6 @@
 			padding: 8px;
 			text-align: left;
 			border-bottom: 1px solid #ddd;
-		}
-
-		tr:hover {
-			background-color: #f5f5f5;
 		}
 
 		th {
@@ -38,10 +34,38 @@
 			border: none;
 			cursor: pointer;
 		}
+
+		.pago-realizado {
+			padding: 4px 8px;
+			background-color: rgb(81, 251, 81) !important;
+			color: black;
+			border: none;
+			cursor: pointer;
+		}
+
+		.pago-pendiente {
+			padding: 4px 8px;
+			background-color: rgb(251, 81, 81) !important;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+
+		.pagado {
+			background-color: rgb(162, 244, 162);
+		}
+
+		.vencido {
+			background-color: rgb(244, 162, 162);
+		}
+
+		.prox-vencimiento {
+			background-color: rgb(244, 162, 162);
+		}
 	</style>
 </head>
 <body>
-	<h1>Estudiantes</h1>
+	<h1>Trabajadores</h1>
 	<table>
 		<thead>
 			<tr>
@@ -86,8 +110,8 @@
                     <td>{{ row[15] }}</td>
                     <td>{{ row[16] }}</td>
 					<td>
-						<button class="edit-button" onclick="editarEstudiante('{{ row[0] }}')">Editar</button>
-						<button class="delete-button" onclick="eliminarEstudiante('{{ row[0] }}')">Eliminar</button>
+						<button class="pago-realizado" onclick="pagoRealizado(this)">Pagado</button>
+						<button class="pago-pendiente" onclick="pagoPendiente(this)">Pendiente</button>
 					</td>
 				</tr>
 			{% endfor %}
@@ -95,16 +119,14 @@
 	</table>
 
 	<script>
-		function editarEstudiante(id) {
-			// Redireccionar al formulario de edición con el ID del trabajador
-			window.location.href = '/estudiantes2/' + id + '/edit';
+		function pagoRealizado(button) {
+			var row = button.parentNode.parentNode;
+			row.classList.add('pagado');
 		}
 
-		function eliminarEstudiante(id) {
-			// Enviar una solicitud de eliminación del trabajador con el ID
-			if (confirm("¿Estás seguro de que deseas eliminar este trabajador?")) {
-				window.location.href = '/estudiantes2/' + id + '/delete';
-			}
+		function pagoPendiente(button) {
+			var row = button.parentNode.parentNode;
+			row.classList.remove('pagado');
 		}
 	</script>
 </body>

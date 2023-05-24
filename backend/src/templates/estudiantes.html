@@ -72,8 +72,8 @@
         {% endwith %}
         <h1>Añadir Estudiantes</h1>
         <div class="form-floating">
-          <input type="number" class="form-control" id="id_estudiantes" name="id_estudiantes" placeholder="ID Estudiantes" required>
-          <label for="id_estudiantes">ID Estudiantes</label>
+          <input type="text" class="form-control" id="id_estudiante" name="id_estudiante" placeholder="ID Estudiante" required>
+          <label for="id_estudiante">ID Estudiante</label>
         </div>
         <div class="form-floating">
           <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres" required>
@@ -88,8 +88,8 @@
           <label for="fecha_nacimiento">Fecha de Nacimiento</label>
         </div>
         <div class="form-floating">
-            <input type="number" class="form-control" name="edad" placeholder="Edad" required>
-            <label for="edad">Edad</label>
+          <input type="text" class="form-control" name="edad" placeholder="Edad">
+          <label for="edad">Edad</label>
         </div>
         <div class="form-floating">
           <input type="number" class="form-control" name="grado" placeholder="Grado" required>
@@ -101,63 +101,63 @@
         </div>
         <div class="form-floating">
           <input type="text" class="form-control" id="curso1" name="curso1" placeholder="Curso1" required>
-          <label for="curso1">Curso1</label>
+          <label for="curso1">Curso 1</label>
         </div>
         
         <div class="form-floating">
           <input type="text" class="form-control" id="curso2" name="curso2" placeholder="Curso2" required>
-          <label for="curso2">Curso2</label>
+          <label for="curso2">Curso 2</label>
         </div>
         
         <div class="form-floating">
           <input type="text" class="form-control" id="curso3" name="curso3" placeholder="Curso3" required>
-          <label for="curso3">Curso3</label>
+          <label for="curso3">Curso 3</label>
         </div>
         
         <div class="form-floating">
           <input type="text" class="form-control" id="curso4" name="curso4" placeholder="Curso4" required>
-          <label for="curso4">Curso4</label>
+          <label for="curso4">Curso 4</label>
         </div>
         
         <div class="form-floating">
-          <input type="text" class="form-control" id="curso5" name="curso5" placeholder="Curso5" required>
-          <label for="curso5">Curso5</label>
+          <input type="text" class="form-control" id="curso5" name="curso5" placeholder="Curso5">
+          <label for="curso5">Curso 5</label>
         </div>
         
         <div class="form-floating">
-          <input type="text" class="form-control" id="curso6" name="curso6" placeholder="Curso6" required>
-          <label for="curso6">Curso6</label>
+          <input type="text" class="form-control" id="curso6" name="curso6" placeholder="Curso6">
+          <label for="curso6">Curso 6</label>
         </div>
         
         <div class="form-floating">
-          <input type="text" class="form-control" id="curso7" name="curso7" placeholder="Curso7" required>
-          <label for="curso7">Curso7</label>
+          <input type="text" class="form-control" id="curso7" name="curso7" placeholder="Curso7">
+          <label for="curso7">Curso 7</label>
         </div>
         
         <div class="form-floating">
-          <input type="text" class="form-control" id="curso8" name="curso8" placeholder="Curso8" required>
-          <label for="curso8">Curso8</label>
+          <input type="text" class="form-control" id="curso8" name="curso8" placeholder="Curso8">
+          <label for="curso8">Curso 8</label>
         </div>
         
         <div class="form-floating">
-          <input type="text" class="form-control" id="curso9" name="curso9" placeholder="Curso9" required>
-          <label for="curso9">Curso9</label>
+          <input type="text" class="form-control" id="curso9" name="curso9" placeholder="Curso9">
+          <label for="curso9">Curso 9</label>
         </div>
         
         <div class="form-floating">
-          <input type="text" class="form-control" id="curso10" name="curso10" placeholder="Curso10" required>
-          <label for="curso10">Curso10</label>
+          <input type="text" class="form-control" id="curso10" name="curso10" placeholder="Curso10">
+          <label for="curso10">Curso 10</label>
         </div>
         
         
         
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir Estudiantes</button>
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir Estudiante</button>
 
       </form>
       {% endblock %}
-            <label for="id_estudiantes">ID Estudiantes:</label>
-            <input type="number" id="id_estudiantes" name="id_estudiantes" required>
+            <label for="id_estudiante">ID Estudiantes:</label>
+            <input type="text" id="id_estudiante" name="id_estudiante" required>
             <label for="nombres">Nombres:</label>
             <input type="text" id="nombres" name="nombres" required>
             <label for="apellidos">Apellidos:</label>
@@ -165,32 +165,32 @@
             <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
             <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
             <label for="edad">Edad:</label>
-            <input type="number" id="edad" name="edad" required>
+            <input type="text" id="edad" name="edad">
             <label for="grado">Grado:</label>
             <input type="number" id="grado" name="grado" required>
             <label for="seccion">Seccion:</label>
             <input type="text" id="seccion" name="seccion" required>
-            <label for="curso1">Curso1:</label>
+            <label for="curso1">Curso 1:</label>
             <input type="text" id="curso1" name="curso1" required>
-            <label for="curso2">Curso2:</label>
+            <label for="curso2">Curso 2:</label>
             <input type="text" id="curso2" name="curso2" required>
-            <label for="curso3">Curso3:</label>
+            <label for="curso3">Curso 3:</label>
             <input type="text" id="curso3" name="curso3" required>
-            <label for="curso4">Curso4:</label>
+            <label for="curso4">Curso 4:</label>
             <input type="text" id="curso4" name="curso4" required>
-            <label for="curso5">Curso5:</label>
-            <input type="text" id="curso5" name="curso5" required>
-            <label for="curso6">Curso6:</label>
-            <input type="text" id="curso6" name="curso6" required>
-            <label for="curso7">Curso7:</label>
-            <input type="text" id="curso7" name="curso7" required>
-            <label for="curso8">Curso8:</label>
-            <input type="text" id="curso8" name="curso8" required>
-            <label for="curso9">Curso9:</label>
-            <input type="text" id="curso9" name="curso9" required>
-            <label for="curso10">Curso10:</label>
-            <input type="text" id="curso10" name="curso10" required>
-            <button type="submit">Añadir usuario</button>
+            <label for="curso5">Curso 5:</label>
+            <input type="text" id="curso5" name="curso5">
+            <label for="curso6">Curso 6:</label>
+            <input type="text" id="curso6" name="curso6">
+            <label for="curso7">Curso 7:</label>
+            <input type="text" id="curso7" name="curso7">
+            <label for="curso8">Curso 8:</label>
+            <input type="text" id="curso8" name="curso8">
+            <label for="curso9">Curso 9:</label>
+            <input type="text" id="curso9" name="curso9">
+            <label for="curso10">Curso 10:</label>
+            <input type="text" id="curso10" name="curso10">
+            <button type="submit">Añadir Estudiante</button>
       </form>
     </body>
   </html>
