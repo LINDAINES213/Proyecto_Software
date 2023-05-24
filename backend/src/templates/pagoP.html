@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Trabajadores</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th, td {
+			padding: 8px;
+			text-align: left;
+			border-bottom: 1px solid #ddd;
+		}
+
+		th {
+			background-color: #4CAF50;
+			color: white;
+		}
+
+		.edit-button {
+			padding: 4px 8px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+
+		.delete-button {
+			padding: 4px 8px;
+			background-color: #f44336;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+
+		.pago-realizado {
+			padding: 4px 8px;
+			background-color: rgb(81, 251, 81) !important;
+			color: black;
+			border: none;
+			cursor: pointer;
+		}
+
+		.pago-pendiente {
+			padding: 4px 8px;
+			background-color: rgb(251, 81, 81) !important;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+
+		.pagado {
+			background-color: rgb(162, 244, 162);
+		}
+
+		.vencido {
+			background-color: rgb(244, 162, 162);
+		}
+
+		.prox-vencimiento {
+			background-color: rgb(244, 162, 162);
+		}
+	</style>
+</head>
+<body>
+	<h1>Trabajadores</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nombres</th>
+				<th>Apellidos</th>
+				<th>Cargo</th>
+				<th>Salario</th>
+				<th>Método de Pago</th>
+				<th>Bonus</th>
+				<th>Fecha de Contratacion</th>
+				<th>Fecha de Pago</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in rows %}
+				<tr>
+					<td>{{ row[0] }}</td>
+					<td>{{ row[1] }}</td>
+					<td>{{ row[2] }}</td>
+					<td>{{ row[3] }}</td>
+					<td>{{ row[4] }}</td>
+					<td>{{ row[5] }}</td>
+					<td>{{ row[6] }}</td>
+					<td>{{ row[7] }}</td>
+					<td>{{ row[8] }}</td>
+					<td>
+						<button class="pago-realizado" onclick="pagoRealizado(this)">Pagado</button>
+						<button class="pago-pendiente" onclick="pagoPendiente(this)">Pendiente</button>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<script>
+		function pagoRealizado(button) {
+			var row = button.parentNode.parentNode;
+			row.classList.add('pagado');
+		}
+
+		function pagoPendiente(button) {
+			var row = button.parentNode.parentNode;
+			row.classList.remove('pagado');
+		}
+	</script>
+</body>
+</html>
