@@ -40,8 +40,8 @@ def get_cargo_from_database(dpi):
         print(f"Error al obtener el cargo del usuario: {ex}")
         return None
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/logint', methods=['GET', 'POST'])
+def logint():
     if request.method == 'POST':
         dpi = request.form['dpi']
         contrasena = request.form['contrasena']
@@ -55,20 +55,45 @@ def login():
                     return redirect(url_for('iniciomaestro'))
                 elif logged_user.cargo == "Coordinador":
                     return redirect(url_for('inicioadmin'))
+                elif logged_user.cargo == "Director":
+                    return redirect(url_for('iniciodirector'))
+                elif logged_user.cargo == "Secretario":
+                    return redirect(url_for('iniciosecretario'))
+                elif logged_user.cargo == "Contador":
+                    return redirect(url_for('iniciocontador'))
             else:
                 flash("Invalid password...")
-                return render_template('home.html')
+                return render_template('loginT.html')
         else:
             flash("Contrasena o usuario incorrectos...")
-            return render_template('home.html')
+            return render_template('loginT.html')
     else:
-        return render_template('home.html')
+        return render_template('loginT.html')
     
-@app.route('/logout')
+@app.route('/crearUsuario', methods=['GET','POST'])
+def crearUsuario():
+    try:
+        if request.method == 'POST':
+            dpi = request.form['dpi']
+            contrasena = request.form['contrasena']
+
+            with connection.cursor() as cursor:
+                cursor.execute("""INSERT INTO usuarios.user (dpi, contrasena)
+                                VALUES (%s, %s)""", (dpi, contrasena))
+                connection.commit()
+            cursor.close()
+            return render_template('confirmaciones.html')
+        else:
+            return render_template('crearUsuario.html')
+        
+    except Exception as ex:
+        return render_template('crearUsuario.html')
+    
+@app.route('/logoutt')
 @login_required
-def logout():
+def logoutt():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('logint'))
 
         
 
@@ -81,6 +106,21 @@ def inicio():
 @login_required
 def inicioadmin():
     return render_template('inicioadmin.html')
+
+@app.route('/iniciocontador')
+@login_required
+def iniciocontador():
+    return render_template('iniciocontador.html')
+
+@app.route('/iniciodirector')
+@login_required
+def iniciodirector():
+    return render_template('iniciodirector.html')
+
+@app.route('/iniciosecretario')
+@login_required
+def iniciosecretario():
+    return render_template('iniciosecretario.html')
 
 @app.route('/iniciomaestro')
 @login_required
