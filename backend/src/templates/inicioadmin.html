@@ -5,6 +5,7 @@
 {% block body %}
 <div class="container">
   <h2>Portal de Servicios Electrónicos</h2>
+  <h3>Bienvenido, {{ current_user.username }}</h3>
   <form action="/inicioadmin" method="GET">
     <div class="sidebar">
       <ul>
@@ -20,6 +21,7 @@
         <li><a href="/salones">Asignacion de Salones</a></li>
         <li><a href="horarios">Asignacion de Horarios</a></li>
         <li><a href="/salario">Pago de Salario</a></li>
+        <li><a class="btn btn-secondary" style="background-color: black;" href="{{ url_for('logout') }}">Logout</a></li>
       </ul>
     </div>
   </form>
@@ -63,6 +65,13 @@
     margin: 0;
     text-align: left;
     margin-top: 30px;
+    }
+
+    h3 {
+    font-size: 1.5em;
+    margin: 0;
+    text-align: left;
+    margin-top: 35px;
     }
 
     h1 {

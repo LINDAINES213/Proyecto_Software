@@ -1,31 +1,100 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, session, url_for, flash
 from database.db import get_connection
 from flask_wtf.csrf import CSRFProtect
+from flask_login import LoginManager, login_user, logout_user, login_required
 from datetime import datetime
 from flask_cors import CORS
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from config import config
+from models.ModelUser import ModelUser
+from models.entities.User import User
+
+
 
 
 app = Flask(__name__)
 csrf = CSRFProtect(app)
 connection = get_connection()
+login_manager_app = LoginManager(app)
 CORS(app)
 
-@app.before_request
-def override_method():
-    if request.form.get('_method'):
-        request.environ['REQUEST_METHOD'] = request.form['_method'].upper()
+@login_manager_app.user_loader
+def load_user(id):
+    return ModelUser.get_by_id(connection, id)
+
+
+def get_cargo_from_database(dpi):
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("""SELECT cargo FROM usuarios.user
+                                WHERE dpi = %s""", (dpi,))
+            row = cursor.fetchone()
+           
+            if row:
+                cargo = row[3]
+                return cargo
+            else:
+                return None
+
+    except Exception as ex:
+        print(f"Error al obtener el cargo del usuario: {ex}")
+        return None
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        dpi = request.form['dpi']
+        contrasena = request.form['contrasena']
+        cargo = get_cargo_from_database(dpi)
+        user = User(0, dpi, contrasena)
+        logged_user = ModelUser.login(connection, user)
+        if logged_user != None:
+            if logged_user.contrasena:
+                login_user(logged_user)
+                if logged_user.cargo == "Maestro":
+                    return redirect(url_for('iniciomaestro'))
+                elif logged_user.cargo == "Coordinador":
+                    return redirect(url_for('inicioadmin'))
+            else:
+                flash("Invalid password...")
+                return render_template('home.html')
+        else:
+            flash("Contrasena o usuario incorrectos...")
+            return render_template('home.html')
+    else:
+        return render_template('home.html')
+    
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+        
+
 
 @app.route('/')
 def inicio():
-    return render_template('inicio.html')
+    return render_template('home.html')
+
+@app.route('/inicioadmin')
+@login_required
+def inicioadmin():
+    return render_template('inicioadmin.html')
+
+@app.route('/iniciomaestro')
+@login_required
+def iniciomaestro():
+    return render_template('iniciomaestro.html')
+
 
 @app.route('/trabajadores')
+@login_required
 def trabajadores():
     return render_template('trabajadores.html')
 
 @app.route('/trabajadores2', methods=['POST'])
+@login_required
 def trabajadores2():
     try:
         dpi = request.form['dpi']
@@ -47,6 +116,7 @@ def trabajadores2():
         return render_template('trabajadores.html')
 
 @app.route('/trabajadores2/<dpi>/edit', methods=['GET', 'POST'])
+@login_required
 def edit_worker(dpi):
     if request.method == 'GET':
         # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
@@ -84,6 +154,7 @@ def edit_worker(dpi):
         return redirect('/trabajadores3')
     
 @app.route('/trabajadores2/<dpi>/delete', methods=['GET', 'POST'])
+@login_required
 def delete_worker(dpi):
     try:
         if request.method == 'POST':
@@ -101,6 +172,7 @@ def delete_worker(dpi):
         return redirect('/trabajadores3')
 
 @app.route('/trabajadores3')
+@login_required
 def trabajores3():
     with connection.cursor() as cursor:
         cursor.execute("""SELECT * FROM trabajadores
@@ -109,10 +181,12 @@ def trabajores3():
         return render_template('trabajores3.html', rows=rows)
     
 @app.route('/estudiantes')
+@login_required
 def estudiantes():
     return render_template('estudiantes.html')
 
 @app.route('/estudiantes2', methods=['POST'])
+@login_required
 def estudiantes2():
     try:
         id_estudiante = request.form['id_estudiante']
@@ -141,6 +215,7 @@ def estudiantes2():
         return render_template('estudiantes.html')
     
 @app.route('/estudiantes2/<id>/edit', methods=['GET', 'POST'])
+@login_required
 def editar_estudiante(id):
     if request.method == 'GET':
         # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
@@ -198,6 +273,7 @@ def editar_estudiante(id):
         return redirect('/estudiantes3')
     
 @app.route('/estudiantes2/<id>/delete', methods=['GET', 'POST'])
+@login_required
 def eliminar_estudiante(id):
     try:
         if request.method == 'POST':
@@ -215,6 +291,7 @@ def eliminar_estudiante(id):
         return redirect('/estudiantes3')
 
 @app.route('/estudiantes3')
+@login_required
 def estudiantes3():
     with connection.cursor() as cursor:
         cursor.execute("""SELECT * FROM estudiantes
@@ -223,10 +300,12 @@ def estudiantes3():
         return render_template('estudiantes3.html', rows=rows)
 
 @app.route('/maestros')
+@login_required
 def maestros():
     return render_template('maestros.html')
 
 @app.route('/maestros2', methods=['POST'])
+@login_required
 def mestros2():
     try:
         dpi = request.form['dpi']
@@ -242,6 +321,7 @@ def mestros2():
         return render_template('maestros.html')
 
 @app.route('/maestros2/<dpi>/edit', methods=['GET', 'POST'])
+@login_required
 def editar_maestro(dpi):
     if request.method == 'GET':
         # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
@@ -271,6 +351,7 @@ def editar_maestro(dpi):
         return redirect('/maestros3')
     
 @app.route('/maestros2/<dpi>/delete', methods=['GET', 'POST'])
+@login_required
 def eliminar_maestro(dpi):
     try:
         if request.method == 'POST':
@@ -288,6 +369,7 @@ def eliminar_maestro(dpi):
         return redirect('/maestros3')
 
 @app.route('/maestros3')
+@login_required
 def mestros3():
     with connection.cursor() as cursor:
         cursor.execute("""SELECT t.dpi, CONCAT(t.nombres,' ', t.apellidos) AS maestro, curso_1, curso_2 FROM maestros
@@ -297,10 +379,12 @@ def mestros3():
         return render_template('maestros3.html', rows=rows)
 
 @app.route('/cursos')
+@login_required
 def cursos():
     return render_template('cursos.html')
 
 @app.route('/cursos2', methods=['POST'])
+@login_required
 def cursos2():
     try:
         id_curso = request.form['id_curso']
@@ -319,6 +403,7 @@ def cursos2():
         return render_template('cursos.html')
 
 @app.route('/cursos2/<id>/edit', methods=['GET', 'POST'])
+@login_required
 def editar_curso(id):
     if request.method == 'GET':
         # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
@@ -354,6 +439,7 @@ def editar_curso(id):
         return redirect('/cursos3')
     
 @app.route('/cursos2/<id>/delete', methods=['GET', 'POST'])
+@login_required
 def eliminar_curso(id):
     try:
         if request.method == 'POST':
@@ -371,6 +457,7 @@ def eliminar_curso(id):
         return redirect('/cursos3')
 
 @app.route('/cursos3')
+@login_required
 def cursos3():
     with connection.cursor() as cursor:
         cursor.execute("""SELECT id_curso, nombre, CONCAT(t.nombres,' ', t.apellidos) AS maestro, salon, hora_inicio, hora_fin FROM curso
@@ -380,10 +467,12 @@ def cursos3():
         return render_template('cursos3.html', rows=rows)
 
 @app.route('/salones')
+@login_required
 def salones():
     return render_template('salones.html')
 
 @app.route('/salones2', methods=['POST'])
+@login_required
 def salones2():
     try:
         id_salon = request.form['id_salon']
@@ -402,6 +491,7 @@ def salones2():
         return render_template('salones.html')
 
 @app.route('/salones2/<id>/edit', methods=['GET', 'POST'])
+@login_required
 def editar_salon(id):
     if request.method == 'GET':
         # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
@@ -437,6 +527,7 @@ def editar_salon(id):
         return redirect('/salones3')
     
 @app.route('/salones2/<id>/delete', methods=['GET', 'POST'])
+@login_required
 def eliminar_salon(id):
     try:
         if request.method == 'POST':
@@ -454,6 +545,7 @@ def eliminar_salon(id):
         return redirect('/salones3')
 
 @app.route('/salones3')
+@login_required
 def salones3():
     with connection.cursor() as cursor:
         cursor.execute("""SELECT * FROM salon
@@ -462,10 +554,12 @@ def salones3():
         return render_template('salones3.html', rows=rows)
     
 @app.route('/grados')
+@login_required
 def grados():
     return render_template('grados.html')
 
 @app.route('/grados2', methods=['POST'])
+@login_required
 def grados2():
     try:
         id_grado = request.form['id_grado']
@@ -480,6 +574,7 @@ def grados2():
         return render_template('grados.html')
 
 @app.route('/grados2/<id>/edit', methods=['GET', 'POST'])
+@login_required
 def editar_grado(id):
     if request.method == 'GET':
         # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
@@ -507,6 +602,7 @@ def editar_grado(id):
         return redirect('/grados3')
     
 @app.route('/grados2/<id>/delete', methods=['GET', 'POST'])
+@login_required
 def eliminar_grado(id):
     try:
         if request.method == 'POST':
@@ -524,6 +620,7 @@ def eliminar_grado(id):
         return redirect('/grados3')
 
 @app.route('/grados3')
+@login_required
 def grados3():
     with connection.cursor() as cursor:
         cursor.execute("""SELECT * FROM grado
@@ -532,10 +629,12 @@ def grados3():
         return render_template('grados3.html', rows=rows)
     
 @app.route('/secciones')
+@login_required
 def secciones():
     return render_template('secciones.html')
 
 @app.route('/secciones2', methods=['POST'])
+@login_required
 def secciones2():
     try:
         id_seccion = request.form['id_seccion']
@@ -551,6 +650,7 @@ def secciones2():
         return render_template('secciones.html')
 
 @app.route('/secciones2/<id>/edit', methods=['GET', 'POST'])
+@login_required
 def editar_seccion(id):
     if request.method == 'GET':
         with connection.cursor() as cursor:
@@ -576,6 +676,7 @@ def editar_seccion(id):
         return redirect('/secciones3')
     
 @app.route('/secciones2/<id>/delete', methods=['GET', 'POST'])
+@login_required
 def eliminar_seccion(id):
     try:
         if request.method == 'POST':
@@ -593,6 +694,7 @@ def eliminar_seccion(id):
         return redirect('/secciones3')
 
 @app.route('/secciones3')
+@login_required
 def secciones3():
     with connection.cursor() as cursor:
         cursor.execute("""SELECT * FROM seccion
@@ -601,6 +703,7 @@ def secciones3():
         return render_template('secciones3.html', rows=rows)
 
 @app.route('/pagoP')
+@login_required
 def pagoP():
     with connection.cursor() as cursor:
         cursor.execute("""SELECT * FROM trabajadores
@@ -609,6 +712,7 @@ def pagoP():
         return render_template('pagoP.html', rows=rows)
     
 @app.route('/pagoC')
+@login_required
 def pagoC():
     with connection.cursor() as cursor:
         cursor.execute("""SELECT * FROM estudiantes
