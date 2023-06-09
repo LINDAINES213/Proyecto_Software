@@ -1,15 +1,18 @@
-from flask import Blueprint
-from flask_login import login_required
+from flask import Blueprint, redirect, render_template, request, flash, url_for
+from flask_login import login_required, logout_user
+from database.db import get_connection
 
-trabajadores_bp = Blueprint('trabajadores_blueprint' __name__)
+
+connection = get_connection()
+trabajadores_bp = Blueprint('trabajadores_blueprint', __name__)
 
 
-@app.route('/trabajadores')
+@trabajadores_bp.route('/trabajadores')
 @login_required
 def trabajadores():
     return render_template('trabajadores.html')
 
-@app.route('/trabajadores2', methods=['POST'])
+@trabajadores_bp.route('/trabajadores2', methods=['POST'])
 @login_required
 def trabajadores2():
     try:
@@ -31,7 +34,7 @@ def trabajadores2():
     except Exception as ex:
         return render_template('trabajadores.html')
 
-@app.route('/trabajadores2/<dpi>/edit', methods=['GET', 'POST'])
+@trabajadores_bp.route('/trabajadores2/<dpi>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_worker(dpi):
     if request.method == 'GET':
@@ -69,7 +72,7 @@ def edit_worker(dpi):
 
         return redirect('/trabajadores3')
     
-@app.route('/trabajadores2/<dpi>/delete', methods=['GET', 'POST'])
+@trabajadores_bp.route('/trabajadores2/<dpi>/delete', methods=['GET', 'POST'])
 @login_required
 def delete_worker(dpi):
     try:
@@ -87,7 +90,7 @@ def delete_worker(dpi):
         flash('Ocurrió un error al intentar eliminar el trabajador.', 'error')
         return redirect('/trabajadores3')
 
-@app.route('/trabajadores3')
+@trabajadores_bp.route('/trabajadores3')
 @login_required
 def trabajores3():
     with connection.cursor() as cursor:
