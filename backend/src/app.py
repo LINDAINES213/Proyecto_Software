@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, flash, url_for
+from flask import Flask, render_template, request, redirect, flash, url_for, send_file
 from database.db import get_connection
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_required, login_user, logout_user
 from flask_cors import CORS
 from config import config
+from dotenv import load_dotenv
 
 ################## Funcionalidades para Coordinador ###################
 from models.entities.User import User
@@ -21,6 +22,7 @@ from routes.perfil_trabajador.crearUsuario import crearUsuario_bp
 
 ################## Funcionalidades para Maestro ###################
 
+load_dotenv()
 
 
 app = Flask(__name__)
@@ -45,7 +47,7 @@ app.register_blueprint(crearUsuario_bp)
 ##################### INICIOS PERFILES #####################
 @app.route('/')
 def inicio():
-    return render_template('home.html')
+    return send_file('C:/Users/lijv1/OneDrive/Documents/GitHub/Proyecto_Software/frontend/static/home.html')
 
 @app.route('/inicioadmin')
 @login_required
