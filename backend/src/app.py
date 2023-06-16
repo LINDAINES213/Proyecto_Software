@@ -24,7 +24,6 @@ from routes.perfil_trabajador.crearUsuario import crearUsuario_bp
 
 load_dotenv()
 
-
 app = Flask(__name__)
 csrf = CSRFProtect(app)
 connection = get_connection()
@@ -47,7 +46,7 @@ app.register_blueprint(crearUsuario_bp)
 ##################### INICIOS PERFILES #####################
 @app.route('/')
 def inicio():
-    return send_file('C:/Users/lijv1/OneDrive/Documents/GitHub/Proyecto_Software/frontend/static/home.html')
+    return render_template('home.html')
 
 @app.route('/inicioadmin')
 @login_required
