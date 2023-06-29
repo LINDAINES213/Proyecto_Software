@@ -3,20 +3,38 @@
 <head>
 	<title>Estudiantes</title>
 	<style>
+		body {
+			margin: 15px;
+			padding: 0;
+			font-family: Arial, sans-serif;
+		}
+
 		table {
 			border-collapse: collapse;
 			width: 100%;
 		}
 
 		th, td {
+			border: 1px solid #dddddd;
 			padding: 8px;
-			text-align: left;
-			border-bottom: 1px solid #ddd;
+			text-align: center;
 		}
 
 		th {
-			background-color: #4CAF50;
-			color: white;
+			background-color: #000;
+			color: #ffffff;
+			border: 1px solid #000;
+			padding: 8px;
+			text-align: center;
+		}
+
+		.tabla tr:nth-child(even) {
+			background-color: #f9f9f9;
+		}
+		
+		/* Estilo para el texto del encabezado */
+		.tabla th span {
+			font-weight: bold;
 		}
 
 		.edit-button {
@@ -62,6 +80,15 @@
 		.prox-vencimiento {
 			background-color: rgb(244, 162, 162);
 		}
+
+		table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    
+    /* Estilo para el texto del encabezado */
+    table th span {
+      font-weight: bold;
+    }
 	</style>
 </head>
 <body>

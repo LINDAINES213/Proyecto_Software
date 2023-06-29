@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Log In</title>
     <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
       .login-box {
         position: absolute;
         top: 50%;
@@ -112,9 +118,9 @@
         {% if messages %}
         <br />
         {% for message in messages %}
-        <div style="background-color: transparent; color:#FFF; border: none;" class="alert alert-primary alert-dismissible" role="alert">
+        <div style="background-color: #FFFFFF80; color:#FFF; border: none;" class="alert alert-primary alert-dismissible" role="alert">
           <strong>{{ message }}</strong>
-          <button style="background-color: #FFF;" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% endfor %}
         {% endif %}
