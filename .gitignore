@@ -11,6 +11,7 @@ __psycache__
 .flaskenv
 
 node_modules
+venv/
 dist
 dist-ssr
 *.local
