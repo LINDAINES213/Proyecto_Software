@@ -82,13 +82,13 @@
 		}
 
 		table tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
+			background-color: #f9f9f9;
+		}
     
-    /* Estilo para el texto del encabezado */
-    table th span {
-      font-weight: bold;
-    }
+		/* Estilo para el texto del encabezado */
+		table th span {
+			font-weight: bold;
+		}
 	</style>
 </head>
 <body>
@@ -99,43 +99,43 @@
 				<th>ID</th>
 				<th>Nombres</th>
 				<th>Apellidos</th>
-                <th>Fecha Nacimiento</th>
-                <th>Edad</th>
+				<th>Fecha Nacimiento</th>
+				<th>Edad</th>
 				<th>Grado</th>
-                <th>Seccion</th>
+				<th>Seccion</th>
 				<th>curso1</th>
-                <th>curso2</th>
+				<th>curso2</th>
 				<th>curso3</th>
-                <th>curso4</th>
+				<th>curso4</th>
 				<th>curso5</th>
-                <th>curso6</th>
+				<th>curso6</th>
 				<th>curso7</th>
-                <th>curso8</th>
-                <th>curso9</th>
+				<th>curso8</th>
+				<th>curso9</th>
 				<th>curso10</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for row in rows %}
-				<tr>
+				<tr id="fila-{{ loop.index }}" class="{% if row[17] == 'pagado' %}pagado{% endif %}">
 					<td>{{ row[0] }}</td>
-                    <td>{{ row[1] }}</td>
-                    <td>{{ row[2] }}</td>
-                    <td>{{ row[3] }}</td>
-                    <td>{{ row[4] }}</td>
-                    <td>{{ row[5] }}</td>
-                    <td>{{ row[6] }}</td>
-                    <td>{{ row[7] }}</td>
-                    <td>{{ row[8] }}</td>
-                    <td>{{ row[9] }}</td>
-                    <td>{{ row[10] }}</td>
-                    <td>{{ row[11] }}</td>
-                    <td>{{ row[12] }}</td>
-                    <td>{{ row[13] }}</td>
-                    <td>{{ row[14] }}</td>
-                    <td>{{ row[15] }}</td>
-                    <td>{{ row[16] }}</td>
+					<td>{{ row[1] }}</td>
+					<td>{{ row[2] }}</td>
+					<td>{{ row[3] }}</td>
+					<td>{{ row[4] }}</td>
+					<td>{{ row[5] }}</td>
+					<td>{{ row[6] }}</td>
+					<td>{{ row[7] }}</td>
+					<td>{{ row[8] }}</td>
+					<td>{{ row[9] }}</td>
+					<td>{{ row[10] }}</td>
+					<td>{{ row[11] }}</td>
+					<td>{{ row[12] }}</td>
+					<td>{{ row[13] }}</td>
+					<td>{{ row[14] }}</td>
+					<td>{{ row[15] }}</td>
+					<td>{{ row[16] }}</td>
 					<td>
 						<button class="pago-realizado" onclick="pagoRealizado(this)">Pagado</button>
 						<button class="pago-pendiente" onclick="pagoPendiente(this)">Pendiente</button>
@@ -146,15 +146,37 @@
 	</table>
 
 	<script>
+		// Función para marcar como pagado
 		function pagoRealizado(button) {
 			var row = button.parentNode.parentNode;
 			row.classList.add('pagado');
+			var id = row.id.replace('fila-', '');
+			localStorage.setItem(id, 'pagado');
 		}
 
+		// Función para marcar como pendiente
 		function pagoPendiente(button) {
 			var row = button.parentNode.parentNode;
 			row.classList.remove('pagado');
+			var id = row.id.replace('fila-', '');
+			localStorage.setItem(id, 'pendiente');
 		}
+
+		// Al cargar la página, verificar el estado de cada fila
+		window.onload = function() {
+			var rows = document.getElementsByTagName('tr');
+			for (var i = 0; i < rows.length; i++) {
+				var id = rows[i].id.replace('fila-', '');
+				var estado = localStorage.getItem(id);
+				if (estado === 'pagado') {
+					rows[i].classList.add('pagado');
+				} else {
+					rows[i].classList.remove('pagado');
+				}
+			}
+		};
 	</script>
 </body>
 </html>
+
+

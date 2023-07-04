@@ -9,7 +9,7 @@ class ModelUser():
             connection = get_connection()
 
             with connection.cursor() as cursor:
-                cursor.execute("""SELECT id, dpi, contrasena, cargo, username
+                cursor.execute("""SELECT id, dpi, contrasena, cargo, nombre
                                 FROM usuarios.user
                                 WHERE dpi = '{}' AND contrasena = '{}'""".format(user.dpi, user.contrasena))
                 row = cursor.fetchone()
@@ -27,7 +27,7 @@ class ModelUser():
         try:
             connection = get_connection()
             with connection.cursor() as cursor:
-                cursor.execute("SELECT id, dpi, cargo, username FROM usuarios.user WHERE id = '{}'".format(id))
+                cursor.execute("SELECT id, dpi, cargo, nombre FROM usuarios.user WHERE id = '{}'".format(id))
                 row = cursor.fetchone()
             
                 if row != None:

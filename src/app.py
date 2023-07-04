@@ -9,15 +9,15 @@ from dotenv import load_dotenv
 ################## Funcionalidades para Coordinador ###################
 from models.entities.User import User
 from models.ModelUser import ModelUser
-from routes.perfil_trabajador.trabajadores import trabajadores_bp
-from routes.perfil_trabajador.estudiantes import estudiantes_bp
-from routes.perfil_trabajador.maestros import maestros_bp
-from routes.perfil_trabajador.cursos import cursos_bp
-from routes.perfil_trabajador.salones import salones_bp
-from routes.perfil_trabajador.grados import grados_bp
-from routes.perfil_trabajador.secciones import secciones_bp
-from routes.perfil_trabajador.pagos import pagos_bp
-from routes.perfil_trabajador.crearUsuario import crearUsuario_bp
+from routes.perfil_admin.trabajadores import trabajadores_bp
+from routes.perfil_admin.estudiantes import estudiantes_bp
+from routes.perfil_admin.maestros import maestros_bp
+from routes.perfil_admin.cursos import cursos_bp
+from routes.perfil_admin.salones import salones_bp
+from routes.perfil_admin.grados import grados_bp
+from routes.perfil_admin.secciones import secciones_bp
+from routes.perfil_admin.pagos import pagos_bp
+from routes.perfil_admin.crearUsuario import crearUsuario_bp
 #######################################################################
 
 ################## Funcionalidades para Maestro ###################
@@ -118,13 +118,13 @@ def logint():
                     return redirect(url_for('iniciocontador'))
             else:
                 flash("DPI o contraseña incorrecta...")
-                return render_template('auth/loginT.html')
+                return render_template('auth/Trabajadores/loginT.html')
         else:
                 flash("DPI o contraseña incorrecta......")
-                return render_template('auth/loginT.html')
+                return render_template('auth/Trabajadores/loginT.html')
     
     else:
-        return render_template('auth/loginT.html')
+        return render_template('auth/Trabajadores/loginT.html')
     
 ################ LOGOUT ################
 @app.route('/logoutt')
