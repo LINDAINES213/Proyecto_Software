@@ -6,7 +6,11 @@ from database.db import get_connection
 connection = get_connection()
 crearUsuario_bp = Blueprint('crearUsuario_blueprint', __name__)
 
-@crearUsuario_bp.route('/crearUsuario', methods=['GET','POST'])
+@crearUsuario_bp.route('/crearUsuario')
+def inicio():
+    return render_template('admin/crearuser.html')
+
+@crearUsuario_bp.route('/trabajador', methods=['GET','POST'])
 def crearUsuario():
     if request.method == 'POST':
         dpi = request.form['dpi']
@@ -27,10 +31,37 @@ def crearUsuario():
                 return render_template('admin/crearUsuario.html')
             else:
                 # El DPI no existe en la base de datos
-                flash('DPI o contraseña incorrecta', 'error')
+                flash('DPI inexistente', 'error')
                 return render_template('admin/crearUsuario.html')
     else:
         return render_template('admin/crearUsuario.html')
+    
+
+@crearUsuario_bp.route('/estudiante', methods=['GET','POST'])
+def usuarioEstudiante():
+    if request.method == 'POST':
+        id_estudiante = request.form['id_estudiante']
+        contrasena = request.form['contrasena']
+
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM estudiantes WHERE id_estudiante = %s", (id_estudiante,))
+            user = cursor.fetchone()
+
+            if user:
+                # El DPI existe en la base de datos
+                with connection.cursor() as cursor:
+                    cursor.execute("""INSERT INTO usuarios.userestudiantes (id_estudiante, contrasena)
+                                    VALUES (%s, %s)""", (id_estudiante, contrasena))
+                    connection.commit()
+                cursor.close()
+                flash("Usuario creado exitosamente!")
+                return render_template('admin/usuarioEstudiante.html')
+            else:
+                # El DPI no existe en la base de datos
+                flash('ID inexistente', 'error')
+                return render_template('admin/usuarioEstudiante.html')
+    else:
+        return render_template('admin/usuarioEstudiante.html')
 
 
 

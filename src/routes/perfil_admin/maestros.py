@@ -16,12 +16,12 @@ def maestros():
 def mestros2():
     try:
         dpi = request.form['dpi']
-        curso_1 = request.form['curso_1']
-        curso_2 = request.form['curso_2']
+        curso1 = request.form['curso1']
+        curso2 = request.form['curso2']
 
         with connection.cursor() as cursor:
             cursor.execute("""INSERT INTO maestros VALUES (%s, %s, %s)""", 
-                           (dpi, curso_1, curso_2))
+                           (dpi, curso1, curso2))
             connection.commit()  
         return redirect('/maestros3')
     except Exception as ex:
@@ -44,15 +44,15 @@ def editar_maestro(dpi):
     elif request.method == 'POST':
         # Actualizar los datos del trabajador en la base de datos
         dpi = request.form['dpi']
-        curso_1 = request.form['curso_1']
-        curso_2 = request.form['curso_2']
+        curso1 = request.form['curso1']
+        curso2 = request.form['curso2']
 
         with connection.cursor() as cursor:
             cursor.execute("""UPDATE maestros SET
-                curso_1 = %s,
-                curso_2 = %s
+                curso1 = %s,
+                curso2 = %s
                 WHERE dpi = %s
-            """, (curso_1, curso_2, dpi))
+            """, (curso1, curso2, dpi))
             connection.commit()
 
         return redirect('/maestros3')
@@ -79,7 +79,7 @@ def eliminar_maestro(dpi):
 @login_required
 def mestros3():
     with connection.cursor() as cursor:
-        cursor.execute("""SELECT t.dpi, CONCAT(t.nombres,' ', t.apellidos) AS maestro, curso_1, curso_2 FROM maestros
+        cursor.execute("""SELECT t.dpi, CONCAT(t.nombres,' ', t.apellidos) AS maestro, curso1, curso2 FROM maestros
                         LEFT JOIN trabajadores t ON t.dpi = maestros.dpi
                         ORDER BY dpi ASC""")
         rows = cursor.fetchall()
