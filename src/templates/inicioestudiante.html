@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<body>
+  {% extends './base.html' %}
+  {% block title %}Inicio{% endblock %}
+  {% block body %}
+  <div class="content">
+    <h2>Portal de Servicios Electrónicos</h2>
+    <h3>Bienvenido, {{ current_user.nombre }}</h3>
+    <form action="/inicioestudiante" method="GET">
+      <div class="sidebar">
+        <h1>Menú</h1>
+        <ul>
+          <li><a href="/circulares">Circulares</a></li>
+          <li><a href="/calificaciones">Calificaciones</a></li>
+          <br>
+          <a class="btn btn-secondary" style="background-color: white; color:black; margin-left: 30%; text-align: center;" href="{{ url_for('logoutt') }}">Logout</a>
+        </ul>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .sidebar a {
+    text-decoration: none; /* Sin subrayado */
+    color: #fff; /* Color de texto blanco */
+  }
+
+  .sidebar {
+    text-decoration: none;
+    width: 250px;
+    background-color: #222;
+    color: #fff;
+    height: 100vh; /* Ocupa toda la altura vertical */
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: left;
+    overflow-y: auto; /* Habilita el desplazamiento vertical si el contenido excede el espacio */
+  }
+
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+
+  .sidebar li {
+    padding: 10px;
+    transition: background-color 0.3s;
+  }
+
+  .sidebar li:hover {
+    background-color: #555;
+  }
+    
+  .content {
+    margin-left: 250px; /* Ancho del menú lateral */
+    padding: 20px;
+  }
+
+
+  h2 {
+    font-size: 3em;
+    margin: 0;
+    text-align: left;
+    margin-top: 30px;
+  }
+
+  h3 {
+    font-size: 1.5em;
+    margin: 0;
+    text-align: left;
+    margin-top: 10px;
+  }
+
+  .sidebar h1 {
+    margin: 0;
+    padding: 18.5px;
+    background-color: #111;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>
+{% endblock %}

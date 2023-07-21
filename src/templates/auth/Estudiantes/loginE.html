@@ -55,7 +55,7 @@
       {% block title %}Log In{% endblock %}
 
       {% block body %}
-      <form class="login-form" action="/logint" method="POST">
+      <form class="login-form" action="/logine" method="POST">
         {% with messages = get_flashed_messages() %}
 
         {% if messages %}
@@ -71,8 +71,8 @@
         {% endwith %}
         <h1>Log In</h1>
         <div class="form-floating">
-          <input type="text" class="form-control" id="dpi" name="dpi" placeholder="dpi" required>
-          <label for="dpi">DPI</label>
+          <input type="text" class="form-control" id="id_estudiante" name="id_estudiante" placeholder="id_estudiante" required>
+          <label for="id_estudiante">ID</label>
         </div>
         <div class="form-floating mt-2">
           <input type="password" class="form-control" name="contrasena" placeholder="Contrasena" required>
@@ -83,8 +83,8 @@
 
       </form>
       {% endblock %}
-            <label for="dpi">DPI:</label>
-            <input type="text" id="dpi" name="dpi" required>
+            <label for="id_estudiante">ID:</label>
+            <input type="text" id="id_estudiante" name="id_estudiante" required>
             <label for="contrasena">Password:</label>
             <input type="password" id="contrasena" name="contrasena" required>
             <button type="submit">Log In</button>
