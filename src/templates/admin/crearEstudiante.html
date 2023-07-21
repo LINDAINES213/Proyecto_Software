@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Crear Usuario</title>
+    <title>Crear Usuario Estudiante</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -52,10 +52,10 @@
   <body>
       {% extends './base.html' %}
 
-      {% block title %}Crear Usuario{% endblock %}
+      {% block title %}Crear Usuario Estudiante{% endblock %}
 
       {% block body %}
-      <form class="login-form" action="/estudiante" method="POST">
+      <form class="login-form" action="/crearEstudiante" method="POST">
         {% with messages = get_flashed_messages() %}
 
         {% if messages %}
@@ -69,7 +69,7 @@
         {% endif %}
 
         {% endwith %}
-        <h1>Crear Usuario</h1>
+        <h1>Crear Usuario Estudiante</h1>
         <div class="form-floating">
           <input type="text" class="form-control" id="id_estudiante" name="id_estudiante" placeholder="id_estudiante" required>
           <label for="id_estudiante">ID</label>

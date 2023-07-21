@@ -19,6 +19,8 @@ from routes.perfil_admin.grados import grados_bp
 from routes.perfil_admin.secciones import secciones_bp
 from routes.perfil_admin.pagos import pagos_bp
 from routes.perfil_admin.crearUsuario import crearUsuario_bp
+from routes.perfil_admin.crearEstudiante import crearEstudiante_bp 
+
 #######################################################################
 
 ################## Funcionalidades para Maestro ###################
@@ -42,8 +44,8 @@ app.register_blueprint(grados_bp)
 app.register_blueprint(secciones_bp)
 app.register_blueprint(pagos_bp)
 app.register_blueprint(crearUsuario_bp)
+app.register_blueprint(crearEstudiante_bp)
 #############################################
-
 
 ##################### INICIOS PERFILES #####################
 @app.route('/')
@@ -83,8 +85,7 @@ def inicioestudiante():
 ############################# LOGIN ##############################
 @login_manager_app.user_loader
 def load_user(id):
-    return ModelUser.get_by_id(connection, id) or ModelUser.get_by_idE(connection, id)
-
+    return ModelUser.get_by_idE(connection, id) or ModelUser.get_by_id(connection, id) 
 
 def get_cargo_from_database(dpi):
     try:
