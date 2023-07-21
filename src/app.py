@@ -45,6 +45,8 @@ app.register_blueprint(grados_bp)
 app.register_blueprint(secciones_bp)
 app.register_blueprint(pagos_bp)
 app.register_blueprint(crearUsuario_bp)
+app.register_blueprint(crearEstudiante_bp)
+app.register_blueprint(calificaciones_bp)
 #############################################
 
 ##################### INICIOS PERFILES #####################
