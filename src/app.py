@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 
 ################## Funcionalidades para Coordinador ###################
 from models.entities.User import User
+from models.entities.UserS import UserS
 from models.ModelUser import ModelUser
 from routes.perfil_admin.trabajadores import trabajadores_bp
 from routes.perfil_admin.estudiantes import estudiantes_bp
@@ -74,10 +75,16 @@ def iniciosecretario():
 def iniciomaestro():
     return render_template('iniciomaestro.html')
 
+@app.route('/inicioestudiante')
+@login_required
+def inicioestudiante():
+    return render_template('inicioestudiante.html')
+
 ############################# LOGIN ##############################
 @login_manager_app.user_loader
 def load_user(id):
-    return ModelUser.get_by_id(connection, id)
+    return ModelUser.get_by_id(connection, id) or ModelUser.get_by_idE(connection, id)
+
 
 def get_cargo_from_database(dpi):
     try:
@@ -127,12 +134,36 @@ def logint():
     else:
         return render_template('auth/Trabajadores/loginT.html')
     
+
+
+    
+@app.route('/logine', methods=['GET', 'POST'])
+def logine():
+    if request.method == 'POST':
+        id_estudiante = request.form['id_estudiante']
+        contrasena = request.form['contrasena']
+        user = UserS(0, id_estudiante, contrasena)
+        logged_user = ModelUser.loginE(connection, user)
+        if logged_user != None:
+            if logged_user.contrasena:
+                login_user(logged_user)
+                return redirect(url_for('inicioestudiante'))
+            else:
+                flash("DPI o contraseña incorrecta...")
+                return render_template('auth/Estudiantes/loginE.html')
+        else:
+                flash("DPI o contraseña incorrecta......")
+                return render_template('auth/Estudiantes/loginE.html')
+    
+    else:
+        return render_template('auth/Estudiantes/loginE.html')
+    
 ################ LOGOUT ################
 @app.route('/logoutt')
 @login_required
 def logoutt():
     logout_user()
-    return redirect(url_for('logint'))
+    return redirect(url_for('inicio'))
 
 ################################# EJECUCION API #######################################
 def page_not_found(error):
