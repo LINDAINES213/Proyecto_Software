@@ -10,6 +10,8 @@ lerna-debug.log*
 __psycache__
 .flaskenv
 
+.env
+config.py
 node_modules
 venv/
 dist
