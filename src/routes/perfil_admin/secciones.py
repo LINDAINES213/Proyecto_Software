@@ -75,7 +75,6 @@ def eliminar_seccion(id):
 @login_required
 def secciones3():
     with connection.cursor() as cursor:
-        cursor.execute("""SELECT * FROM seccion
-                        ORDER BY id_seccion ASC""")
+        cursor.execute("""SELECT * FROM seccion ORDER BY id_seccion ASC""")
         rows = cursor.fetchall()
         return render_template('admin/secciones3.html', rows=rows)

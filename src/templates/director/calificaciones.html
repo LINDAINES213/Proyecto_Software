@@ -72,24 +72,108 @@
         {% endwith %}
         <h1>Mostrar calificaciones</h1>
         <div class="form-floating">
-          <input type="text" class="form-control" id="grado" name="grado" placeholder="grado" required>
-          <label for="grado">Grado</label>
+            <input type="text" class="form-control" id="id_estudiante" name="id_estudiante" placeholder="id_estudiante" required>
+            <label for="id_estudiante">ID Estudiante: </label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="nombres" name="nombres" placeholder="nombres" required>
+            <label for="grado">Nombres: </label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="apellidos" required>
+          <label for="apellidos">Apellidos: </label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="grado" name="grado" placeholder="grado" required>
+            <label for="grado">Grado: </label>
         </div>
         <div class="form-floating">
             <input type="text" class="form-control" name="seccion" placeholder="seccion" required>
-            <label for="seccion">Seccion</label>
+            <label for="seccion">Seccion: </label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="curso1" placeholder="curso1" required>
+            <label for="curso1">Curso 1: </label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="curso2" placeholder="curso2" required>
+            <label for="curso2">Curso 2: </label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="curso3" placeholder="curso3" required>
+            <label for="curso3">Curso 3: </label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="curso4" placeholder="curso4" required>
+            <label for="curso4">Curso 4: </label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="curso5" placeholder="curso5" required>
+            <label for="curso5">Curso 5: </label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="curso6" placeholder="curso6" required>
+            <label for="curso6">Curso 6: </label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="curso7" placeholder="curso7" required>
+            <label for="curso7">Curso 7: </label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="curso8" placeholder="curso8" required>
+            <label for="curso8">Curso 8: </label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="curso9" placeholder="curso9" required>
+            <label for="curso9">Curso 9: </label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="curso10" placeholder="curso10" required>
+            <label for="curso10">Curso 10: </label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="promedio" placeholder="promedio" required>
+            <label for="promedio">Promedio: </label>
         </div>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Ver calificaciones de grado</button>
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Insertar calificaciones</button>
         <button class="w-100 btn btn-lg btn-primary mt-3" onclick="window.location.href='/calificaciones3'">Ver todas las calificaciones</button>
 
       </form>
       {% endblock %}
-            <label for="grado">Grado:</label>
+            <label for="id_estudiante">ID Estudiante: </label>
+            <input type="text" id="id_estudiante" name="id_estudiante" required>
+            <label for="nombres">Nombres: </label>
+            <input type="text" id="nombres" name="nombres" required>
+            <label for="apellidos">Apellidos: </label>
+            <input type="text" id="apellidos" name="apellidos" required>
+            <label for="grado">Grado: </label>
             <input type="text" id="grado" name="grado" required>
-            <label for="seccion">Seccion:</label>
+            <label for="seccion">Seccion: </label>
             <input type="text" id="seccion" name="seccion" required>
-            <button type="submit">Ver calificaciones</button>
+            <label for="curso1">Curso 1: </label>
+            <input type="text" id="curso1" name="curso1" required>
+            <label for="curso2">Curso 2: </label>
+            <input type="text" id="curso2" name="curso2" required>
+            <label for="curso3">Curso 3: </label>
+            <input type="text" id="curso3" name="curso3" required>
+            <label for="curso4">Curso 4: </label>
+            <input type="text" id="curso4" name="curso4" required>
+            <label for="curso5">Curso 5: </label>
+            <input type="text" id="curso5" name="curso5" required>
+            <label for="curso6">Curso 6: </label>
+            <input type="text" id="curso6" name="curso6" required>
+            <label for="curso7">Curso 7: </label>
+            <input type="text" id="curso7" name="curso7" required>
+            <label for="curso8">Curso 8: </label>
+            <input type="text" id="curso8" name="curso8" required>
+            <label for="curso9">Curso 9: </label>
+            <input type="text" id="curso9" name="curso9" required>
+            <label for="curso10">Curso 10: </label>
+            <input type="text" id="curso10" name="curso10" required>
+            <label for="promedio">Promedio: </label>
+            <input type="text" id="promedio" name="promedio" required>
+            <button type="submit">Insertar calificaciones</button>
       </form>
     </body>
   </html>
