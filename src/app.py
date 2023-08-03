@@ -23,6 +23,7 @@ from routes.perfil_admin.crearEstudiante import crearEstudiante_bp
 #######################################################################
 
 ################## Funcionalidades para Director ###################
+from routes.perfil_director.pagos_director import pagosdirector_bp
 from routes.perfil_director.calificaciones import calificaciones_bp
 #######################################################################
 
@@ -61,6 +62,7 @@ app.register_blueprint(crearEstudiante_bp)
 #############################################
 
 ###### Funcionalidades para Director ######
+app.register_blueprint(pagosdirector_bp)
 app.register_blueprint(calificaciones_bp)
 #############################################
 
