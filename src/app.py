@@ -20,11 +20,23 @@ from routes.perfil_admin.secciones import secciones_bp
 from routes.perfil_admin.pagos import pagos_bp
 from routes.perfil_admin.crearUsuario import crearUsuario_bp
 from routes.perfil_admin.crearEstudiante import crearEstudiante_bp 
+#######################################################################
+
+################## Funcionalidades para Director ###################
 from routes.perfil_director.calificaciones import calificaciones_bp
+#######################################################################
+
+################## Funcionalidades para Secretario ###################
 from routes.perfil_secretario.circulares import circulares_bp
 #######################################################################
 
 ################## Funcionalidades para Maestro ###################
+#######################################################################
+
+################## Funcionalidades para Contador ###################
+#######################################################################
+
+################## Funcionalidades para Estudiantes/Padres de Familia ###################
 #######################################################################
 
 load_dotenv()
@@ -46,8 +58,23 @@ app.register_blueprint(secciones_bp)
 app.register_blueprint(pagos_bp)
 app.register_blueprint(crearUsuario_bp)
 app.register_blueprint(crearEstudiante_bp)
+#############################################
+
+###### Funcionalidades para Director ######
 app.register_blueprint(calificaciones_bp)
+#############################################
+
+###### Funcionalidades para Secretario ######
 app.register_blueprint(circulares_bp)
+#############################################
+
+###### Funcionalidades para Maestro ######
+#############################################
+
+###### Funcionalidades para Contador ######
+#############################################
+
+###### Funcionalidades para Estudiante/Padres de Familia ######
 #############################################
 
 ##################### INICIOS PERFILES #####################
