@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Salario de Trabajadores</title>
+	<style>
+		body {
+			margin: 15px;
+			padding: 0;
+			font-family: Arial, sans-serif;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th, td {
+			border: 1px solid #dddddd;
+			padding: 8px;
+			text-align: center;
+		}
+
+		th {
+			background-color: #000;
+			color: #ffffff;
+			border: 1px solid #000;
+			padding: 8px;
+			text-align: center;
+		}
+
+		.tabla tr:nth-child(even) {
+			background-color: #f9f9f9;
+		}
+		
+		/* Estilo para el texto del encabezado */
+		.tabla th span {
+			font-weight: bold;
+		}
+
+		.edit-button {
+			padding: 4px 8px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+
+		.delete-button {
+			padding: 4px 8px;
+			background-color: #f44336;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+
+		.pago-realizado {
+			padding: 4px 8px;
+			background-color: rgb(81, 251, 81) !important;
+			color: black;
+			border: none;
+			cursor: pointer;
+		}
+
+		.pago-pendiente {
+			padding: 4px 8px;
+			background-color: rgb(251, 81, 81) !important;
+			color: white;
+			border: none;
+			cursor: pointer;
+		}
+
+		.pagado {
+			background-color: rgb(162, 244, 162);
+		}
+
+		.vencido {
+			background-color: rgb(244, 162, 162);
+		}
+
+		.prox-vencimiento {
+			background-color: rgb(244, 162, 162);
+		}
+
+		table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    
+    /* Estilo para el texto del encabezado */
+    table th span {
+      font-weight: bold;
+    }
+	</style>
+</head>
+<body>
+	<h1>Salario de Trabajadores</h1>
+	<table>
+		<thead>
+			<tr>
+				<th><span>ID</span></th>
+				<th><span>Nombres</span></th>
+				<th><span>Apellidos</span></th>
+				<th><span>Cargo</span></th>
+				<th><span>Salario</span></th>
+				<th><span>Metodo de Pago</span></th>
+				<th><span>Bonus</span></th>
+				<th><span>Fecha de Contratación</span></th>
+				<th><span>Fecha de Pago</span></th>
+				<th><span>Acciones</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in rows %}
+				<tr>
+					<td>{{ row[0] }}</td>
+					<td>{{ row[1] }}</td>
+					<td>{{ row[2] }}</td>
+					<td>{{ row[3] }}</td>
+					<td>{{ row[4] }}</td>
+					<td>{{ row[5] }}</td>
+					<td>{{ row[6] }}</td>
+					<td>{{ row[7] }}</td>
+					<td>{{ row[8] }}</td>
+					<td>
+						<button class="pago-realizado" onclick="pagoRealizado(this)">Pagado</button>
+						<button class="pago-pendiente" onclick="pagoPendiente(this)">Pendiente</button>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<script>
+		// Función para marcar una fila como pagada
+		function pagoRealizado(button) {
+		  var row = button.parentNode.parentNode;
+		  row.classList.add('pagado');
+		  guardarEstado(row);
+		}
+	  
+		// Función para marcar una fila como pendiente
+		function pagoPendiente(button) {
+		  var row = button.parentNode.parentNode;
+		  row.classList.remove('pagado');
+		  guardarEstado(row);
+		}
+	  
+		// Función para guardar el estado de la fila en el almacenamiento local
+		function guardarEstado(row) {
+		  var rowId = row.querySelector('td:first-child').textContent;
+		  var isPagado = row.classList.contains('pagado');
+		  localStorage.setItem('estadoFila-' + rowId, isPagado);
+		}
+	  
+		// Función para cargar el estado de las filas desde el almacenamiento local
+		function cargarEstadoFilas() {
+		  var filas = document.querySelectorAll('tbody tr');
+		  filas.forEach(function(row) {
+			var rowId = row.querySelector('td:first-child').textContent;
+			var isPagado = localStorage.getItem('estadoFila-' + rowId);
+			if (isPagado === 'true') {
+			  row.classList.add('pagado');
+			}
+		  });
+		}
+	  
+		// Cargar el estado de las filas cuando se carga la página
+		window.addEventListener('load', cargarEstadoFilas);
+	  </script>
+	  
+</body>
+</html>
