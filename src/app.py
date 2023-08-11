@@ -5,6 +5,7 @@ from flask_login import LoginManager, login_required, login_user, logout_user
 from flask_cors import CORS
 from config import config
 from dotenv import load_dotenv
+from flask import Response
 
 ################## Funcionalidades para Coordinador ###################
 from models.entities.User import User
@@ -28,7 +29,8 @@ from routes.perfil_director.calificaciones import calificaciones_bp
 #######################################################################
 
 ################## Funcionalidades para Secretario ###################
-from routes.perfil_secretario.circulares import circulares_bp
+from routes.perfil_secretario.circularesT import circularesT_bp
+from routes.perfil_secretario.circularesE import circularesE_bp
 #######################################################################
 
 ################## Funcionalidades para Maestro ###################
@@ -44,6 +46,7 @@ load_dotenv()
 
 app = Flask(__name__)
 csrf = CSRFProtect(app)
+app.config['SECRET_KEY'] = 'SOFTWARE_123'
 connection = get_connection()
 login_manager_app = LoginManager(app)
 CORS(app)
@@ -67,7 +70,8 @@ app.register_blueprint(calificaciones_bp)
 #############################################
 
 ###### Funcionalidades para Secretario ######
-app.register_blueprint(circulares_bp)
+app.register_blueprint(circularesT_bp)
+app.register_blueprint(circularesE_bp)
 #############################################
 
 ###### Funcionalidades para Maestro ######
@@ -127,10 +131,10 @@ def get_cargo_from_database(dpi):
             row = cursor.fetchone()
            
             if row:
-                cargo = row[3]
+                cargo = row[0]
                 return cargo
             else:
-                return None
+                return cargo
 
     except Exception as ex:
         print(f"Error al obtener el cargo del usuario: {ex}")
