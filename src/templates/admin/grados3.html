@@ -2,58 +2,9 @@
 <html>
 <head>
 	<title>Grados</title>
-	<style>
-		table {
-			border-collapse: collapse;
-			width: 100%;
-		}
-
-		th, td {
-			padding: 8px;
-			text-align: left;
-			border-bottom: 1px solid #ddd;
-		}
-
-		tr:hover {
-			background-color: #f5f5f5;
-		}
-
-		th {
-			background-color: #4CAF50;
-			color: white;
-		}
-
-		.edit-button {
-			padding: 5px 5px;
-			background-color: transparent;
-			color: white;
-			font-size: 1.5em;
-			border: none;
-			cursor: pointer;
-		}
-
-		.delete-button {
-			padding: 5px 5px;
-			font-size: 1.5em;
-			background-color: transparent;
-			color: white;
-			border: none;
-			cursor: pointer;
-		}
-
-		.home-button {
-			position: absolute;
-			top: 10px;
-			left: 10px;
-			padding: 5px 10px;
-			background-color: #4CAF50;
-			color: white;
-			border: none;
-			border-radius: 3px;
-			cursor: pointer;
-			text-decoration: none;
-		}
-	</style>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/ver/grados3.css') }}">
+	<script src="{{ url_for('static', filename='js/admin/grados3.js') }}"></script>
+</head>
 </head>
 <body>
 	<a href="/inicioadmin" class="home-button">&#x2190 Regresar</a>
@@ -80,19 +31,5 @@
 			{% endfor %}
 		</tbody>
 	</table>
-
-	<script>
-		function editar_grado(id) {
-			// Redireccionar al formulario de edición con el ID del trabajador
-			window.location.href = '/grados2/' + id + '/edit';
-		}
-
-		function eliminar_grado(id) {
-			// Enviar una solicitud de eliminación del trabajador con el ID
-			if (confirm("¿Estás seguro de que deseas eliminar este trabajador?")) {
-				window.location.href = '/grados2/' + id + '/delete';
-			}
-		}
-	</script>
 </body>
 </html>

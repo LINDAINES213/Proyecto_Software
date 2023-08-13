@@ -36,7 +36,7 @@ def editar_seccion(id):
             seccion = cursor.fetchone()
 
         if seccion:
-            return render_template('editar_seccion.html', seccion=seccion)
+            return render_template('admin/editar_seccion.html', seccion=seccion)
         else:
             return 'Seccion no encontrado'
 

@@ -2,43 +2,8 @@
 <html>
 <head>
 	<title>Grados</title>
-	<style>
-		table {
-			border-collapse: collapse;
-			width: 100%;
-		}
-
-		th, td {
-			padding: 8px;
-			text-align: left;
-			border-bottom: 1px solid #ddd;
-		}
-
-		tr:hover {
-			background-color: #f5f5f5;
-		}
-
-		th {
-			background-color: #4CAF50;
-			color: white;
-		}
-
-		.edit-button {
-			padding: 4px 8px;
-			background-color: #4CAF50;
-			color: white;
-			border: none;
-			cursor: pointer;
-		}
-
-		.delete-button {
-			padding: 4px 8px;
-			background-color: #f44336;
-			color: white;
-			border: none;
-			cursor: pointer;
-		}
-	</style>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/ver/secciones3.css') }}">
+	<script src="{{ url_for('static', filename='js/admin/secciones3.js') }}"></script>
 </head>
 <body>
 	<h1>Grados</h1>
@@ -65,19 +30,5 @@
 			{% endfor %}
 		</tbody>
 	</table>
-
-	<script>
-		function editar_seccion(id) {
-			// Redireccionar al formulario de edición con el ID del trabajador
-			window.location.href = '/secciones2/' + id + '/edit';
-		}
-
-		function eliminar_seccion(id) {
-			// Enviar una solicitud de eliminación del trabajador con el ID
-			if (confirm("¿Estás seguro de que deseas eliminar este trabajador?")) {
-				window.location.href = '/secciones2/' + id + '/delete';
-			}
-		}
-	</script>
 </body>
 </html>
