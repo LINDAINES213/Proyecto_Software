@@ -19,7 +19,7 @@ def pagoP():
 @login_required
 def pagoC():
     with connection.cursor() as cursor:
-        cursor.execute("""SELECT * FROM estudiantes
+        cursor.execute("""SELECT id, nombres, apellidos, fecha_nacimiento, grado, seccion FROM estudiantes
                         ORDER BY grado ASC""")
         rows = cursor.fetchall()
         return render_template('director/pagoC.html', rows=rows)
