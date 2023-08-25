@@ -1,37 +1,37 @@
 from flask import Flask, render_template, request, redirect, flash, url_for, Response, session
-from database.db import get_connection
+from src.database.db import get_connection
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_required, login_user, logout_user
 from flask_cors import CORS
-from config import config
+from src.config import config
 from dotenv import load_dotenv
 from flask import Response
 
 ################## Funcionalidades para Coordinador ###################
-from models.entities.User import User
-from models.entities.UserS import UserS
-from models.ModelUser import ModelUser
-from routes.perfil_admin.trabajadores import trabajadores_bp
-from routes.perfil_admin.estudiantes import estudiantes_bp
-from routes.perfil_admin.maestros import maestros_bp
-from routes.perfil_admin.cursos import cursos_bp
-from routes.perfil_admin.salones import salones_bp
-from routes.perfil_admin.grados import grados_bp
-from routes.perfil_admin.secciones import secciones_bp
-from routes.perfil_admin.pagos import pagos_bp
-from routes.perfil_admin.crearUsuario import crearUsuario_bp
-from routes.perfil_admin.crearEstudiante import crearEstudiante_bp 
+from src.models.entities.User import User
+from src.models.entities.UserS import UserS
+from src.models.ModelUser import ModelUser
+from src.routes.perfil_admin.trabajadores import trabajadores_bp
+from src.routes.perfil_admin.estudiantes import estudiantes_bp
+from src.routes.perfil_admin.maestros import maestros_bp
+from src.routes.perfil_admin.cursos import cursos_bp
+from src.routes.perfil_admin.salones import salones_bp
+from src.routes.perfil_admin.grados import grados_bp
+from src.routes.perfil_admin.secciones import secciones_bp
+from src.routes.perfil_admin.pagos import pagos_bp
+from src.routes.perfil_admin.crearUsuario import crearUsuario_bp
+from src.routes.perfil_admin.crearEstudiante import crearEstudiante_bp 
 #######################################################################
 
 ################## Funcionalidades para Director ###################
-from routes.perfil_director.pagos_director import pagosdirector_bp
-from routes.perfil_director.calificaciones import calificaciones_bp
+from src.routes.perfil_director.pagos_director import pagosdirector_bp
+from src.routes.perfil_director.calificaciones import calificaciones_bp
 #######################################################################
 
 ################## Funcionalidades para Secretario ###################
-from routes.perfil_secretario.circularesT import circularesT_bp
-from routes.perfil_secretario.circularesE import circularesE_bp
-######################################################################
+from src.routes.perfil_secretario.circularesT import circularesT_bp
+from src.routes.perfil_secretario.circularesE import circularesE_bp
+#######################################################################
 
 ################## Funcionalidades para Maestro ###################
 #######################################################################
