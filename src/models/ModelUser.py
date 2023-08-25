@@ -1,6 +1,6 @@
 from .entities.User import User
 from .entities.UserS import UserS
-from database.db import get_connection
+from src.database.db import get_connection
 
 class ModelUser():
 
