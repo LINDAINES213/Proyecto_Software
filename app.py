@@ -1,37 +1,37 @@
 from flask import Flask, render_template, request, redirect, flash, url_for, Response, session
-from src.database.db import get_connection
+from database.db import get_connection
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_required, login_user, logout_user
 from flask_cors import CORS
-from src.config import config
+from config import config
 from dotenv import load_dotenv
 from flask import Response
 
 ################## Funcionalidades para Coordinador ###################
-from src.models.entities.User import User
-from src.models.entities.UserS import UserS
-from src.models.ModelUser import ModelUser
-from src.routes.perfil_admin.trabajadores import trabajadores_bp
-from src.routes.perfil_admin.estudiantes import estudiantes_bp
-from src.routes.perfil_admin.maestros import maestros_bp
-from src.routes.perfil_admin.cursos import cursos_bp
-from src.routes.perfil_admin.salones import salones_bp
-from src.routes.perfil_admin.grados import grados_bp
-from src.routes.perfil_admin.secciones import secciones_bp
-from src.routes.perfil_admin.pagos import pagos_bp
-from src.routes.perfil_admin.crearUsuario import crearUsuario_bp
-from src.routes.perfil_admin.crearEstudiante import crearEstudiante_bp 
+from models.entities.User import User
+from models.entities.UserS import UserS
+from models.ModelUser import ModelUser
+from routes.perfil_admin.trabajadores import trabajadores_bp
+from routes.perfil_admin.estudiantes import estudiantes_bp
+from routes.perfil_admin.maestros import maestros_bp
+from routes.perfil_admin.cursos import cursos_bp
+from routes.perfil_admin.salones import salones_bp
+from routes.perfil_admin.grados import grados_bp
+from routes.perfil_admin.secciones import secciones_bp
+from routes.perfil_admin.pagos import pagos_bp
+from routes.perfil_admin.crearUsuario import crearUsuario_bp
+from routes.perfil_admin.crearEstudiante import crearEstudiante_bp 
 #######################################################################
 
 ################## Funcionalidades para Director ###################
-from src.routes.perfil_director.pagos_director import pagosdirector_bp
-from src.routes.perfil_director.calificaciones import calificaciones_bp
-#######################################################################
+from routes.perfil_director.pagos_director import pagosdirector_bp
+from routes.perfil_director.calificaciones import calificaciones_bp
+######################################################################
 
 ################## Funcionalidades para Secretario ###################
-from src.routes.perfil_secretario.circularesT import circularesT_bp
-from src.routes.perfil_secretario.circularesE import circularesE_bp
-#######################################################################
+from routes.perfil_secretario.circularesT import circularesT_bp
+from routes.perfil_secretario.circularesE import circularesE_bp
+#####################################################################
 
 ################## Funcionalidades para Maestro ###################
 #######################################################################
@@ -121,7 +121,8 @@ def inicioestudiante():
 ############################# LOGIN ##############################
 @login_manager_app.user_loader
 def load_user(id):
-    return ModelUser.get_by_idE(connection, id) or ModelUser.get_by_id(connection, id) 
+    return ModelUser.get_by_id(connection, id) 
+    #return ModelUser.get_by_idE(connection, id) or
 
 def get_cargo_from_database(dpi):
     try:
@@ -174,7 +175,7 @@ def logint():
 
 
     
-@app.route('/logine', methods=['GET', 'POST'])
+'''@app.route('/logine', methods=['GET', 'POST'])
 def logine():
     if request.method == 'POST':
         id_estudiante = request.form['id_estudiante']
@@ -193,7 +194,7 @@ def logine():
                 return render_template('auth/Estudiantes/loginE.html')
     
     else:
-        return render_template('auth/Estudiantes/loginE.html')
+        return render_template('auth/Estudiantes/loginE.html')'''
     
 ################ LOGOUT ################
 @app.route('/logoutt')
