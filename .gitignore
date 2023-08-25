@@ -1,7 +1,5 @@
 __psycache__
-.flaskenv
 .env
-config.py
 venv/
 
 # Editor directories and files
