@@ -7,7 +7,6 @@ from app import app, get_cargo_from_database
 from database import db
 import re
 import json
-from app import app
 
 class TestApp(unittest.TestCase):
     def setUp(self):
@@ -38,10 +37,10 @@ class TestApp(unittest.TestCase):
         # Obtener la página de inicio de sesión para extraer el token CSRF
         login_page_response = self.app.get('/logint')
         csrf_token = self.extract_csrf_token(login_page_response)
-        self.app.post('/logint', data=dict(dpi='1234545', contrasena='david123', csrf_token=csrf_token), follow_redirects=True)
+        #self.app.post('/logint', data=dict(dpi='1234545', contrasena='david123', csrf_token=csrf_token), follow_redirects=True)
         
         self.app.get('/crearTrabajador')
-        response = self.app.post('/crearTrabajador', data=dict(dpi='111234567891', contrasena='eduardo123', csrf_token=csrf_token))
+        response = self.app.post('/crearTrabajador', data=dict(dpi='765432101298', contrasena='sergio123', csrf_token=csrf_token))
         self.assertEqual(response.status_code, 200)
         '''
         789101123456 carlos123

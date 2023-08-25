@@ -35,21 +35,4 @@ def crearEstudiante():
                 flash('ID inexistente', 'error')
                 return render_template('admin/crearEstudiante.html')
     else:
-        return render_template('admin/crearEstudiante.html')
-
-
-
-    '''if request.method == 'POST':
-        dpi = request.form['dpi']
-        contrasena = request.form['contrasena']
-
-        with connection.cursor() as cursor:
-            cursor.execute("""INSERT INTO usuarios.user (dpi, contrasena)
-                                VALUES (%s, %s)""", (dpi, contrasena))
-            connection.commit()
-        cursor.close()
-        return render_template('confirmaciones.html')
-    else:
-        return render_template('admin/crearUsuario.html')'''
-    
-    
+        return render_template('admin/crearEstudiante.html')    

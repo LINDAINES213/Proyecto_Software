@@ -20,8 +20,7 @@ def secciones2():
         seccion = request.form['seccion']
 
         with connection.cursor() as cursor:
-            cursor.execute("""INSERT INTO seccion VALUES (%s, %s, %s)""", 
-                           (id_seccion, id_grado, seccion))
+            cursor.execute("""INSERT INTO seccion VALUES (%s, %s, %s)""", (id_seccion, id_grado, seccion))
             connection.commit()  
         return redirect('/secciones3')
     except Exception as ex:

@@ -7,7 +7,7 @@ import unittest
 from app import app
 from database import db
 
-#scenarios('BDD.feature')
+scenarios('BDD.feature')
 
 class TestApp(unittest.TestCase):
     def setUp(self):

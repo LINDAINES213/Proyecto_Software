@@ -31,7 +31,7 @@ from routes.perfil_director.calificaciones import calificaciones_bp
 ################## Funcionalidades para Secretario ###################
 from routes.perfil_secretario.circularesT import circularesT_bp
 from routes.perfil_secretario.circularesE import circularesE_bp
-#######################################################################
+######################################################################
 
 ################## Funcionalidades para Maestro ###################
 #######################################################################
