@@ -3,7 +3,7 @@ from src.database.db import get_connection
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_required, login_user, logout_user
 from flask_cors import CORS
-from src.config import config
+from config import config
 from dotenv import load_dotenv
 from flask import Response
 
