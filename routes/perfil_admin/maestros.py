@@ -13,50 +13,19 @@ def maestros():
 
 @maestros_bp.route('/maestros2', methods=['POST'])
 @login_required
-def mestros2():
+def maestros2():
     try:
         dpi = request.form['dpi']
-        curso1 = request.form['curso1']
-        curso2 = request.form['curso2']
 
         with connection.cursor() as cursor:
-            cursor.execute("""INSERT INTO maestros VALUES (%s, %s, %s)""", 
-                           (dpi, curso1, curso2))
+            cursor.execute("INSERT INTO maestros (dpi) VALUES (%s)", (dpi,))
             connection.commit()  
         return redirect('/maestros3')
     except Exception as ex:
-        return render_template('admin/maestros.html')
+        connection.rollback()  # Revertir la transacción en caso de error
+        flash('Error, verifique que el DPI exista en la base de datos')
+        return redirect('/maestros')
 
-@maestros_bp.route('/maestros2/<dpi>/edit', methods=['GET', 'POST'])
-@login_required
-def editar_maestro(dpi):
-    if request.method == 'GET':
-        # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM maestros WHERE dpi = %s", (dpi,))
-            maestro = cursor.fetchone()
-
-        if maestro:
-            return render_template('admin/editar_maestro.html', maestro=maestro)
-        else:
-            return 'Maestro no encontrado'
-
-    elif request.method == 'POST':
-        # Actualizar los datos del trabajador en la base de datos
-        dpi = request.form['dpi']
-        curso1 = request.form['curso1']
-        curso2 = request.form['curso2']
-
-        with connection.cursor() as cursor:
-            cursor.execute("""UPDATE maestros SET
-                curso1 = %s,
-                curso2 = %s
-                WHERE dpi = %s
-            """, (curso1, curso2, dpi))
-            connection.commit()
-
-        return redirect('/maestros3')
-    
 @maestros_bp.route('/maestros2/<dpi>/delete', methods=['GET', 'POST'])
 @login_required
 def eliminar_maestro(dpi):
@@ -77,10 +46,9 @@ def eliminar_maestro(dpi):
 
 @maestros_bp.route('/maestros3')
 @login_required
-def mestros3():
+def maestros3():
     with connection.cursor() as cursor:
-        cursor.execute("""SELECT t.dpi, CONCAT(t.nombres,' ', t.apellidos) AS maestro, curso1, curso2 FROM maestros
-                        LEFT JOIN trabajadores t ON t.dpi = maestros.dpi
+        cursor.execute("""SELECT * FROM maestros
                         ORDER BY dpi ASC""")
         rows = cursor.fetchall()
         return render_template('admin/maestros3.html', rows=rows)

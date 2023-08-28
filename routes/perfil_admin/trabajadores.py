@@ -32,8 +32,9 @@ def trabajadores2():
             connection.commit()  
         return redirect('/trabajadores3')
     except Exception as ex:
-        return render_template('admin/trabajadores.html')
-
+        connection.rollback()  # Revertir la transacción en caso de error
+        flash('Error, verifique que el DPI exista en la base de datos')
+        return redirect('/trabajadores')
 @trabajadores_bp.route('/trabajadores2/<dpi>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_worker(dpi):

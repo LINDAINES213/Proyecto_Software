@@ -29,27 +29,15 @@
           <input type="text" class="form-control" id="dpi" name="dpi" placeholder="DPI" required>
           <label for="dpi">DPI</label>
         </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" name="curso_1" placeholder="curso_1" required>
-            <label for="curso_1">Curso 1</label>
-        </div>
-        <div class="form-floating">
-          <input type="text" class="form-control" name="curso_2" placeholder="curso_2">
-          <label for="curso_2">Curso 2</label>
-        </div>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir maestro</button>
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir Maestro</button>
         <button class="w-100 btn btn-lg btn-primary mt-3" onclick="window.location.href='/maestros3'">Ver Maestros</button>
 
       </form>
       {% endblock %}
             <label for="dpi">DPI:</label>
             <input type="text" id="dpi" name="dpi" required>
-            <label for="curso_1">Curso 1:</label>
-            <input type="text" id="curso_1" name="curso_1" required>
-            <label for="curso_2">Curso 2:</label>
-            <input type="text" id="curso_2" name="curso_2">
-            <button type="submit">Añadir maestro</button>
+            <button type="submit">Añadir Maestro</button>
       </form>
     </body>
   </html>
