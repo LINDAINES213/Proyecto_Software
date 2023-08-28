@@ -26,20 +26,16 @@
         {% endwith %}
         <h1>Añadir curso</h1>
         <div class="form-floating">
-          <input type="number" class="form-control" id="id_curso" name="id_curso" placeholder="ID Curso" required>
+          <input type="text" class="form-control" id="id_curso" name="id_curso" placeholder="ID Curso" required>
           <label for="id_curso">ID Curso</label>
         </div>
         <div class="form-floating">
-          <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
-          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" id="curso" name="curso" placeholder="Curso" required>
+          <label for="curso">Curso</label>
         </div>
         <div class="form-floating">
-          <input type="text" class="form-control" id="maestro" name="maestro" placeholder="Maestro" required>
-          <label for="maestro">Maestro</label>
-        </div>
-        <div class="form-floating">
-          <input type="text" class="form-control" name="salon" placeholder="Salon" required>
-          <label for="salon">Salon</label>
+          <input type="text" class="form-control" id="maestro" name="maestro" placeholder="DPI Maestro" required>
+          <label for="maestro">DPI Maestro</label>
         </div>
         <div class="form-floating">
             <input type="time" class="form-control" name="hora_inicio" placeholder="Hora de Inicio" required>
@@ -57,13 +53,11 @@
       </form>
       {% endblock %}
             <label for="id_curso">ID Curso:</label>
-            <input type="number" id="id_curso" name="id_curso" required>
-            <label for="nombre">Nombre:</label>
+            <input type="text" id="id_curso" name="id_curso" required>
+            <label for="curso">Curso:</label>
             <input type="text" id="nombre" name="nombre" required>
             <label for="maestro">Maestro:</label>
             <input type="text" id="maestro" name="maestro" required>
-            <label for="salon">Salon:</label>
-            <input type="text" id="salon" name="salon" required>
             <label for="hora_inicio">Hora de Inicio:</label>
             <input type="time" id="hora_inicio" name="hora_inicio" required>
             <label for="horaFinal">Hora del final:</label>

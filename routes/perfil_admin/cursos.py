@@ -16,19 +16,20 @@ def cursos():
 def cursos2():
     try:
         id_curso = request.form['id_curso']
-        nombre = request.form['nombre']
+        curso = request.form['curso']
         maestro = request.form['maestro']
-        salon = request.form['salon']
         hora_inicio = request.form['hora_inicio']
         hora_fin = request.form['hora_fin']
 
         with connection.cursor() as cursor:
-            cursor.execute("""INSERT INTO curso VALUES (%s, %s, %s, %s, %s, %s)""", 
-                           (id_curso, nombre, maestro, salon, hora_inicio, hora_fin))
+            cursor.execute("""INSERT INTO curso VALUES (%s, %s, %s, %s, %s)""", 
+                           (id_curso, curso, maestro, hora_inicio, hora_fin))
             connection.commit()  
         return redirect('/cursos3')
     except Exception as ex:
-        return render_template('admin/cursos.html')
+        connection.rollback()
+        flash('Error, intente nuevamente')
+        return redirect('/cursos')
 
 @cursos_bp.route('/cursos2/<id>/edit', methods=['GET', 'POST'])
 @login_required
@@ -47,21 +48,19 @@ def editar_curso(id):
     elif request.method == 'POST':
         # Actualizar los datos del trabajador en la base de datos
         id_curso = request.form['id_curso']
-        nombre = request.form['nombre']
+        curso = request.form['curso']
         maestro = request.form['maestro']
-        salon = request.form['salon']
         hora_inicio = request.form['hora_inicio']
         hora_final = request.form['hora_fin']
 
         with connection.cursor() as cursor:
             cursor.execute("""UPDATE curso SET
-                nombre = %s,
+                curso = %s,
                 maestro = %s,
-                salon = %s,
                 hora_inicio = %s,
                 hora_fin = %s
                 WHERE id_curso = %s
-            """, (nombre, maestro, salon, hora_inicio, hora_final, id_curso))
+            """, (curso, maestro, hora_inicio, hora_final, id_curso))
             connection.commit()
 
         return redirect('/cursos3')
@@ -88,8 +87,8 @@ def eliminar_curso(id):
 @login_required
 def cursos3():
     with connection.cursor() as cursor:
-        cursor.execute("""SELECT id_curso, nombre, CONCAT(t.nombres,' ', t.apellidos) AS maestro, salon, hora_inicio, hora_fin FROM curso
-                        LEFT JOIN trabajadores t ON t.dpi = curso.maestro
+        cursor.execute("""SELECT id_curso, curso, m.nombre AS maestro, hora_inicio, hora_fin FROM curso
+                        LEFT JOIN maestros m ON m.dpi = curso.maestro
                         ORDER BY id_curso ASC""")
         rows = cursor.fetchall()
         return render_template('admin/cursos3.html', rows=rows)
