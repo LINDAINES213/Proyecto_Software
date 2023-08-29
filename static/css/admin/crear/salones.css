@@ -23,7 +23,7 @@
         margin-bottom: 20px;
       }
 
-      .login-form input[type=text], .login-form input[type=password], .login-form[type=date] {
+      .login-form input[type=text], .login-form input[type=password], .login-form input[type=number] {
         display: block;
         width: 100%;
         padding: 10px;

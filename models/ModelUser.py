@@ -24,13 +24,13 @@ class ModelUser():
             raise Exception(ex)
         
 
-    '''@classmethod
+    @classmethod
     def loginE(self, connection, user):
         try:
             connection = get_connection()
 
             with connection.cursor() as cursor:
-                cursor.execute("""SELECT id, id_estudiante, contrasena, nombree, grado, seccion
+                cursor.execute("""SELECT id, id_estudiante, contrasena, enombre, grado, seccion
                                 FROM usuarios.userestudiantes
                                 WHERE id_estudiante = '{}' AND contrasena = '{}'""".format(user.id_estudiante, user.contrasena))
                 row = cursor.fetchone()
@@ -41,7 +41,7 @@ class ModelUser():
                 else:
                     return None
         except Exception as ex:
-            raise Exception(ex)'''
+            raise Exception(ex)
         
     @classmethod
     def get_by_id(self, connection, id):
@@ -58,12 +58,12 @@ class ModelUser():
         except Exception as ex:
             raise Exception(ex)
 
-    ''' @classmethod
+    @classmethod
     def get_by_idE(self, connection, id):
         try:
             connection = get_connection()
             with connection.cursor() as cursor:
-                cursor.execute("SELECT id, id_estudiante, nombree, grado, seccion FROM usuarios.userestudiantes WHERE id = '{}'".format(id))
+                cursor.execute("SELECT id, id_estudiante, enombre, grado, seccion FROM usuarios.userestudiantes WHERE id = '{}'".format(id))
                 row = cursor.fetchone()
             
                 if row != None:
@@ -71,5 +71,5 @@ class ModelUser():
                 else:
                     return None
         except Exception as ex:
-            raise Exception(ex)''' 
+            raise Exception(ex)
         

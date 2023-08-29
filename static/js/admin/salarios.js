@@ -1,35 +1,18 @@
-// Función para marcar una fila como pagada
-function pagoRealizado(button) {
-    var row = button.parentNode.parentNode;
-    row.classList.add('pagado');
-    guardarEstado(row);
-}
-
-// Función para marcar una fila como pendiente
-function pagoPendiente(button) {
-    var row = button.parentNode.parentNode;
-    row.classList.remove('pagado');
-    guardarEstado(row);
-}
-
-// Función para guardar el estado de la fila en el almacenamiento local
-function guardarEstado(row) {
-    var rowId = row.querySelector('td:first-child').textContent;
-    var isPagado = row.classList.contains('pagado');
-    localStorage.setItem('estadoFila-' + rowId, isPagado);
-}
-
-// Función para cargar el estado de las filas desde el almacenamiento local
-function cargarEstadoFilas() {
-    var filas = document.querySelectorAll('tbody tr');
-    filas.forEach(function(row) {
-        var rowId = row.querySelector('td:first-child').textContent;
-            var isPagado = localStorage.getItem('estadoFila-' + rowId);
-            if (isPagado === 'true') {
-                row.classList.add('pagado');
-            }
-    });
-}
-
-// Cargar el estado de las filas cuando se carga la página
-window.addEventListener('load', cargarEstadoFilas);
+window.onload = function() {
+      // Iterar sobre todas las filas de la tabla
+      var table = document.getElementsByTagName("table")[0];
+      var rows = table.getElementsByTagName("tr");
+      
+      for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        
+        // Obtener el índice de la fila
+        var rowIndex = row.rowIndex;
+        
+        // Verificar si la fila está pintada en el almacenamiento local
+        if (localStorage.getItem("filaPintada_" + rowIndex) === "pagado") {
+          // Cambiar el color de fondo de la fila a verde claro
+          row.style.backgroundColor = "#B9E6C1";
+        }
+      }
+};

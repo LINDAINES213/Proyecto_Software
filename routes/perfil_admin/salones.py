@@ -18,53 +18,54 @@ def salones2():
         id_salon = request.form['id_salon']
         salon = request.form['salon']
         aforo = request.form['aforo']
-        dpi_maestro = request.form['dpi_maestro']
-        grado_asignado = request.form['grado_asignado']
         seccion_asignada = request.form['seccion_asignada']
 
         with connection.cursor() as cursor:
-            cursor.execute("""INSERT INTO salon VALUES (%s, %s, %s, %s, %s, %s)""", 
-                           (id_salon, salon, aforo, dpi_maestro, grado_asignado, seccion_asignada))
+            cursor.execute("""INSERT INTO salon VALUES (%s, %s, %s, %s)""", 
+                           (id_salon, salon, aforo, seccion_asignada))
             connection.commit()  
         return redirect('/salones3')
     except Exception as ex:
-        return render_template('admin/salones.html')
+        connection.rollback()
+        flash('Error, intente nuevamente')
+        return redirect('/salones')
 
 @salones_bp.route('/salones2/<id>/edit', methods=['GET', 'POST'])
 @login_required
 def editar_salon(id):
-    if request.method == 'GET':
-        # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM salon WHERE id_salon = %s", (id,))
-            salon = cursor.fetchone()
+    try:
+        if request.method == 'GET':
+            # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * FROM salon WHERE id_salon = %s", (id,))
+                salon = cursor.fetchone()
 
-        if salon:
-            return render_template('admin/editar_salon.html', salon=salon)
-        else:
-            return 'Salon no encontrado'
+            if salon:
+                return render_template('admin/editar_salon.html', salon=salon)
+            else:
+                return 'Salon no encontrado'
 
-    elif request.method == 'POST':
-        # Actualizar los datos del salon en la base de datos
-        id_salon = request.form['id_salon']
-        salon = request.form['salon']
-        aforo = request.form['aforo']
-        dpi_maestro = request.form['dpi_maestro']
-        grado_asignado = request.form['grado_asignado']
-        seccion_asignada = request.form['seccion_asignada']
+        elif request.method == 'POST':
+            # Actualizar los datos del salon en la base de datos
+            id_salon = request.form['id_salon']
+            salon = request.form['salon']
+            aforo = request.form['aforo']
+            seccion_asignada = request.form['seccion_asignada']
 
-        with connection.cursor() as cursor:
-            cursor.execute("""UPDATE salon SET
-                salon = %s,
-                aforo = %s,
-                dpi_maestro = %s,
-                grado_asignado = %s,
-                seccion_asignada = %s
-                WHERE id_salon = %s
-            """, (salon, aforo, dpi_maestro, grado_asignado, seccion_asignada, id_salon))
-            connection.commit()
+            with connection.cursor() as cursor:
+                cursor.execute("""UPDATE salon SET
+                    salon = %s,
+                    aforo = %s,
+                    seccion_asignada = %s
+                    WHERE id_salon = %s
+                """, (salon, aforo, seccion_asignada, id_salon))
+                connection.commit()
 
-        return redirect('/salones3')
+            return redirect('/salones3')
+    except Exception as ex:
+        connection.rollback()
+        flash('Error, intente nuevamente')
+        return redirect('/salones')
     
 @salones_bp.route('/salones2/<id>/delete', methods=['GET', 'POST'])
 @login_required

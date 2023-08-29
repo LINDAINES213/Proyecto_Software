@@ -11,13 +11,13 @@
     {% block body %}
     <div class="content">
       <h2>Portal de Servicios Electrónicos</h2>
-      <h3>Bienvenido, {{ current_user.nombree }}</h3>
+      <h3>Bienvenido, {{ current_user.enombre }}</h3>
       <form action="/inicioestudiante" method="GET">
         <div class="sidebar">
           <h1>Menú</h1>
           <ul>
-            <li><a href="/circulares">Circulares</a></li>
-            <li><a href="/calificaciones">Calificaciones</a></li>
+            <li><a href="/circularesE">Circulares</a></li>
+            <li><a href="/calificacioness">Calificaciones</a></li>
             <br>
             <a class="btn btn-secondary" style="background-color: white; color:black; margin-left: 30%; text-align: center;" href="{{ url_for('logoutt') }}">Logout</a>
           </ul>

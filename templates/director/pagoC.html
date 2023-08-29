@@ -10,18 +10,17 @@
 	<table>
 		<thead>
 			<tr>
-				<th>ID</th>
-				<th>Nombres</th>
-				<th>Apellidos</th>
-				<th>Fecha Nacimiento</th>
-				<th>Grado</th>
-				<th>Seccion</th>
-				<th>Acciones</th>
+				<th><span>ID</span></th>
+				<th><span>Nombres</span></th>
+				<th><span>Apellidos</span></th>
+				<th><span>Fecha Nacimiento</span></th>
+				<th><span>Grado</span></th>
+				<th><span>Seccion</span></th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for row in rows %}
-				<tr id="fila-{{ loop.index }}" class="{% if row[17] == 'pagado' %}pagado{% endif %}">
+				<tr>
 					<td>{{ row[0] }}</td>
 					<td>{{ row[1] }}</td>
 					<td>{{ row[2] }}</td>
@@ -29,10 +28,6 @@
 					<td>{{ row[4] }}</td>
 					<td>{{ row[5] }}</td>
 					<td>{{ row[6] }}</td>
-					<td>
-						<button class="pago-realizado" onclick="pagoRealizado(this)">Pagado</button>
-						<button class="pago-pendiente" onclick="pagoPendiente(this)">Pendiente</button>
-					</td>
 				</tr>
 			{% endfor %}
 		</tbody>

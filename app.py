@@ -40,6 +40,7 @@ from routes.perfil_secretario.circularesE import circularesE_bp
 #######################################################################
 
 ################## Funcionalidades para Estudiantes/Padres de Familia ###################
+from routes.perfil_estudiante.circulares import circularesEe_bp
 #######################################################################
 
 load_dotenv()
@@ -81,6 +82,7 @@ app.register_blueprint(circularesE_bp)
 #############################################
 
 ###### Funcionalidades para Estudiante/Padres de Familia ######
+app.register_blueprint(circularesEe_bp)
 #############################################
 
 ##################### INICIOS PERFILES #####################
@@ -121,8 +123,7 @@ def inicioestudiante():
 ############################# LOGIN ##############################
 @login_manager_app.user_loader
 def load_user(id):
-    return ModelUser.get_by_id(connection, id) 
-    #return ModelUser.get_by_idE(connection, id) or
+    return ModelUser.get_by_idE(connection, id) or ModelUser.get_by_id(connection, id) 
 
 def get_cargo_from_database(dpi):
     try:
@@ -175,7 +176,7 @@ def logint():
 
 
     
-'''@app.route('/logine', methods=['GET', 'POST'])
+@app.route('/logine', methods=['GET', 'POST'])
 def logine():
     if request.method == 'POST':
         id_estudiante = request.form['id_estudiante']
@@ -194,7 +195,7 @@ def logine():
                 return render_template('auth/Estudiantes/loginE.html')
     
     else:
-        return render_template('auth/Estudiantes/loginE.html')'''
+        return render_template('auth/Estudiantes/loginE.html')
     
 ################ LOGOUT ################
 @app.route('/logoutt')
