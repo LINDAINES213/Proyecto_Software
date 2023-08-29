@@ -15,42 +15,50 @@ def secciones():
 @login_required
 def secciones2():
     try:
-        id_seccion = request.form['id_seccion']
         id_grado = request.form['id_grado']
+        id_seccion = request.form['id_seccion']
         seccion = request.form['seccion']
 
         with connection.cursor() as cursor:
-            cursor.execute("""INSERT INTO seccion VALUES (%s, %s, %s)""", (id_seccion, id_grado, seccion))
+            cursor.execute("""INSERT INTO seccion VALUES (%s, %s, %s)""", (id_grado, id_seccion, seccion))
             connection.commit()  
         return redirect('/secciones3')
     except Exception as ex:
-        return render_template('admin/secciones.html')
+        connection.rollback()
+        flash('Error, intente nuevamente')
+        return redirect('/secciones')
 
 @secciones_bp.route('/secciones2/<id>/edit', methods=['GET', 'POST'])
 @login_required
 def editar_seccion(id):
-    if request.method == 'GET':
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM seccion WHERE id_seccion = %s", (id,))
-            seccion = cursor.fetchone()
+    try:
+        if request.method == 'GET':
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * FROM seccion WHERE id_seccion = %s", (id,))
+                seccion = cursor.fetchone()
 
-        if seccion:
-            return render_template('admin/editar_seccion.html', seccion=seccion)
-        else:
-            return 'Seccion no encontrado'
+            if seccion:
+                return render_template('admin/editar_seccion.html', seccion=seccion)
+            else:
+                return 'Seccion no encontrado'
 
-    elif request.method == 'POST':
-        id_seccion = request.form['id_seccion']
-        seccion = request.form['seccion']
+        elif request.method == 'POST':
+            id_grado = request.form['id_grado']
+            id_seccion = request.form['id_seccion']
+            seccion = request.form['seccion']
 
-        with connection.cursor() as cursor:
-            cursor.execute("""UPDATE seccion SET
-                seccion = %s
-                WHERE id_seccion = %s
-            """, (seccion, id_seccion))
-            connection.commit()
+            with connection.cursor() as cursor:
+                cursor.execute("""UPDATE seccion SET
+                    seccion = %s
+                    WHERE id_seccion = %s
+                """, (seccion, id_seccion))
+                connection.commit()
 
-        return redirect('/secciones3')
+            return redirect('/secciones3')
+    except Exception as ex:
+        connection.rollback()
+        flash('Error, intente nuevamente')
+        return redirect('/secciones')
     
 @secciones_bp.route('/secciones2/<id>/delete', methods=['GET', 'POST'])
 @login_required

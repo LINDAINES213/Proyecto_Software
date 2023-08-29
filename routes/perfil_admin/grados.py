@@ -17,42 +17,80 @@ def grados2():
     try:
         id_grado = request.form['id_grado']
         grado = request.form['grado']
+        curso1 = request.form['curso1']
+        curso2 = request.form['curso2']
+        curso3 = request.form['curso3']
+        curso4 = request.form['curso4']
+        curso5 = request.form['curso5']
+        curso6 = request.form['curso6']
+        curso7 = request.form['curso7']
+        curso8 = request.form['curso8']
+        curso9 = request.form['curso9']
+        curso10 = request.form['curso10']
 
         with connection.cursor() as cursor:
-            cursor.execute("""INSERT INTO grado VALUES (%s, %s)""", 
-                           (id_grado, grado))
+            cursor.execute("""INSERT INTO grado VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", 
+                           (id_grado, grado, curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8, curso9, curso10))
             connection.commit()  
         return redirect('/grados3')
     except Exception as ex:
-        return render_template('admin/grados.html')
+        connection.rollback()
+        flash('Error, intente nuevamente')
+        return redirect('/grados')
 
 @grados_bp.route('/grados2/<id>/edit', methods=['GET', 'POST'])
 @login_required
 def editar_grado(id):
-    if request.method == 'GET':
-        # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM grado WHERE id_grado = %s", (id,))
-            grado = cursor.fetchone()
+    try: 
+        if request.method == 'GET':
+            # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * FROM grado WHERE id_grado = %s", (id,))
+                grado = cursor.fetchone()
 
-        if grado:
-            return render_template('admin/editar_grado.html', grado=grado)
-        else:
-            return 'Grado no encontrado'
+            if grado:
+                return render_template('admin/editar_grado.html', grado=grado)
+            else:
+                return 'Grado no encontrado'
 
-    elif request.method == 'POST':
-        # Actualizar los datos del salon en la base de datos
-        id_grado = request.form['id_grado']
-        grado = request.form['grado']
+        elif request.method == 'POST':
+            # Actualizar los datos del salon en la base de datos
+            id_grado = request.form['id_grado']
+            grado = request.form['grado']
+            curso1 = request.form['curso1']
+            curso2 = request.form['curso2']
+            curso3 = request.form['curso3']
+            curso4 = request.form['curso4']
+            curso5 = request.form['curso5']
+            curso6 = request.form['curso6']
+            curso7 = request.form['curso7']
+            curso8 = request.form['curso8']
+            curso9 = request.form['curso9']
+            curso10 = request.form['curso10']
 
-        with connection.cursor() as cursor:
-            cursor.execute("""UPDATE grado SET
-                grado = %s
-                WHERE id_grado = %s
-            """, (grado, id_grado))
-            connection.commit()
+            with connection.cursor() as cursor:
+                cursor.execute("""UPDATE grado SET
+                    grado = %s
+                    curso1 = %s,
+                    curso2 = %s,
+                    curso3 = %s,
+                    curso4 = %s, 
+                    curso5 = %s,
+                    curso6 = %s,
+                    curso7 = %s,
+                    curso8 = %s,
+                    curso9 = %s,
+                    curso10 = %s
+                    WHERE id_grado = %s
+                """, (grado, curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8, curso9, curso10, id_grado))
+                connection.commit()
 
-        return redirect('/grados3')
+            return redirect('/grados3')
+        
+    except Exception as ex:
+        connection.rollback()
+        flash('Error, intente nuevamente')
+        return redirect('/grados')
     
 @grados_bp.route('/grados2/<id>/delete', methods=['GET', 'POST'])
 @login_required

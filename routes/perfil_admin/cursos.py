@@ -34,36 +34,42 @@ def cursos2():
 @cursos_bp.route('/cursos2/<id>/edit', methods=['GET', 'POST'])
 @login_required
 def editar_curso(id):
-    if request.method == 'GET':
-        # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM curso WHERE id_curso = %s", (id,))
-            cur = cursor.fetchone()
+    try:
+        if request.method == 'GET':
+            # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * FROM curso WHERE id_curso = %s", (id,))
+                cur = cursor.fetchone()
 
-        if cur:
-            return render_template('admin/editar_curso.html', cur=cur)
-        else:
-            return 'Curso no encontrado'
+            if cur:
+                return render_template('admin/editar_curso.html', cur=cur)
+            else:
+                return 'Curso no encontrado'
 
-    elif request.method == 'POST':
-        # Actualizar los datos del trabajador en la base de datos
-        id_curso = request.form['id_curso']
-        curso = request.form['curso']
-        maestro = request.form['maestro']
-        hora_inicio = request.form['hora_inicio']
-        hora_final = request.form['hora_fin']
+        elif request.method == 'POST':
+            # Actualizar los datos del trabajador en la base de datos
+            id_curso = request.form['id_curso']
+            curso = request.form['curso']
+            maestro = request.form['maestro']
+            hora_inicio = request.form['hora_inicio']
+            hora_final = request.form['hora_fin']
 
-        with connection.cursor() as cursor:
-            cursor.execute("""UPDATE curso SET
-                curso = %s,
-                maestro = %s,
-                hora_inicio = %s,
-                hora_fin = %s
-                WHERE id_curso = %s
-            """, (curso, maestro, hora_inicio, hora_final, id_curso))
-            connection.commit()
+            with connection.cursor() as cursor:
+                cursor.execute("""UPDATE curso SET
+                    curso = %s,
+                    maestro = %s,
+                    hora_inicio = %s,
+                    hora_fin = %s
+                    WHERE id_curso = %s
+                """, (curso, maestro, hora_inicio, hora_final, id_curso))
+                connection.commit()
 
-        return redirect('/cursos3')
+            return redirect('/cursos3')
+    except Exception as ex:
+        connection.rollback()
+        flash('Error, intente nuevamente')
+        return redirect('/cursos')
+    
     
 @cursos_bp.route('/cursos2/<id>/delete', methods=['GET', 'POST'])
 @login_required

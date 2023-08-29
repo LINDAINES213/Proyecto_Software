@@ -26,16 +26,16 @@
         {% endwith %}
         <h1>Añadir Seccion</h1>
         <div class="form-floating">
-            <input type="number" class="form-control" id="id_seccion" name="id_seccion" placeholder="ID Seccion" required>
-            <label for="id_seccion">ID Seccion</label>
-          </div>
-        <div class="form-floating">
-          <input type="number" class="form-control" id="id_grado" name="id_grado" placeholder="ID Grado" required>
+          <input type="text" class="form-control" id="id_grado" name="id_grado" placeholder="ID Grado" required>
           <label for="id_grado">ID Grado</label>
         </div>
         <div class="form-floating">
-            <input type="text" class="form-control" name="seccion" placeholder="seccion" required>
-            <label for="seccion">Seccion</label>
+          <input type="text" class="form-control" id="id_seccion" name="id_seccion" placeholder="ID Seccion" required>
+          <label for="id_seccion">ID Seccion</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="seccion" placeholder="seccion">
+            <label for="seccion">Descripcion Seccion (Opcional)</label>
         </div>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir Seccion</button>
@@ -43,13 +43,5 @@
 
       </form>
       {% endblock %}
-            <label for="id_seccion">ID Seccion:</label>
-            <input type="number" id="id_seccion" name="id_seccion" required>
-            <label for="id_grado">ID Grado:</label>
-            <input type="number" id="id_grado" name="id_grado" required>
-            <label for="seccion">Seccion:</label>
-            <input type="text" id="seccion" name="seccion" required>
-            <button type="submit">Añadir Seccion</button>
-      </form>
     </body>
   </html>
