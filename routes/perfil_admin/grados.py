@@ -101,14 +101,14 @@ def eliminar_grado(id):
                 cursor.execute("DELETE FROM grado WHERE id_grado = %s", (id,))
                 connection.commit()
 
-            flash('El salon ha sido eliminado exitosamente.', 'success')
             return redirect('/grados3')
 
         return render_template('admin/eliminar_grado.html', id_grado=id)
 
     except Exception as ex:
+        connection.rollback()
         flash('Ocurrió un error al intentar eliminar el salon.', 'error')
-        return redirect('/grados3')
+        return redirect('/grados')
 
 @grados_bp.route('/grados3')
 @login_required

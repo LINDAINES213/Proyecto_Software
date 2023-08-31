@@ -80,7 +80,6 @@ def eliminar_curso(id):
                 cursor.execute("DELETE FROM curso WHERE id_curso = %s", (id,))
                 connection.commit()
 
-            flash('El curso ha sido eliminado exitosamente.', 'success')
             return redirect('/cursos3')
 
         return render_template('admin/eliminar_curso.html', curso_id=id)
@@ -88,7 +87,7 @@ def eliminar_curso(id):
     except Exception as ex:
         flash('Ocurrió un error al intentar eliminar el curso.', 'error')
         connection.rollback()
-        return redirect('/cursos3')
+        return redirect('/cursos')
 
 @cursos_bp.route('/cursos3')
 @login_required

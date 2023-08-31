@@ -85,14 +85,13 @@ def eliminar_estudiante(id):
                 cursor.execute("DELETE FROM estudiantes WHERE id_estudiante = %s", (id,))
                 connection.commit()
 
-            flash('El Estudiante ha sido eliminado exitosamente.', 'success')
             return redirect('/estudiantes3')
 
         return render_template('admin/eliminar_estudiante.html', id_estudiante=id)
 
     except Exception as ex:
         flash('Ocurrió un error al intentar eliminar el trabajador.', 'error')
-        return redirect('/estudiantes3')
+        return redirect('/estudiantes')
 
 @estudiantes_bp.route('/estudiantes3')
 @login_required

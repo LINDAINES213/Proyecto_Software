@@ -76,14 +76,14 @@ def eliminar_salon(id):
                 cursor.execute("DELETE FROM salon WHERE id_salon = %s", (id,))
                 connection.commit()
 
-            flash('El salon ha sido eliminado exitosamente.', 'success')
             return redirect('/salones3')
 
         return render_template('admin/eliminar_salon.html', salon_id=id)
 
     except Exception as ex:
+        connection.rollback()
         flash('Ocurrió un error al intentar eliminar el salon.', 'error')
-        return redirect('/salones3')
+        return redirect('/salones')
 
 @salones_bp.route('/salones3')
 @login_required

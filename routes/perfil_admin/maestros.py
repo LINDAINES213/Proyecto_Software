@@ -35,14 +35,14 @@ def eliminar_maestro(dpi):
                 cursor.execute("DELETE FROM maestros WHERE dpi = %s", (dpi,))
                 connection.commit()
 
-            flash('El maestro ha sido eliminado exitosamente.', 'success')
             return redirect('/maestros3')
 
         return render_template('admin/eliminar_maestro.html', maestro_dpi=dpi)
 
     except Exception as ex:
+        connection.rollback()
         flash('Ocurrió un error al intentar eliminar el maestro.', 'error')
-        return redirect('/maestros3')
+        return redirect('/maestros')
 
 @maestros_bp.route('/maestros3')
 @login_required

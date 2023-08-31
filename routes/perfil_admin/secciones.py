@@ -69,14 +69,14 @@ def eliminar_seccion(id):
                 cursor.execute("DELETE FROM seccion WHERE id_seccion = %s", (id,))
                 connection.commit()
 
-            flash('El salon ha sido eliminado exitosamente.', 'success')
             return redirect('/secciones3')
 
         return render_template('admin/eliminar_seccion.html', id_seccion=id)
 
     except Exception as ex:
+        connection.rollback()
         flash('Ocurrió un error al intentar eliminar el salon.', 'error')
-        return redirect('/secciones3')
+        return redirect('/secciones')
 
 @secciones_bp.route('/secciones3')
 @login_required

@@ -82,14 +82,14 @@ def delete_worker(dpi):
                 cursor.execute("DELETE FROM trabajadores WHERE dpi = %s", (dpi,))
                 connection.commit()
 
-            flash('El trabajador ha sido eliminado exitosamente.', 'success')
             return redirect('/trabajadores3')
 
         return render_template('admin/eliminar_trabajador.html', worker_dpi=dpi)
 
     except Exception as ex:
+        connection.rollback()
         flash('Ocurrió un error al intentar eliminar el trabajador.', 'error')
-        return redirect('/trabajadores3')
+        return redirect('/trabajadores')
 
 @trabajadores_bp.route('/trabajadores3')
 @login_required
