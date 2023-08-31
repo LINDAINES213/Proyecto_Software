@@ -83,10 +83,11 @@ def eliminar_curso(id):
             flash('El curso ha sido eliminado exitosamente.', 'success')
             return redirect('/cursos3')
 
-        return render_template('eliminar_curso.html', curso_id=id)
+        return render_template('admin/eliminar_curso.html', curso_id=id)
 
     except Exception as ex:
         flash('Ocurrió un error al intentar eliminar el curso.', 'error')
+        connection.rollback()
         return redirect('/cursos3')
 
 @cursos_bp.route('/cursos3')

@@ -11,7 +11,7 @@
     {% block body %}
     <div class="content">
       <h2>Portal de Servicios Electrónicos</h2>
-      <h3>Bienvenido, {{ current_user.enombre }}</h3>
+      <h3>Bienvenido {{ current_user.enombre }}</h3>
       <form action="/inicioestudiante" method="GET">
         <div class="sidebar">
           <h1>Menú</h1>
