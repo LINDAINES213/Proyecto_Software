@@ -12,7 +12,7 @@ pip freeze
 ```
 `Clonar el repositorio`: Luego de tener ya el entorno virtual instalado puedes proceder a clonar el repositorio con el siguiente comando:
 ```bash
-git clone https://github.com/LINDAINES213/API_REST_BD_P2.git
+git clone https://github.com/LINDAINES213/Proyecto_Software.git
 ``` 
 `Configurar Base de Datos`: Dentro del repositorio se encuentra el archivo `Proyecto_software.dump` el cual debes subir como un restore en una base de datos creada en pgAdmin. Luego en la carpeta raiz del proyecto crea el archivo llamado .env, donde lo llenes con el formato a continuacion, debes de cambiar los datos que sean necesarions, como la contraseña, nombre de la base de datos que le colocaste en pgAdmin, usuario, etc. El secret key se debe dejar tal y como esta.
 ```bash
