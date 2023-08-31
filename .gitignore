@@ -1,8 +1,7 @@
-__psycache__
+__psycache__/*
 .env
 venv/
 config.py
-__psycache__/
 
 # Editor directories and files
 .vscode/*
