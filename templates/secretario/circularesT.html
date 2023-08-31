@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Circulares</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/secretario/circularesT.css') }}">
+</head>
+<body>
+    <div class="container">
+        <br>
+        <a href="/iniciosecretario">&#x2190 Regresar</a>
+        <h1 class="animated fadeInDown">Circulares</h1>
+        <ul class="post-list">
+            {% for row in rows %}
+                <li class="post-item">
+                    <h3 class="post-title">{{ row[1] }}</h3>
+                    <p class="post-content">{{ row[2] }}</p>
+                    <br>
+                    <p class="post-date">{{ row[3].strftime('%d-%m-%Y %I:%M %p') }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

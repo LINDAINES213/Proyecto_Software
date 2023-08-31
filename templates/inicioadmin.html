@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/inicioadmin.css') }}">
+  </head>
+<body>
+  {% extends './base.html' %}
+  {% block title %}Inicio{% endblock %}
+  {% block body %}
+  <div class="content">
+    <h2>Portal de Servicios Electrónicos</h2>
+    <h3>Bienvenido {{ current_user.nombre }}</h3>
+    <form action="/inicioadmin" method="GET">
+      <div class="sidebar">
+        <h1>Menú</h1>
+        <ul>
+          <li><a href="/trabajadores">Trabajadores</a></li>
+          <li><a href="/maestros">Maestros</a></li>
+          <li><a href="/cursos">Cursos</a></li>
+          <li><a href="/estudiantes">Estudiantes</a></li>
+          <li><a href="/grados">Grados</a></li>
+          <li><a href="/secciones">Secciones</a></li>
+          <li><a href="/pagoC">Pago Colegiatura</a></li>
+          <li><a href="/pagoP">Pago a Personal</a></li>
+          <li><a href="/salones">Asignación de Salones</a></li>
+          <li><a href="horarios">Asignación de Horarios</a></li>
+          <li><a href="/salario">Pago de Salario</a></li>
+          <li><a href="/crearUsuario">Crear Usuario</a></li>
+          <br>
+          <a class="btn btn-secondary" style="background-color: white; color:black; margin-left: 30%; text-align: center;" href="{{ url_for('logoutt') }}">Logout</a>
+        </ul>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
+{% endblock %}

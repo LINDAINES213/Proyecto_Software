@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Editar Grado</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/editar/editar_grado.css') }}">
+</head>
+<body>
+	<h1>Editar Grado</h1>
+	<form action="/grados2/{{ grado[0] }}/edit" method="POST">
+		<label for="id_grado">ID Grado:</label>
+		<input type="number" id="id_grado" name="id_grado" value="{{ grado[0] }}" readonly>
+		<br>
+		<label for="grado">Grado:</label>
+		<input type="text" id="grado" name="grado" value="{{ grado[1] }}">
+		<br>
+		<label for="curso1">Curso 1:</label>
+		<input type="text" id="curso1" name="curso1" value="{{ grado[2] }}">
+		<br>
+		<label for="curso2">Curso 2:</label>
+		<input type="text" id="curso2" name="curso2" value="{{ grado[3] }}">
+		<br>
+		<label for="curso3">Curso 3:</label>
+		<input type="text" id="curso3" name="curso3" value="{{ grado[4] }}">
+		<br>
+        <label for="curso4">Curso 4:</label>
+		<input type="text" id="curso4" name="curso4" value="{{ grado[5] }}">
+		<br>
+        <label for="curso5">Curso 5:</label>
+		<input type="text" id="curso5" name="curso5" value="{{ grado[6] }}">
+		<br>
+        <label for="curso6">Curso 6:</label>
+		<input type="text" id="curso6" name="curso6" value="{{ grado[7] }}">
+		<br>
+        <label for="curso7">Curso 7:</label>
+		<input type="text" id="curso7" name="curso7" value="{{ grado[8] }}">
+		<br>
+        <label for="curso8">Curso 8:</label>
+		<input type="text" id="curso8" name="curso8" value="{{ grado[9] }}">
+		<br>
+        <label for="curso9">Curso 9:</label>
+		<input type="text" id="curso9" name="curso9" value="{{ grado[10] }}">
+		<br>
+        <label for="curso10">Curso 10:</label>
+		<input type="text" id="curso10" name="curso10" value="{{ grado[11] }}">
+		<br>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Guardar</button>
+	</form>
+</body>
+</html>

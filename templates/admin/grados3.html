@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Grados</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/ver/grados3.css') }}">
+	<script src="{{ url_for('static', filename='js/admin/grados3.js') }}"></script>
+</head>
+</head>
+<body>
+	<a href="/inicioadmin" style="font-size: 16px;margin-left: 5px;margin-bottom: 50px;">&#x2190 Regresar</a>
+	<br>
+	<h1>Grados</h1>
+	<table>
+		<thead>
+			<tr>
+				<th><span>ID</span></th>
+				<th><span>Grado</span></th>
+				<th><span>Curso 1</span></th>
+                <th><span>Curso 2</span></th>
+				<th><span>Curso 3</span></th>
+                <th><span>Curso 4</span></th>
+				<th><span>Curso 5</span></th>
+                <th><span>Curso 6</span></th>
+				<th><span>Curso 7</span></th>
+                <th><span>Curso 8</span></th>
+                <th><span>Curso 9</span></th>
+				<th><span>Curso 10</span></th>
+				<th><span>Acciones</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in rows %}
+				<tr>
+					<td>{{ row[0] }}</td>
+					<td>{{ row[1] }}</td>
+					<td>{{ row[2] }}</td>
+					<td>{{ row[3] }}</td>
+					<td>{{ row[4] }}</td>
+					<td>{{ row[5] }}</td>
+					<td>{{ row[6] }}</td>
+					<td>{{ row[7] }}</td>
+					<td>{{ row[8] }}</td>
+					<td>{{ row[9] }}</td>
+					<td>{{ row[10] }}</td>
+					<td>{{ row[11] }}</td>
+					<td>
+						<button class="edit-button" onclick="editar_grado('{{ row[0] }}')">✏️</button>
+						<button class="delete-button" onclick="eliminar_grado('{{ row[0] }}')">&#x1F5D1;&#xFE0F;</button>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>

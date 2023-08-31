@@ -1,0 +1,52 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Crear Usuario Estudiante</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/crearEstudiante.css') }}">
+  </head>
+  <body>
+      {% extends './base.html' %}
+
+      {% block title %}Crear Usuario Estudiante{% endblock %}
+
+      {% block body %}
+      <a href="/inicioadmin" style="font-size: 16px;margin-top: -600px; margin-right: 50px;">&#x2190 Regresar</a>
+      <form class="login-form" action="/crearEstudiante" method="POST">
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        <br />
+        {% for message in messages %}
+        <div class="alert alert-primary alert-dismissible" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% endwith %}
+        <h1>Crear Usuario Estudiante</h1>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="id_estudiante" name="id_estudiante" placeholder="id_estudiante" required>
+          <label for="id_estudiante">ID</label>
+        </div>
+        <div class="form-floating mt-2">
+          <input type="password" class="form-control" name="contrasena" placeholder="Contrasena" required>
+          <label for="contrasena">Password</label>
+        </div>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Crear Usuario</button>
+
+      </form>
+      {% endblock %}
+        <label for="id_estudiante">ID:</label>
+        <input type="text" id="id_estudiante" name="id_estudiante" required>
+        <label for="contrasena">Password:</label>
+        <input type="password" id="contrasena" name="contrasena" required>
+        <button type="submit">Crear Usuario</button>
+      </form>
+    </body>
+  </html>
+
+

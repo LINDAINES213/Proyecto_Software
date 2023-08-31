@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Asignacion de Salones</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/salones.css') }}">
+
+  </head>
+  <body>
+    <a href="/inicioadmin" style="font-size: 16px;margin-top: -600px; margin-right: 50px;">&#x2190 Regresar</a>
+
+      {% extends './base.html' %}
+
+      {% block title %}Asignacion de Salones{% endblock %}
+      {% block body %}
+      <form class="login-form" action="/salones2" method="POST">
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        <br />
+        {% for message in messages %}
+        <div class="alert alert-primary alert-dismissible" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% endwith %}
+        <h1>Asignar Salon</h1>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="id_salon" name="id_salon" placeholder="ID Salon" required>
+          <label for="id_salon">ID Salon</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="salon" name="salon" placeholder="Salon" required>
+          <label for="salon">Salon</label>
+        </div>
+        <div class="form-floating">
+          <input type="number" class="form-control" name="aforo" placeholder="aforo" required>
+          <label for="aforo">Aforo</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="seccion_asignada" placeholder="seccion_asignada" required>
+            <label for="seccion_asignada">Seccion Asignada</label>
+        </div>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Asignar Salon</button>
+        <button class="w-100 btn btn-lg btn-primary mt-3" onclick="window.location.href='/salones3'">Ver Salones</button>
+
+      </form>
+      {% endblock %}
+    </body>
+  </html>

@@ -1,8 +1,7 @@
-__psycache__
-.flaskenv
+__pycache__
 .env
-config.py
 venv/
+config.py
 
 # Editor directories and files
 .vscode/*

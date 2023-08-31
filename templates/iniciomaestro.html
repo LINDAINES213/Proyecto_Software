@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/iniciomaestro.css') }}">
+  </head>
+  <body>
+    {% extends './base.html' %}
+    {% block title %}Home{% endblock %}
+    {% block body %}
+    <div class="content">
+      <h2>Portal de Servicios Electrónicos</h2>
+      <h3>Bienvenido {{ current_user.nombre }}</h3>
+      <form action="/iniciomaestro" method="GET">
+        <div class="sidebar">
+          <h1>Menu</h1>
+          <ul>
+            <li><a href="/vercirculares">Circulares</a></li>
+            <li><a href="/salario">Pago de Salario</a></li>
+            <li><a href="/horario">Horario</a></li>
+            <li><a href="/cursosI">Cursos a Impartir</a></li>
+            <br>
+            <a class="btn btn-secondary" style="background-color: white; color:black; margin-left: 30%; text-align: center;" href="{{ url_for('logoutt') }}">Logout</a>      </ul>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
+{% endblock %}

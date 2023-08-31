@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Estudiantes</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/ver/pagoC.css') }}">
+	<script src="{{ url_for('static', filename='js/admin/pagoC.js') }}"></script>
+</head>
+</head>
+<body>
+	<a href="/inicioadmin" style="font-size: 16px;margin-left: 5px;margin-bottom: 50px;">&#x2190 Regresar</a>
+	<h1>Estudiantes</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nombres</th>
+				<th>Apellidos</th>
+				<th>Fecha Nacimiento</th>
+				<th>Edad</th>
+				<th>Grado</th>
+				<th>Seccion</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in rows %}
+				<tr>
+					<td>{{ row[0] }}</td>
+					<td>{{ row[1] }}</td>
+					<td>{{ row[2] }}</td>
+					<td>{{ row[3] }}</td>
+					<td>{{ row[4] }}</td>
+					<td>{{ row[5] }}</td>
+					<td>{{ row[6] }}</td>
+					<td>
+						<button class="pago-realizado" onclick="pagoRealizado(this)">Pagado</button>
+						<button class="pago-pendiente" onclick="pagoPendiente(this)">Pendiente</button>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>
+
+

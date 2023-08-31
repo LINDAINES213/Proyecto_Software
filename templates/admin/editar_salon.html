@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Editar Salon</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/editar/editar_salon.css') }}">
+</head>
+<body>
+	<h1>Editar Salon</h1>
+	<form action="/salones2/{{ salon[0] }}/edit" method="POST">
+		<label for="id_salon">ID Salon:</label>
+		<input type="text" id="id_salon" name="id_salon" value="{{ salon[0] }}" readonly>
+		<br>
+		<label for="salon">Salon:</label>
+		<input type="text" id="salon" name="salon" value="{{ salon[1] }}">
+		<br>
+		<label for="aforo">Aforo:</label>
+		<input type="text" id="aforo" name="aforo" value="{{ salon[2] }}">
+		<br>
+        <label for="seccion_asignada">Seccion Asignada:</label>
+		<input type="text" id="seccion_asignada" name="seccion_asignada" value="{{ salon[5] }}">
+		<br>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Guardar</button>
+	</form>
+</body>
+</html>

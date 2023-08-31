@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Crear circular</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container mt-5">
+            <a href="/iniciosecretario" style="font-size: 16px;margin-left: 5px;margin-bottom: 50px;">&#x2190 Regresar</a>
+            <h1 class="mb-4" style="margin-top: 30px;">Crear Nueva Circular</h1>
+            <form action="/crearcircularese" method="post">
+                <div class="form-group">
+                    <label for="titulo">Título:</label>
+                    <input type="text" class="form-control" name="titulo" id="titulo" required>
+                </div>
+                <div class="form-group">
+                    <label for="contenido">Contenido:</label>
+                    <textarea name="contenido" class="form-control" id="contenido" rows="6" required></textarea>
+                </div>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="btn btn-primary" type="submit">Publicar Circular</button>
+                <br>
+            </form>
+            <br>
+            <a href="/vercircularesE">Ver Circulares &#8594;</a>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>

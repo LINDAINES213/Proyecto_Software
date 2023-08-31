@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Grados</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/ver/secciones3.css') }}">
+	<script src="{{ url_for('static', filename='js/admin/secciones3.js') }}"></script>
+</head>
+<body>
+	<a href="/inicioadmin" style="font-size: 16px;margin-left: 5px;margin-bottom: 50px;">&#x2190 Regresar</a>
+	<h1>Secciones</h1>
+	<table>
+		<thead>
+			<tr>
+				<th><span>ID Grado</span></th>
+				<th><span>ID Seccion</span></th>
+                <th><span>Seccion</span>Seccion</th>
+				<th><span>Acciones</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in rows %}
+				<tr>
+					<td>{{ row[0] }}</td>
+					<td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+					<td>
+						<button class="edit-button" onclick="editar_seccion('{{ row[0] }}')">Editar</button>
+						<button class="delete-button" onclick="eliminar_seccion('{{ row[0] }}')">Eliminar</button>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>
