@@ -22,7 +22,7 @@ PGSQL_USER = postgres
 PGSQL_PASSWORD = TU_CONTRASEÑA
 PGSQL_DATABASE = NOMBRE_BASE_DE_DATOS
 ```
-Igualmente el el archivo `config.py` se debe de cambiar estos datos:
+Igualmente se debe crear el archivo `config.py` se debe colocar en este formato cambiando igualmente los datos necesarios como en el archivo `.env`:
 ```bash
 class Config:
     SECRET_KEY = 'SOFTWARE_123'
