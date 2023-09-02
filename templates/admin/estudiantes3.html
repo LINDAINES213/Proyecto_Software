@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 	<title>Estudiantes</title>
+	<meta charset="UTF-8,BOM">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/ver/estudiantes3.css') }}">
 	<script src="{{ url_for('static', filename='js/admin/estudiantes3.js') }}"></script>
 </head>
@@ -40,5 +41,7 @@
 			{% endfor %}
 		</tbody>
 	</table>
+	<br>
+	<button class="download-button" onclick="descargarCSV()">Descargar CSV</button>
 </body>
 </html>
