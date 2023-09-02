@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Salario de Trabajadores</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/formsalarios.css') }}">
+  </head>
+  <body>
+    <a href="/inicioadmin" style="font-size: 16px;margin-top: -600px; margin-right: 50px;">&#x2190 Regresar</a>
+
+      {% extends './base.html' %}
+
+      {% block title %}Ver Salario{% endblock %}
+      {% block body %}
+      <form class="login-form" action="/formsalarios" method="POST">
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        <br />
+        {% for message in messages %}
+        <div class="alert alert-primary alert-dismissible" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% endwith %}
+        <h1>Ver Salario</h1>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="dpi" name="dpi" placeholder="DPI" required>
+          <label for="dpi">DPI</label>
+        </div>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="w-100 btn btn-lg btn-primary mt-3" onclick="window.location.href='/salarios'">Ver Salario</button>
+
+      </form>
+      {% endblock %}
+            <label for="dpi">DPI:</label>
+            <input type="text" id="dpi" name="dpi" required>
+            <button type="submit">Ver Salario</button>
+      </form>
+    </body>
+  </html>

@@ -4,14 +4,13 @@ from database.db import get_connection
 
 
 connection = get_connection()
-pagos_bp = Blueprint('pagos_blueprint', __name__)
+colegiatura_bp = Blueprint('colegiatura_blueprint', __name__)
 
-@pagos_bp.route('/pagoP')
+@colegiatura_bp.route('/pagoC')
 @login_required
-def pagoP():
+def pagoC():
     with connection.cursor() as cursor:
-        cursor.execute("""SELECT * FROM trabajadores
-                        ORDER BY fecha_pago ASC""")
+        cursor.execute("""SELECT * FROM estudiantes
+                        ORDER BY grado ASC""")
         rows = cursor.fetchall()
-        return render_template('admin/pagoP.html', rows=rows)
-    
+        return render_template('admin/pagoC.html', rows=rows)
