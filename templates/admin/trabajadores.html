@@ -42,8 +42,14 @@
           <label for="apellidos">Apellidos</label>
         </div>
         <div class="form-floating">
-            <input type="text" class="form-control" name="cargo" placeholder="Cargo" required>
-            <label for="cargo">Cargo</label>
+          <select class="custom-select" name="cargo" placeholder="Cargo" id="cargo" required>
+            <option value="" disabled selected>Cargo</option>
+            <option value="Coordinador">Coordinador</option>
+            <option value="Maestro">Maestro</option>
+            <option value="Secretario">Secretario</option>
+            <option value="Director">Director</option>
+            <option value="Contador">Contador</option>
+          </select>
         </div>
         <div class="form-floating">
           <input type="number" class="form-control" name="salario" placeholder="Salario" required>
@@ -77,8 +83,6 @@
             <input type="text" id="nombres" name="nombres" required>
             <label for="apellidos">Apellido:</label>
             <input type="text" id="apellidos" name="apellidos" required>
-            <label for="cargo">Cargo:</label>
-            <input type="text" id="cargo" name="cargo" required>
             <label for="salario">Salario:</label>
             <input type="number" id="salario" name="salario" required>
             <label for="metodo_de_pago">Metodo de Pago:</label>
