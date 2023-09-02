@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Estudiantes</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/director/pagoC.css') }}">
+	<script src="{{ url_for('static', filename='js/director/pagoC.js') }}"></script>
+</head>
+<body>
+	<a href="/iniciodirector" style="font-size: 16px;margin-left: 5px;margin-bottom: 50px;">&#x2190 Regresar</a>
+	<h1>Estudiantes</h1>
+	<table>
+		<thead>
+			<tr>
+				<th><span>ID</span></th>
+				<th><span>Nombres</span></th>
+				<th><span>Apellidos</span></th>
+				<th><span>Fecha Nacimiento</span></th>
+				<th><span>Grado</span></th>
+				<th><span>Seccion</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in rows %}
+				<tr>
+					<td>{{ row[0] }}</td>
+					<td>{{ row[1] }}</td>
+					<td>{{ row[2] }}</td>
+					<td>{{ row[3] }}</td>
+					<td>{{ row[4] }}</td>
+					<td>{{ row[5] }}</td>
+					<td>{{ row[6] }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>

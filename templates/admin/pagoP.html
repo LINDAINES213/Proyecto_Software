@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Trabajadores</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/ver/pagoP.css') }}">
+	<script src="{{ url_for('static', filename='js/admin/pagoP.js') }}"></script>
+</head>
+<body>
+	<a href="/inicioadmin" style="font-size: 16px;margin-left: 5px;margin-bottom: 50px;">&#x2190 Regresar</a>
+	<h1>Trabajadores</h1>
+	<table>
+		<thead>
+			<tr>
+				<th><span>ID</span></th>
+				<th><span>Nombres</span></th>
+				<th><span>Apellidos</span></th>
+				<th><span>Cargo</span></th>
+				<th><span>Salario</span></th>
+				<th><span>Metodo de Pago</span></th>
+				<th><span>Bonus</span></th>
+				<th><span>Fecha de Contratación</span></th>
+				<th><span>Fecha de Pago</span></th>
+				<th><span>Acciones</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in rows %}
+				<tr>
+					<td>{{ row[0] }}</td>
+					<td>{{ row[1] }}</td>
+					<td>{{ row[2] }}</td>
+					<td>{{ row[3] }}</td>
+					<td>{{ row[4] }}</td>
+					<td>{{ row[5] }}</td>
+					<td>{{ row[6] }}</td>
+					<td>{{ row[7] }}</td>
+					<td>{{ row[8] }}</td>
+					<td>
+						<button class="pago-realizado" onclick="pagoRealizado(this)">Pagado</button>
+						<button class="pago-pendiente" onclick="pagoPendiente(this)">Pendiente</button>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>	  
+</body>
+</html>
