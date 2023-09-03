@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Pagos de Colegiatura</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/formcolegiaturas.css') }}">
+  </head>
+  <body>
+    <a href="/inicioadmin" style="font-size: 16px;margin-top: -600px; margin-right: 50px;">&#x2190 Regresar</a>
+
+      {% extends './base.html' %}
+
+      {% block title %}Pagos de colegiatura{% endblock %}
+      {% block body %}
+      <form class="login-form" action="/formcolegiaturas" method="POST">
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        <br />
+        {% for message in messages %}
+        <div class="alert alert-primary alert-dismissible" role="alert">
+            <strong>{{ message }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% endwith %}
+        <h1>Pagos de colegiatura</h1>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="id_estudiante" name="id_estudiante" placeholder="id_estudiante" required>
+          <label for="id_estudiante">ID del estudiante</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="contrasena" name="contrasena" placeholder="contrasena" required>
+          <label for="contrasena">Contraseña del estudiante</label>
+        </div>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="w-100 btn btn-lg btn-primary mt-3" onclick="window.location.href='/pagoC'">Ver pagos de colegiatura</button>
+
+      </form>
+      {% endblock %}
+            <label for="id_estudiante">ID del estudiante:</label>
+            <input type="text" id="id_estudiante" name="id_estudiante" required>
+            <label for="contrasena">Contraseña del estudiante:</label>
+            <input type="text" id="contrasena" name="contrasena" required>
+            <button type="submit">Ver pagos de colegiatura</button>
+      </form>
+    </body>
+  </html>
