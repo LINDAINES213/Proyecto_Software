@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, request, flash
+from flask import Blueprint, redirect, render_template, request, flash, redirect
 from flask_login import login_required, login_user
 from database.db import get_connection
 from models.ModelUser import ModelUser
@@ -38,14 +38,15 @@ def get_dpi_from_database(dpi):
 def verificarSalario():
     if request.method == 'POST':
         dpi = request.form['dpi']
+        contrasena = request.form['contrasena']
         dpi2 = get_dpi_from_database(dpi)
-        user = User(0, dpi)
+        user = User(0, dpi, contrasena)
         logged_user = ModelUser.login(connection, user)
         if logged_user != None:
             if logged_user.dpi:
                 login_user(logged_user)
-                if logged_user.dpi2 == dpi:
-                    salario()
+                if logged_user.dpi == dpi:
+                    return redirect(f'/salario/{dpi}')
             else:
                 flash("DPI incorrecto...")
                 return redirect('/formsalarios')
@@ -61,11 +62,11 @@ def salarios():
     return render_template('admin/salarios.html')
 
 
-@salarios_bp.route('/salario')
+@salarios_bp.route('/salario/<string:dpi>')
 @login_required
 def salario(dpi):
     with connection.cursor() as cursor:
         cursor.execute("""SELECT * FROM trabajadores
-                        WHERE dpi = %s""",(dpi))
+                        WHERE dpi = %s""",(dpi,))
         rows = cursor.fetchall()
         return render_template('admin/salarios.html', rows=rows)

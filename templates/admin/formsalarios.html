@@ -31,6 +31,10 @@
           <input type="text" class="form-control" id="dpi" name="dpi" placeholder="DPI" required>
           <label for="dpi">DPI</label>
         </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="contrasena" name="contrasena" placeholder="contrasena" required>
+          <label for="contrasena">Contraseña del usuario</label>
+        </div>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <button class="w-100 btn btn-lg btn-primary mt-3" onclick="window.location.href='/salarios'">Ver Salario</button>
 
@@ -38,6 +42,8 @@
       {% endblock %}
             <label for="dpi">DPI:</label>
             <input type="text" id="dpi" name="dpi" required>
+            <label for="contrasena">Contraseña del usuario:</label>
+            <input type="text" id="contrasena" name="contrasena" required>
             <button type="submit">Ver Salario</button>
       </form>
     </body>
