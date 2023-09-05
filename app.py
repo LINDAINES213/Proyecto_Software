@@ -37,6 +37,8 @@ from routes.perfil_secretario.circularesE import circularesE_bp
 #######################################################################
 
 ################## Funcionalidades para Contador ###################
+from routes.perfil_contador.pagoC import colegiatura_bp
+from routes.perfil_contador.salarios import salarios_bp
 #######################################################################
 
 ################## Funcionalidades para Estudiantes/Padres de Familia ###################
@@ -79,6 +81,8 @@ app.register_blueprint(circularesE_bp)
 #############################################
 
 ###### Funcionalidades para Contador ######
+app.register_blueprint(salarios_bp)
+app.register_blueprint(colegiatura_bp)
 #############################################
 
 ###### Funcionalidades para Estudiante/Padres de Familia ######

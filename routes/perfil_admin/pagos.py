@@ -15,20 +15,3 @@ def pagoP():
         rows = cursor.fetchall()
         return render_template('admin/pagoP.html', rows=rows)
     
-@pagos_bp.route('/pagoC')
-@login_required
-def pagoC():
-    with connection.cursor() as cursor:
-        cursor.execute("""SELECT * FROM estudiantes
-                        ORDER BY grado ASC""")
-        rows = cursor.fetchall()
-        return render_template('admin/pagoC.html', rows=rows)
-
-@pagos_bp.route('/salario')
-@login_required
-def salario():
-    with connection.cursor() as cursor:
-        cursor.execute("""SELECT * FROM trabajadores
-                        ORDER BY fecha_pago ASC""")
-        rows = cursor.fetchall()
-        return render_template('admin/salarios.html', rows=rows)
