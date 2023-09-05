@@ -25,6 +25,7 @@ def cursos2():
             cursor.execute("""INSERT INTO curso VALUES (%s, %s, %s, %s, %s)""", 
                            (id_curso, curso, maestro, hora_inicio, hora_fin))
             connection.commit()  
+        connection.close()
         return redirect('/cursos3')
     except Exception as ex:
         connection.rollback()
@@ -63,7 +64,7 @@ def editar_curso(id):
                     WHERE id_curso = %s
                 """, (curso, maestro, hora_inicio, hora_final, id_curso))
                 connection.commit()
-
+            connection.close()
             return redirect('/cursos3')
     except Exception as ex:
         connection.rollback()
@@ -79,7 +80,7 @@ def eliminar_curso(id):
             with connection.cursor() as cursor:
                 cursor.execute("DELETE FROM curso WHERE id_curso = %s", (id,))
                 connection.commit()
-
+            connection.close()
             return redirect('/cursos3')
 
         return render_template('admin/eliminar_curso.html', curso_id=id)
@@ -97,4 +98,4 @@ def cursos3():
                         LEFT JOIN maestros m ON m.dpi = curso.maestro
                         ORDER BY id_curso ASC""")
         rows = cursor.fetchall()
-        return render_template('admin/cursos3.html', rows=rows)
+    return render_template('admin/cursos3.html', rows=rows)
