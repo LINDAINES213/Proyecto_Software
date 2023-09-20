@@ -20,7 +20,6 @@
 				<th><span>Bonus</span></th>
 				<th><span>Fecha de Contratación</span></th>
 				<th><span>Fecha de Pago</span></th>
-				<th><span>Acciones</span></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -35,10 +34,6 @@
 					<td>{{ row[6] }}</td>
 					<td>{{ row[7] }}</td>
 					<td>{{ row[8] }}</td>
-					<td>
-						<button class="pago-realizado" onclick="pagoRealizado(this)">Pagado</button>
-						<button class="pago-pendiente" onclick="pagoPendiente(this)">Pendiente</button>
-					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
