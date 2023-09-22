@@ -18,12 +18,10 @@ def cursos2():
         id_curso = request.form['id_curso']
         curso = request.form['curso']
         maestro = request.form['maestro']
-        hora_inicio = request.form['hora_inicio']
-        hora_fin = request.form['hora_fin']
 
         with connection.cursor() as cursor:
-            cursor.execute("""INSERT INTO curso VALUES (%s, %s, %s, %s, %s)""", 
-                           (id_curso, curso, maestro, hora_inicio, hora_fin))
+            cursor.execute("""INSERT INTO curso VALUES (%s, %s, %s)""", 
+                           (id_curso, curso, maestro))
             connection.commit()  
         return redirect('/cursos3')
     except Exception as ex:
@@ -51,20 +49,15 @@ def editar_curso(id):
             id_curso = request.form['id_curso']
             curso = request.form['curso']
             maestro = request.form['maestro']
-            hora_inicio = request.form['hora_inicio']
-            hora_final = request.form['hora_fin']
 
             with connection.cursor() as cursor:
                 cursor.execute("""UPDATE curso SET
                     curso = %s,
-                    maestro = %s,
-                    hora_inicio = %s,
-                    hora_fin = %s
+                    maestro = %s
                     WHERE id_curso = %s
-                """, (curso, maestro, hora_inicio, hora_final, id_curso))
+                """, (curso, maestro, id_curso))
                 connection.commit()
-
-            return redirect('/cursos3')
+        return redirect('/cursos3')
     except Exception as ex:
         connection.rollback()
         flash('Error, intente nuevamente')
@@ -79,7 +72,6 @@ def eliminar_curso(id):
             with connection.cursor() as cursor:
                 cursor.execute("DELETE FROM curso WHERE id_curso = %s", (id,))
                 connection.commit()
-
             return redirect('/cursos3')
 
         return render_template('admin/eliminar_curso.html', curso_id=id)
@@ -93,8 +85,8 @@ def eliminar_curso(id):
 @login_required
 def cursos3():
     with connection.cursor() as cursor:
-        cursor.execute("""SELECT id_curso, curso, m.nombre AS maestro, hora_inicio, hora_fin FROM curso
+        cursor.execute("""SELECT id_curso, curso, m.nombre FROM curso
                         LEFT JOIN maestros m ON m.dpi = curso.maestro
                         ORDER BY id_curso ASC""")
         rows = cursor.fetchall()
-        return render_template('admin/cursos3.html', rows=rows)
+    return render_template('admin/cursos3.html', rows=rows)

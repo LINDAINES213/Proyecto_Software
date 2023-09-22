@@ -19,7 +19,6 @@
 				<th>Edad</th>
 				<th>Grado</th>
 				<th>Seccion</th>
-				<th>Acciones</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -32,10 +31,6 @@
 					<td>{{ row[4] }}</td>
 					<td>{{ row[5] }}</td>
 					<td>{{ row[6] }}</td>
-					<td>
-						<button class="pago-realizado" onclick="pagoRealizado(this)">Pagado</button>
-						<button class="pago-pendiente" onclick="pagoPendiente(this)">Pendiente</button>
-					</td>
 				</tr>
 			{% endfor %}
 		</tbody>

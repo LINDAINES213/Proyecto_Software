@@ -23,12 +23,13 @@
 					<td>{{ row[0] }}</td>
 					<td>{{ row[1] }}</td>
 					<td>
-						<button class="edit-button" onclick="editar_maestro('{{ row[0] }}')">Editar</button>
 						<button class="delete-button" onclick="eliminar_maestro('{{ row[0] }}')">Eliminar</button>
 					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
+	<br>
+	<button class="download-button" onclick="descargarCSV()">Descargar CSV</button>
 </body>
 </html>
