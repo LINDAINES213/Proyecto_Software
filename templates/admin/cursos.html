@@ -39,14 +39,6 @@
           <input type="text" class="form-control" id="maestro" name="maestro" placeholder="DPI Maestro" required>
           <label for="maestro">DPI Maestro</label>
         </div>
-        <div class="form-floating">
-            <input type="time" class="form-control" name="hora_inicio" placeholder="Hora de Inicio" required>
-            <label for="hora_inicio">Hora de Inicio</label>
-        </div>
-        <div class="form-floating">
-          <input type="time" class="form-control" name="hora_fin" placeholder="Hora del Final" required>
-          <label for="hora_fin">Hora del Final</label>
-        </div>
         
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir curso</button>
@@ -60,10 +52,6 @@
             <input type="text" id="nombre" name="nombre" required>
             <label for="maestro">Maestro:</label>
             <input type="text" id="maestro" name="maestro" required>
-            <label for="hora_inicio">Hora de Inicio:</label>
-            <input type="time" id="hora_inicio" name="hora_inicio" required>
-            <label for="horaFinal">Hora del final:</label>
-            <input type="time" id="hora_fin" name="hora_fin" required>
             <button type="submit">Añadir usuario</button>
       </form>
     </body>

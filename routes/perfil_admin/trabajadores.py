@@ -58,6 +58,7 @@ def edit_worker(dpi):
         salario = request.form['salario']
         metodo_de_pago = request.form['metodo_de_pago']
         bonus = request.form['bonus']
+        fecha_pago = request.form['fecha_pago']
 
         with connection.cursor() as cursor:
             cursor.execute("""UPDATE trabajadores SET
@@ -66,9 +67,10 @@ def edit_worker(dpi):
                 cargo = %s,
                 salario = %s,
                 metodo_de_pago = %s,
-                bonus = %s
+                bonus = %s,
+                fecha_pago = %s
                 WHERE dpi = %s
-            """, (nombres, apellidos, cargo, salario, metodo_de_pago, bonus, dpi))
+            """, (nombres, apellidos, cargo, salario, metodo_de_pago, bonus, fecha_pago, dpi))
             connection.commit()
 
         return redirect('/trabajadores3')
