@@ -16,46 +16,64 @@ def calificaciones():
         rows = cursor.fetchall()
         return render_template('director/calificaciones3.html', rows=rows)
 
-@calificaciones_bp.route('/estudiantes2/<id>/edit', methods=['GET', 'POST'])
+@calificaciones_bp.route('/calificaciones2/<id>/edit', methods=['GET', 'POST'])
 @login_required
 def editar_calificacion(id):
     try:
         if request.method == 'GET':
             # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
             with connection.cursor() as cursor:
-                cursor.execute("SELECT * FROM estudiantes WHERE id_estudiante = %s", (id,))
-                estudiante = cursor.fetchone()
+                cursor.execute("SELECT * FROM calificaciones WHERE id_estudiante = %s", (id,))
+                calificaciones = cursor.fetchone()
 
-            if estudiante:
-                return render_template('admin/editar_estudiante.html', estudiante=estudiante)
+            if calificaciones:
+                return render_template('director/editar_calificaciones.html', calificaciones=calificaciones)
             else:
-                return 'Estudiante no encontrado'
+                return 'Calificación no encontrada'
 
         elif request.method == 'POST':
             # Actualizar los datos del trabajador en la base de datos
             id_estudiante = request.form['id_estudiante']
             nombres = request.form['nombres']
             apellidos = request.form['apellidos']
-            fecha_nacimiento = request.form['fecha_nacimiento']
-            edad = request.form['edad']
             grado = request.form['grado']
             seccion = request.form['seccion']
+            curso1 = request.form['curso1']
+            curso2 = request.form['curso2']
+            curso3 = request.form['curso3']
+            curso4 = request.form['curso4']
+            curso5 = request.form['curso5']
+            curso6 = request.form['curso6']
+            curso7 = request.form['curso7']
+            curso8 = request.form['curso8']
+            curso9 = request.form['curso9']
+            curso10 = request.form['curso10']
+            promedio = request.form['promedio']
 
             with connection.cursor() as cursor:
-                cursor.execute("""UPDATE estudiantes SET
+                cursor.execute("""UPDATE calificaciones SET
                     nombres = %s,
                     apellidos = %s,
-                    fecha_nacimiento = %s,
-                    edad =%s,
                     grado = %s,
-                    seccion = %s
+                    seccion = %s,
+                    notaCurso1 = %s,
+                    notaCurso2 = %s,
+                    notaCurso3 = %s,
+                    notaCurso4 = %s,
+                    notaCurso5 = %s,
+                    notaCurso6 = %s,
+                    notaCurso7 = %s,
+                    notaCurso8 = %s,
+                    notaCurso9 = %s,
+                    notaCurso10 = %s,
+                    promedio = %s
                     WHERE id_estudiante = %s
-                """, (nombres, apellidos, fecha_nacimiento, edad, grado, seccion, id_estudiante))
+                """, (nombres, apellidos, grado, seccion, curso1, curso2, curso3, curso4, curso5, curso6, curso7, curso8, curso9, curso10, promedio, id_estudiante))
                 connection.commit()
 
-            return redirect('/estudiantes3')
+            return redirect('/calificaciones3')
         
     except Exception as ex:
         connection.rollback()
         flash('Error, intente nuevamente')
-        return redirect('/estudiantes')
+        return redirect('/calificaciones')
