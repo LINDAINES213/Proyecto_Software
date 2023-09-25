@@ -43,6 +43,7 @@ from routes.perfil_contador.salarios import salarios_bp
 
 ################## Funcionalidades para Estudiantes/Padres de Familia ###################
 from routes.perfil_estudiante.circulares import circularesEe_bp
+from routes.perfil_estudiante.calificacionesE import calificacionesE_bp
 #######################################################################
 
 load_dotenv()
@@ -87,6 +88,7 @@ app.register_blueprint(colegiatura_bp)
 
 ###### Funcionalidades para Estudiante/Padres de Familia ######
 app.register_blueprint(circularesEe_bp)
+app.register_blueprint(calificacionesE_bp)
 #############################################
 
 ##################### INICIOS PERFILES #####################

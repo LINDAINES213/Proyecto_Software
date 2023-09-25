@@ -6,14 +6,14 @@ from models.entities.User import User
 from models.entities.UserS import UserS
 
 connection = get_connection()
-calificacionesE_bp = Blueprint('salarios_blueprint', __name__)
+calificacionesE_bp = Blueprint('calificacionesE_blueprint', __name__)
 
-@calificacionesE_bp.route('/calificacionesE')
+@calificacionesE_bp.route('/formcalificacionesE')
 @login_required
-def calificacionesE():
-    return render_template('estudiante/calificacionesE.html')
+def verCalificaciones():
+    return render_template('estudiante/formcalificacionesE.html')
 
-@calificacionesE_bp.route('/calificacionesE', methods=['POST'])
+@calificacionesE_bp.route('/formcalificacionesE', methods=['POST'])
 @login_required
 def verificarCalificaciones():
     if request.method == 'POST':
@@ -22,18 +22,17 @@ def verificarCalificaciones():
         user = UserS(0, id_estudiante, contrasena)
         logged_user = ModelUser.loginE(connection, user)
         if logged_user != None:
-            if logged_user.id_estudiante:
+            if logged_user.contrasena:
                 login_user(logged_user)
-                if logged_user.id_estudiante == id_estudiante:
-                    return redirect(f'/calificacionesE/{id_estudiante}')
+                return redirect(f'/calificacionesE/{id_estudiante}')
             else:
                 flash("ID o contraseña incorrecto...")
-                return redirect('/calificacionesE')
+                return redirect('/formcalificacionesE')
         else:
                 flash("ID o contraseña incorrecto......")
-                return redirect('/calificacionesE')
+                return redirect('/formcalificacionesE')
     else:
-        return redirect('/calificacionesE')
+        return redirect('/formcalificacionesE')
 
 @calificacionesE_bp.route('/calificacionesE')
 @login_required
