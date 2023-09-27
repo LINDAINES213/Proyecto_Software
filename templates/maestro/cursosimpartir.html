@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/formsalarios.css') }}">
   </head>
   <body>
-    <a href="/inicioadmin" style="font-size: 16px;margin-top: -600px; margin-right: 50px;">&#x2190 Regresar</a>
+    <a href="/iniciomaestro" style="font-size: 16px;margin-top: -600px; margin-right: 50px;">&#x2190 Regresar</a>
 
       {% extends './base.html' %}
 
@@ -26,7 +26,7 @@
         {% endif %}
 
         {% endwith %}
-        <h1>Ver Salario</h1>
+        <h1>Cursos a Impartir</h1>
         <div class="form-floating">
           <input type="text" class="form-control" id="dpi" name="dpi" placeholder="DPI" required>
           <label for="dpi">DPI</label>
