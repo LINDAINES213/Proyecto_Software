@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Editar Calificaciones</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/director/editar_calificaciones.css') }}">
+	<script src="{{ url_for('static', filename='js/director/calificaciones3.js') }}"></script>
+</head>
+<body>
+	<h1>Editar Calificaciones</h1>
+	<form action="/calificaciones2/{{ calificaciones[0] }}/edit" method="POST">
+		<label for="id_estudiante">ID Estudiante:</label>
+		<input type="text" id="id_estudiante" name="id_estudiante" value="{{ calificaciones[0] }}" readonly>
+		<br>
+		<label for="nombres">Nombres:</label>
+		<input type="text" id="nombres" name="nombres" value="{{ calificaciones[1] }}">
+		<br>
+		<label for="apellidos">Apellidos:</label>
+		<input type="text" id="apellidos" name="apellidos" value="{{ calificaciones[2] }}">
+		<br>
+		<label for="grado">Grado:</label>
+		<input type="text" id="grado" name="grado" value="{{ calificaciones[3] }}">
+		<br>
+		<label for="seccion">Seccion:</label>
+		<input type="text" id="seccion" name="seccion" value="{{ calificaciones[4] }}">
+		<br>
+		<label for="curso1">Nota del Curso 1:</label>
+		<input type="text" id="curso1" name="curso1" value="{{ calificaciones[5] }}">
+		<br>
+		<label for="curso2">Nota del Curso 2:</label>
+		<input type="text" id="curso2" name="curso2" value="{{ calificaciones[6] }}">
+		<br>
+		<label for="curso3">Nota del Curso 3:</label>
+		<input type="text" id="curso3" name="curso3" value="{{ calificaciones[7] }}">
+		<br>
+		<label for="curso4">Nota del Curso 4:</label>
+		<input type="text" id="curso4" name="curso4" value="{{ calificaciones[8] }}">
+		<br>
+		<label for="curso5">Nota del Curso 5:</label>
+		<input type="text" id="curso5" name="curso5" value="{{ calificaciones[9] }}">
+		<br>
+		<label for="curso6">Nota del Curso 6:</label>
+		<input type="text" id="curso6" name="curso6" value="{{ calificaciones[10] }}">
+		<br>
+		<label for="curso7">Nota del Curso 7:</label>
+		<input type="text" id="curso7" name="curso7" value="{{ calificaciones[11] }}">
+		<br>
+		<label for="curso8">Nota del Curso 8:</label>
+		<input type="text" id="curso8" name="curso8" value="{{ calificaciones[12] }}">
+		<br>
+		<label for="curso9">Nota del Curso 9:</label>
+		<input type="text" id="curso9" name="curso9" value="{{ calificaciones[13] }}">
+		<br>
+		<label for="curso10">Nota del Curso 10:</label>
+		<input type="text" id="curso10" name="curso10" value="{{ calificaciones[14] }}">
+		<br>
+		<label for="promedio">Promedio:</label>
+		<input type="text" id="promedio" name="promedio" value="{{ calificaciones[15] }}">
+		<br>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Guardar</button>
+	</form>
+</body>
+</html>

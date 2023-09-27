@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cursos a Impartir</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/ver/salarios.css') }}">
+	<script src="{{ url_for('static', filename='js/admin/salarios.js') }}"></script>
+</head>
+<body>
+	<a href="/cursosI" style="font-size: 16px;margin-left: 5px;margin-bottom: 50px;">&#x2190 Regresar</a>
+	<h1>Cursos a Impartir</h1>
+	<table>
+		<thead>
+			<tr>
+				<th><span>ID del Curso</span></th>
+				<th><span>Curso</span></th>
+				<th><span>DPI</span></th>
+				<th><span>Maestro</span></th>
+				<th><span>Hora de Inicio</span></th>
+				<th><span>Hora del Final</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in rows %}
+				<tr>
+					<td>{{ row[0] }}</td>
+					<td>{{ row[1] }}</td>
+					<td>{{ row[2] }}</td>
+					<td>{{ row[3] }}</td>
+					<td>{{ row[4] }}</td>
+					<td>{{ row[5] }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>
