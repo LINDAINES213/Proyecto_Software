@@ -34,6 +34,7 @@ from routes.perfil_secretario.circularesE import circularesE_bp
 #####################################################################
 
 ################## Funcionalidades para Maestro ###################
+from routes.perfil_maestro.cursosimpartir import cursosimpartir_bp
 #######################################################################
 
 ################## Funcionalidades para Contador ###################
@@ -79,6 +80,7 @@ app.register_blueprint(circularesE_bp)
 #############################################
 
 ###### Funcionalidades para Maestro ######
+app.register_blueprint(cursosimpartir_bp)
 #############################################
 
 ###### Funcionalidades para Contador ######
