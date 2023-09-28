@@ -34,7 +34,6 @@ def cursos2():
 def editar_curso(id):
     try:
         if request.method == 'GET':
-            # Obtener los datos del trabajador por su ID y mostrar el formulario de edición
             with connection.cursor() as cursor:
                 cursor.execute("SELECT * FROM curso WHERE id_curso = %s", (id,))
                 cur = cursor.fetchone()
@@ -45,7 +44,6 @@ def editar_curso(id):
                 return 'Curso no encontrado'
 
         elif request.method == 'POST':
-            # Actualizar los datos del trabajador en la base de datos
             id_curso = request.form['id_curso']
             curso = request.form['curso']
             maestro = request.form['maestro']

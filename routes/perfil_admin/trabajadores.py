@@ -1,7 +1,6 @@
-from flask import Blueprint, redirect, render_template, request, flash, url_for
-from flask_login import login_required, logout_user
+from flask import Blueprint, redirect, render_template, request, flash
+from flask_login import login_required
 from database.db import get_connection
-
 
 connection = get_connection()
 trabajadores_bp = Blueprint('trabajadores_blueprint', __name__)
