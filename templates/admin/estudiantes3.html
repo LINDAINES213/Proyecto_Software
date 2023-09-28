@@ -10,6 +10,26 @@
 <body>
 	<a href="/inicioadmin" style="font-size: 16px;margin-left: 5px;margin-bottom: 50px;">&#x2190 Regresar</a>
 	<h1>Estudiantes</h1>
+	<form method="GET" action="/filtro">
+		<label for="grado">Grado:</label>
+		<select name="grado" id="grado">
+			<!-- Aquí debes generar las opciones de grado desde tu base de datos o una lista predefinida -->
+			<option value="" disabled selected>Grado</option>
+            <option value="SS7">Primero Basico</option>
+            <option value="SS8">Segundo Basico</option>
+            <option value="SS9">Tercero Basico</option>
+            <option value="SS10C">Cuarto Bachillerato en Computacion</option>
+            <option value="SS10CL">Cuarto Bachillerato en Ciencias y Letras</option>
+		</select>
+		
+		<label for="seccion">Sección:</label>
+		<select name="seccion" id="seccion">
+			<!-- Aquí debes generar las opciones de sección desde tu base de datos o una lista predefinida -->
+		</select>
+		
+		<input type="submit" value="Filtrar">
+	</form>
+	
 	<table>
 		<thead>
 			<tr>
