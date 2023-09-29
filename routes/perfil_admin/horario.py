@@ -6,7 +6,7 @@ from database.db import get_connection
 connection = get_connection()
 horarios_bp = Blueprint('horarios_blueprint', __name__)
 
-@horarios_bp.route('/horarios')
+@horarios_bp.route('/horario')
 @login_required
 def horarios():
     return render_template('admin/horario.html')
@@ -71,7 +71,7 @@ def editar_horario(id):
         return redirect('/horario')
 
 
-@horarios_bp.route('/horarios2/<id>/delete', methods=['GET', 'POST'])
+@horarios_bp.route('/horario2/<id>/delete', methods=['GET', 'POST'])
 @login_required
 def eliminar_horarios(id):
     try:
@@ -88,7 +88,7 @@ def eliminar_horarios(id):
         connection.rollback()
         return redirect('/horario')
 
-@horarios_bp.route('/horarios3')
+@horarios_bp.route('/horario3')
 @login_required
 def cursos3():
     with connection.cursor() as cursor:
@@ -96,4 +96,4 @@ def cursos3():
                         group by id_horarios,dia
                         order by hora_inicio""")
         rows = cursor.fetchall()
-    return render_template('admin/horarios3.html', rows=rows)
+    return render_template('admin/horario3.html', rows=rows)
