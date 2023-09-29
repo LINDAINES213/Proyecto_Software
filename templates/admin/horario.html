@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Horario</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/horario.css') }}">
+</head>
+<body>
+<a href="/inicioadmin" style="font-size: 16px;margin-top: -600px; margin-right: 50px;">&#x2190 Regresar</a>
+
+{% extends './base.html' %}
+
+{% block title %}Añadir Curso{% endblock %}
+{% block body %}
+<form class="login-form" action="/horario2" method="POST">
+    {% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+    <br />
+    {% for message in messages %}
+    <div class="alert alert-primary alert-dismissible" role="alert">
+        <strong>{{ message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% endwith %}
+    <h1>Añadir horario</h1>
+    <div class="form-floating">
+        <input type="text" class="form-control" id="id_horarios" name="id_horarios" placeholder="ID Horarios" required>
+        <label for="id_horarios">ID Horarios</label>
+    </div>
+    <div class="form-floating">
+        <input type="text" class="form-control" id="id_curso" name="id_curso" placeholder="ID Curso" required>
+        <label for="id_curso">ID Curso</label>
+    </div>
+    <div class="form-floating">
+        <input type="text" class="form-control" id="seccion" name="seccion" placeholder="Seccion" required>
+        <label for="seccion">Seccion</label>
+    </div>
+    <div class="form-floating">
+        <input type="time" class="form-control" id="hora_fin" name="hora_fin" placeholder="Hora Fin" required>
+        <label for="hora_fin">Hora Fin</label>
+    </div>
+    <div class="form-floating">
+        <input type="time" class="form-control" id="hora_inicio" name="hora_inicio" placeholder="Hora Inicio" required>
+        <label for="hora_inicio">Hora Inicio</label>
+    </div>
+    <div class="form-floating">
+        <input type="text" class="form-control" id="dia" name="dia" placeholder="Dia" required>
+        <label for="dia">Dia</label>
+    </div>
+
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir Horario</button>
+    <button class="w-100 btn btn-lg btn-primary mt-3" onclick="window.location.href='/horario3'">Ver Horarios</button>
+
+</form>
+{% endblock %}
+<label for="id_horarios">ID Horarios:</label>
+<input type="text" id="id_horarios" name="id_horarios" required>
+<label for="id_curso">ID Curso:</label>
+<input type="text" id="id_curso" name="id_curso" required>
+<label for="seccion">Seccion:</label>
+<input type="text" id="seccion" name="seccion" required>
+<label for="hora_fin">Hora Fin:</label>
+<input type="time" id="hora_fin" name="hora_fin" required>
+<label for="hora_inicio">Hora Inicio:</label>
+<input type="time" id="hora_inicio" name="hora_inicio" required>
+<label for="dia">Dia:</label>
+<input type="text" id="dia" name="dia" required>
+<button type="submit">Añadir usuario</button>
+</form>
+</body>
+</html>
