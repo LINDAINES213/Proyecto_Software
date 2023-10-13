@@ -37,13 +37,10 @@ except psycopg2.Error as e:
 
 import psycopg2
 from psycopg2 import DatabaseError
-from decouple import config
 
-def get_connection(user='postgres', password='lind@115513'):
+
+def get_connection():
     conn = psycopg2.connect(
-        host="database-1.cqxkfbcblu85.us-east-2.rds.amazonaws.com",
-        database="postgres",
-        user=user,
-        password=password
+        dsn="postgres://fl0user:jKxprFuf05OS@ep-bitter-mud-14160489.us-east-2.aws.neon.fl0.io:5432/proyectosoftware2?sslmode=require"
     )
     return conn
