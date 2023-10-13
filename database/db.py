@@ -39,13 +39,11 @@ import psycopg2
 from psycopg2 import DatabaseError
 from decouple import config
 
-def get_connection():
-    try:
-        return psycopg2.connect(
-            host=config('PGSQL_HOST'),
-            user=config('PGSQL_USER'),
-            password=config('PGSQL_PASSWORD'),
-            database=config('PGSQL_DATABASE')
-        )
-    except DatabaseError as ex:
-        raise ex
+def get_connection(user='postgres', password='lind@115513'):
+    conn = psycopg2.connect(
+        host="database-1.cqxkfbcblu85.us-east-2.rds.amazonaws.com",
+        database="postgres",
+        user=user,
+        password=password
+    )
+    return conn
