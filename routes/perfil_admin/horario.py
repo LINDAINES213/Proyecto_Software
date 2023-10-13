@@ -23,7 +23,7 @@ def horario2():
         dia = request.form['dia']
 
         with connection.cursor() as cursor:
-            cursor.execute("""INSERT INTO horarios VALUES (%s, %s, %s, %s, %s)""",
+            cursor.execute("""INSERT INTO horarios VALUES (%s, %s, %s, %s, %s, %s)""",
                            (id_horarios,id_curso,seccion, hora_fin, hora_inicio,dia))
             connection.commit()
         return redirect('/horario3')
@@ -32,17 +32,17 @@ def horario2():
         flash('Error, intente nuevamente')
         return redirect('/horario')
 
-@horarios_bp.route('/horario3/<id>/edit', methods=['GET', 'POST'])
+@horarios_bp.route('/horario2/<id>/edit', methods=['GET', 'POST'])
 @login_required
 def editar_horario(id):
     try:
         if request.method == 'GET':
             with connection.cursor() as cursor:
                 cursor.execute("SELECT * FROM horarios WHERE id_horarios = %s", (id,))
-                cur = cursor.fetchone()
+                hor = cursor.fetchone()
 
-            if cur:
-                return render_template('admin/editar_curso.html', cur=cur)
+            if hor:
+                return render_template('admin/editar_horario.html', hor=hor)
             else:
                 return 'horario no encontrado'
 
@@ -62,9 +62,9 @@ def editar_horario(id):
                     hora_inicio = %s,
                     dia = %s
                     WHERE id_horarios = %s
-                """, (id_horarios, id_curso, seccion,hora_fin,hora_inicio,dia))
+                """, (id_curso, seccion, hora_fin, hora_inicio, dia, id_horarios))
                 connection.commit()
-        return redirect('/horario3')
+            return redirect('/horario3')
     except Exception as ex:
         connection.rollback()
         flash('Error, intente nuevamente')
@@ -81,7 +81,7 @@ def eliminar_horarios(id):
                 connection.commit()
             return redirect('/horario3')
 
-        return render_template('admin/eliminar_horario.html', curso_id=id)
+        return render_template('admin/eliminar_horario.html', id_horarios=id)
 
     except Exception as ex:
         flash('Ocurrió un error al intentar eliminar el horario.', 'error')

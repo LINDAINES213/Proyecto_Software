@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Editar Horario</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/editar/editar_grado.css') }}">
+</head>
+<body>
+	<h1>Editar Horario</h1>
+	<form action="/horario2/{{ hor[0] }}/edit" method="POST">
+		<label for="id_horarios">ID Horario:</label>
+		<input type="text" id="id_horarios" name="id_horarios" value="{{ hor[0] }}" readonly>
+		<br>
+		<label for="id_curso">ID Curso:</label>
+		<input type="text" id="id_curso" name="id_curso" value="{{ hor[1] }}">
+		<br>
+		<label for="seccion">Seccion:</label>
+		<input type="text" id="seccion" name="seccion" value="{{ hor[2] }}">
+		<br>
+        <label for="hora_fin">Hora Fin:</label>
+		<input type="time" id="hora_fin" name="hora_fin" value="{{ hor[3] }}">
+		<br>
+		<label for="hora_inicio">Hora Inicio:</label>
+		<input type="time" id="hora_inicio" name="hora_inicio" value="{{ hor[4] }}">
+		<br>
+        <label for="dia">Dia:</label>
+		<input type="text" id="dia" name="dia" value="{{ hor[5] }}">
+		<br>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Guardar</button>
+	</form>
+</body>
+</html>
