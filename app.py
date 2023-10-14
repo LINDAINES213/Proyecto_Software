@@ -3,9 +3,7 @@ from database.db import get_connection
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_required, login_user, logout_user
 from flask_cors import CORS
-from config import config
 from dotenv import load_dotenv
-from flask import Response
 
 ################## Funcionalidades para Coordinador ###################
 from models.entities.User import User
@@ -219,7 +217,7 @@ def page_not_found(error):
     return f"<h1 style='min-height: 700px;display: flex;align-items: center;justify-content: center;'>UNDER CONSTRUCTION 🛠️</h1>", 404
 
 if __name__ == '__main__':
-    app.config.from_object(config['development'])
+    #app.config.from_object(config['development'])
     app.register_error_handler(404, page_not_found)
-    app.run()
+    app.run(host="0.0.0.0", port=5000)
 ########################################################################################
