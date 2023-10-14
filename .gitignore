@@ -1,6 +1,4 @@
 __pycache__
-.env
-venv/
 config.py
 
 # Editor directories and files
