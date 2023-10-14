@@ -1,0 +1,7 @@
+flask
+psycopg2
+python-decouple
+python-dotenv
+flask_wtf
+flask_login
+flask_cors
