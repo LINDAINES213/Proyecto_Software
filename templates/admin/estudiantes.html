@@ -1,80 +1,96 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="es">
+
+<head>
     <meta charset="UTF-8">
-    <title>Estudiantes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajadores</title>
+	<link rel="icon" href="https://www.talkinheads.net/wp-content/uploads/2023/03/multiple-users-silhouette.png" type="image/x-icon">
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/inicioadmin.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/estudiantes.css') }}">
-  </head>
-  <body>
-    <a href="/inicioadmin" style="font-size: 16px;margin-top: -600px; margin-right: 50px;">&#x2190 Regresar</a>
+	</head>
 
-      {% extends './base.html' %}
-
-      {% block title %}Añadir Estudiantes{% endblock %}
-      {% block body %}
-      <form class="login-form" action="/estudiantes2" method="POST">
-        {% with messages = get_flashed_messages() %}
-
-        {% if messages %}
-        <br />
-        {% for message in messages %}
-        <div class="alert alert-primary alert-dismissible" role="alert">
-            <strong>{{ message }}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endfor %}
-        {% endif %}
-
-        {% endwith %}
-        <h1>Añadir Estudiantes</h1>
-        <div class="form-floating">
-          <input type="text" class="form-control" id="id_estudiante" name="id_estudiante" placeholder="ID Estudiante" required>
-          <label for="id_estudiante">ID Estudiante</label>
-        </div>
-        <div class="form-floating">
-          <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres" required>
-          <label for="nombres">Nombres</label>
-        </div>
-        <div class="form-floating">
-          <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" required>
-          <label for="apellidos">Apellidos</label>
-        </div>
-        <div class="form-floating">
-          <input type="date" class="form-control" name="fecha_nacimiento" placeholder="Fecha de Nacimiento" required>
-          <label for="fecha_nacimiento">Fecha de Nacimiento</label>
-        </div>
-        <div class="form-floating">
-          <input type="number" class="form-control" name="edad" placeholder="Edad">
-          <label for="edad">Edad</label>
-        </div>
-        <div class="form-floating">
-          <input type="text" class="form-control" name="grado" placeholder="Grado" required>
-          <label for="Grado">Grado</label>
-        </div>
-        <div class="form-floating">
-          <input type="text" class="form-control" id="seccion" name="seccion" placeholder="Seccion" required>
-          <label for="seccion">Seccion</label>
-        </div>
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir Estudiante</button>
-        <button class="w-100 btn btn-lg btn-primary mt-3" onclick="window.location.href='/estudiantes3'">Ver Estudiantes</button>
-
-      </form>
-      {% endblock %}
-            <label for="id_estudiante">ID Estudiantes:</label>
-            <input type="text" id="id_estudiante" name="id_estudiante" required>
-            <label for="nombres">Nombres:</label>
-            <input type="text" id="nombres" name="nombres" required>
-            <label for="apellidos">Apellidos:</label>
-            <input type="text" id="apellidos" name="apellidos" required>
-            <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
-            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
-            <label for="edad">Edad:</label>
-            <input type="text" id="edad" name="edad">
-            <label for="grado">Grado:</label>
-            <input type="number" id="grado" name="grado" required>
-            <label for="seccion">Seccion:</label>
-            <input type="text" id="seccion" name="seccion" required>
-      </form>
-    </body>
-  </html>
+<body>
+    {% block body %}
+    <div class="menu-wrapper">
+        <div class="sidebar-header">
+            <div class="sideBar">
+                <h1 style="text-align: center;">Menu</h1>
+                <ul>
+                    <li><a href="/trabajadores"><i class="fas fa-users"></i><label>Trabajadores</label></a></li>
+                    <li><a href="/maestros"><i class="fas fa-chalkboard-teacher"></i><label>Maestros</label></a></li>
+                    <li><a href="/cursos"><i class="fas fa-book"></i><label>Cursos</label></a></li>
+                    <li><a href="/estudiantes"><i class="fas fa-graduation-cap"></i><label>Estudiantes</label></a></li>
+                    <li><a href="/grados"><i class="fas fa-award"></i><label>Grados</label></a></li>
+                    <li><a href="/secciones"><i class="fas fa-columns"></i><label>Secciones</label></a></li>
+                    <li><a href="/formcolegiaturas"><i class="fas fa-money-bill-wave"></i><label>Pago Colegiatura</label></a></li>
+                    <li><a href="/pagoP"><i class="fas fa-hand-holding-usd"></i><label>Pago a Personal</label></a></li>
+                    <li><a href="/salones"><i class="fas fa-door-closed"></i><label>Asignación de Salones</label></a></li>
+                    <li><a href="/horario"><i class="fas fa-clock"></i><label>Asignación de Horarios</label></a></li>
+                    <li><a href="/formsalarios"><i class="fas fa-coins"></i><label>Pago de Salario</label></a></li>
+                    <li><a href="/crearUsuario"><i class="fas fa-user-plus"></i><label>Crear Usuario</label></a></li>
+                    <br><a class="logout" href="{{ url_for('logoutt') }}">Logout</a>
+                </ul> <span class="cross-icon"><i class="fas fa-times"></i></span>
+                <br>
+            </div>
+            <div class="backdrop"></div>
+            <div class="content">
+                <header>
+                    <h3 class="nombre">{{ current_user.nombre }} </h3> <a href="/inicioadmin" class="inicio"><i class="fas fa-home"></i> Inicio</a>
+                </header>
+            <div class="content-data">  
+              <form class="login-form" action="/estudiantes2" method="POST">
+                {% with messages = get_flashed_messages() %}
+        
+                {% if messages %}
+                <br />
+                {% for message in messages %}
+                <div class="alert alert-primary alert-dismissible" role="alert">
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+        
+                {% endwith %}
+                <h1>Añadir Estudiantes</h1>
+                <div class="form-floating">
+                  <label for="id_estudiante">ID Estudiante</label>
+                  <input type="text" class="form-control" id="id_estudiante" name="id_estudiante" placeholder="ID Estudiante" required>
+                </div>
+                <div class="form-floating">
+                  <label for="nombres">Nombres</label>
+                  <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres" required>
+                </div>
+                <div class="form-floating">
+                  <label for="apellidos">Apellidos</label>
+                  <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" required>
+                </div>
+                <div class="form-floating">
+                  <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                  <input type="date" class="form-control" name="fecha_nacimiento" placeholder="Fecha de Nacimiento" required>
+                </div>
+                <div class="form-floating">
+                  <label for="edad">Edad</label>
+                  <input type="number" class="form-control" name="edad" placeholder="Edad">
+                </div>
+                <div class="form-floating">
+                  <label for="Grado">Grado</label>
+                  <input type="text" class="form-control" name="grado" placeholder="Grado" required>
+                </div>
+                <div class="form-floating">
+                  <label for="seccion">Seccion</label>
+                  <input type="text" class="form-control" id="seccion" name="seccion" placeholder="Seccion" required>
+                </div>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="agregar" type="submit">Añadir Estudiante</button>
+                <button class="ver" onclick="window.location.href='/estudiantes3'">Ver Estudiantes</button>
+              </form>        
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+{% endblock %}
