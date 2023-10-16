@@ -15,7 +15,7 @@ class MyUser(HttpUser):
     @task
     def login_with_csrf(self):
         # Realizar el inicio de sesión y obtener el token CSRF
-        response = self.client.get("/logint")  # Ajusta la URL de inicio de sesión según tu aplicación
+        response = self.client.get("https://portal-electronico.onrender.com/logint")  # Ajusta la URL de inicio de sesión según tu aplicación
         csrf_token = self.extract_csrf_token(response)
 
         if csrf_token: 
