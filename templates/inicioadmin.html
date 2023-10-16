@@ -7,6 +7,7 @@
     <title>Inicio</title>
     <link rel='stylesheet' href="{{ url_for('static', filename='css/inicioadmin.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -35,7 +36,7 @@
             <div class="backdrop"></div>
             <div class="content">
                 <header>
-                    <h3 class="nombre">{{ current_user.nombre }} </h3> <p class="inicio"> <a href="/inicioadmin"><i class="fas fa-home"></i> Inicio</a>
+                    <h3 class="nombre">{{ current_user.nombre }} </h3> <a href="/inicioadmin" class="inicio"><i class="fas fa-home"></i> Inicio</a>
                 </header>
             <div class="content-data">  
 			</div>
