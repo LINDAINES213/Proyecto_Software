@@ -1,58 +1,81 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="es">
+
+<head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cursos</title>
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/inicioadmin.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/cursos.css') }}">
-  </head>
-  <body>
-    <a href="/inicioadmin" style="font-size: 16px;margin-top: -600px; margin-right: 50px;">&#x2190 Regresar</a>
 
-      {% extends './base.html' %}
+</head>
 
-      {% block title %}Añadir Curso{% endblock %}
-      {% block body %}
-      <form class="login-form" action="/cursos2" method="POST">
-        {% with messages = get_flashed_messages() %}
+<body>
+    {% block body %}
+    <div class="menu-wrapper">
+        <div class="sidebar-header">
+            <div class="sideBar">
+                <h1 style="text-align: center;">Menu</h1>
+                <ul>
+                    <li><a href="/trabajadores"><i class="fas fa-users"></i><label>Trabajadores</label></a></li>
+                    <li><a href="/maestros"><i class="fas fa-chalkboard-teacher"></i><label>Maestros</label></a></li>
+                    <li><a href="/cursos"><i class="fas fa-book"></i><label>Cursos</label></a></li>
+                    <li><a href="/estudiantes"><i class="fas fa-graduation-cap"></i><label>Estudiantes</label></a></li>
+                    <li><a href="/grados"><i class="fas fa-award"></i><label>Grados</label></a></li>
+                    <li><a href="/secciones"><i class="fas fa-columns"></i><label>Secciones</label></a></li>
+                    <li><a href="/formcolegiaturas"><i class="fas fa-money-bill-wave"></i><label>Pago Colegiatura</label></a></li>
+                    <li><a href="/pagoP"><i class="fas fa-hand-holding-usd"></i><label>Pago a Personal</label></a></li>
+                    <li><a href="/salones"><i class="fas fa-door-closed"></i><label>Asignación de Salones</label></a></li>
+                    <li><a href="/horario"><i class="fas fa-clock"></i><label>Asignación de Horarios</label></a></li>
+                    <li><a href="/formsalarios"><i class="fas fa-coins"></i><label>Pago de Salario</label></a></li>
+                    <li><a href="/crearUsuario"><i class="fas fa-user-plus"></i><label>Crear Usuario</label></a></li>
+                    <br><a class="logout" href="{{ url_for('logoutt') }}">Logout</a>
+                </ul> <span class="cross-icon"><i class="fas fa-times"></i></span>
+                <br>
+            </div>
+            <div class="backdrop"></div>
+            <div class="content">
+                <header>
+                    <h3 class="nombre">{{ current_user.nombre }} </h3> <p class="inicio"> <a href="/inicioadmin" style="margin-right: 100px; text-decoration: none; color: #001629;"><i class="fas fa-home"></i> Inicio</a>
+                </header>
+            <div class="content-data">  
+              <form class="login-form" action="/cursos2" method="POST">
+                {% with messages = get_flashed_messages() %}
 
-        {% if messages %}
-        <br />
-        {% for message in messages %}
-        <div class="alert alert-primary alert-dismissible" role="alert">
-            <strong>{{ message }}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        {% endfor %}
-        {% endif %}
+                {% if messages %}
+                <br />
+                {% for message in messages %}
+                <div class="alert alert-primary alert-dismissible" role="alert">
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
 
-        {% endwith %}
-        <h1>Añadir curso</h1>
-        <div class="form-floating">
-          <input type="text" class="form-control" id="id_curso" name="id_curso" placeholder="ID Curso" required>
-          <label for="id_curso">ID Curso</label>
-        </div>
-        <div class="form-floating">
-          <input type="text" class="form-control" id="curso" name="curso" placeholder="Curso" required>
-          <label for="curso">Curso</label>
-        </div>
-        <div class="form-floating">
-          <input type="text" class="form-control" id="maestro" name="maestro" placeholder="DPI Maestro" required>
-          <label for="maestro">DPI Maestro</label>
-        </div>
-        
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir curso</button>
-        <button class="w-100 btn btn-lg btn-primary mt-3" onclick="window.location.href='/cursos3'">Ver Cursos</button>
-
-      </form>
-      {% endblock %}
-            <label for="id_curso">ID Curso:</label>
-            <input type="text" id="id_curso" name="id_curso" required>
-            <label for="curso">Curso:</label>
-            <input type="text" id="nombre" name="nombre" required>
-            <label for="maestro">Maestro:</label>
-            <input type="text" id="maestro" name="maestro" required>
-            <button type="submit">Añadir usuario</button>
-      </form>
-    </body>
-  </html>
+                {% endwith %}
+                <h1>Añadir curso</h1>
+                <div class="form-floating">
+                  <label for="id_curso">ID Curso</label>
+                  <input type="text" class="form-control" id="id_curso" name="id_curso" placeholder="ID Curso" required>
+                </div>
+                <div class="form-floating">
+                  <label for="curso">Curso</label>
+                  <input type="text" class="form-control" id="curso" name="curso" placeholder="Curso" required>
+                </div>
+                <div class="form-floating">
+                  <label for="maestro">DPI Maestro</label>
+                  <input type="text" class="form-control" id="maestro" name="maestro" placeholder="DPI Maestro" required>
+                </div>
+                
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="agregar" type="submit">Añadir curso</button>
+                <button class="ver" onclick="window.location.href='/cursos3'">Ver Cursos</button>
+              </form>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+{% endblock %}
