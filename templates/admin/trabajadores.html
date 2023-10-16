@@ -1,99 +1,111 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="es">
+
+<head>
     <meta charset="UTF-8">
-    <title>Trabajadores</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/inicioadmin.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/ver/trabajadores3.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/trabajadores.css') }}">
-  </head>
-  <body>
-    
-      {% extends './base.html' %}
+</head>
 
-      {% block title %}Añadir Trabajador{% endblock %}
-      {% block body %}
-      <a href="/inicioadmin" style="font-size: 16px;margin-top: -600px; margin-right: 50px;">&#x2190 Regresar</a>
-      <br>
-      <form class="login-form" action="/trabajadores2" method="POST">
-        {% with messages = get_flashed_messages() %}
-
-        {% if messages %}
-        <br />
-        {% for message in messages %}
-        <div class="alert alert-primary alert-dismissible" role="alert">
-            <strong>{{ message }}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            
-        </div>
-        {% endfor %}
-        {% endif %}
-
-        {% endwith %}
-        <h1>Añadir Trabajador</h1>
-        <div class="form-floating">
-            <input type="text" class="form-control" id="dpi" name="dpi" placeholder="DPI" required>
-            <label for="dpi">DPI</label>
-        </div>
-        <div class="form-floating">
-          <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres" required>
-          <label for="nombres">Nombres</label>
-        </div>
-        <div class="form-floating">
-          <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" required>
-          <label for="apellidos">Apellidos</label>
-        </div>
-        <div class="form-floating">
-          <select class="custom-select" name="cargo" placeholder="Cargo" id="cargo" required>
-            <option value="" disabled selected>Cargo</option>
-            <option value="Coordinador">Coordinador</option>
-            <option value="Maestro">Maestro</option>
-            <option value="Secretario">Secretario</option>
-            <option value="Director">Director</option>
-            <option value="Contador">Contador</option>
-          </select>
-        </div>
-        <div class="form-floating">
-          <input type="number" class="form-control" name="salario" placeholder="Salario" required>
-          <label for="salario">Salario</label>
-        </div>
-        <div class="form-floating">
-          <input type="text" class="form-control" name="metodo_de_pago" placeholder="Metodo de Pago" required>
-          <label for="metodo_de_pago">Metodo de Pago</label>
-        </div>
-        <div class="form-floating">
-          <input type="number" class="form-control" name="bonus" placeholder="Bonus" required>
-          <label for="bonus">Bonus</label>
-        </div>
-        <div class="form-floating">
-          <input type="date" class="form-control" name="fecha_contratacion" placeholder="fecha_contratacion" required>
-          <label for="fecha_contratacion">Fecha de Contratacion</label>
-        </div>
-        <div class="form-floating">
-          <input type="date" class="form-control" name="fecha_pago" placeholder="fecha_pago" required>
-          <label for="fecha_pago">Fecha de Pago</label>
-        </div>
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Añadir Trabajador</button>
-        <button class="w-100 btn btn-lg btn-primary mt-3" onclick="window.location.href='/trabajadores3'">Ver Trabajadores</button>
-
-      </form>
-      {% endblock %}
-            <label for="dpi">DPI:</label>
-            <input type="text" id="dpi" name="dpi" required>
-            <label for="nombres">Nombre:</label>
-            <input type="text" id="nombres" name="nombres" required>
-            <label for="apellidos">Apellido:</label>
-            <input type="text" id="apellidos" name="apellidos" required>
-            <label for="salario">Salario:</label>
-            <input type="number" id="salario" name="salario" required>
-            <label for="metodo_de_pago">Metodo de Pago:</label>
-            <input type="text" id="metodo_de_pago" name="metodo_de_pago" required>
-            <label for="bonus">Bonus:</label>
-            <input type="number" id="bonus" name="bonus" required>
-            <label for="fecha_contratacion">Fecha de Contratacion:</label>
-            <input type="date" id="fecha_contratacion" name="fecha_contratacion" required>
-            <label for="fecha_pago">Fecha de Pago:</label>
-            <input type="date" id="fecha_pago" name="fecha_pago" required>
-            <button type="submit">Añadir Trabajador</button>
-      </form>
-    </body>
-  </html>
+<body>
+    {% block body %}
+    <div class="menu-wrapper">
+        <div class="sidebar-header">
+            <div class="sideBar">
+                <h1 style="text-align: center;">Menu</h1>
+                <ul>
+                    <li><a href="/trabajadores3"><i class="fas fa-users"></i><label>Trabajadores</label></a></li>
+                    <li><a href="/maestros"><i class="fas fa-chalkboard-teacher"></i><label>Maestros</label></a></li>
+                    <li><a href="/cursos"><i class="fas fa-book"></i><label>Cursos</label></a></li>
+                    <li><a href="/estudiantes"><i class="fas fa-graduation-cap"></i><label>Estudiantes</label></a></li>
+                    <li><a href="/grados"><i class="fas fa-award"></i><label>Grados</label></a></li>
+                    <li><a href="/secciones"><i class="fas fa-columns"></i><label>Secciones</label></a></li>
+                    <li><a href="/formcolegiaturas"><i class="fas fa-money-bill-wave"></i><label>Pago Colegiatura</label></a></li>
+                    <li><a href="/pagoP"><i class="fas fa-hand-holding-usd"></i><label>Pago a Personal</label></a></li>
+                    <li><a href="/salones"><i class="fas fa-door-closed"></i><label>Asignación de Salones</label></a></li>
+                    <li><a href="/horario"><i class="fas fa-clock"></i><label>Asignación de Horarios</label></a></li>
+                    <li><a href="/formsalarios"><i class="fas fa-coins"></i><label>Pago de Salario</label></a></li>
+                    <li><a href="/crearUsuario"><i class="fas fa-user-plus"></i><label>Crear Usuario</label></a></li>
+                    <br><a class="logout" href="{{ url_for('logoutt') }}">Logout</a>
+                </ul> <span class="cross-icon"><i class="fas fa-times"></i></span>
+                <br>
+            </div>
+            <div class="backdrop"></div>
+            <div class="content">
+                <header>
+                    <h3 style="color: #0092ff;">{{ current_user.nombre }} </h3>  <a href="/inicioadmin" style="margin-right: 100px; text-decoration: none; color: #001629;"><i class="fas fa-home"></i> Inicio</a>
+                </header>
+            <div class="content-data"> 
+              <form class="login-form" action="/trabajadores2" method="POST">
+                {% with messages = get_flashed_messages() %}
+        
+                {% if messages %}
+                <br />
+                {% for message in messages %}
+                <div class="alert alert-primary alert-dismissible" role="alert">
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    
+                </div>
+                {% endfor %}
+                {% endif %}
+        
+                {% endwith %}
+                <h1>Añadir Trabajador</h1>
+                <div class="form-floating">
+                  <label for="dpi">DPI</label>
+                  <input type="text" class="form-control" id="dpi" name="dpi" placeholder="DPI" required>
+                </div>
+                <div class="form-floating">
+                  <label for="nombres">Nombres</label>
+                  <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres" required>
+                </div>
+                <div class="form-floating">
+                  <label for="apellidos">Apellidos</label>
+                  <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" required>                 
+                </div>
+                <div class="form-floating">
+                  <select class="custom-select" name="cargo" placeholder="Cargo" id="cargo" required>
+                    <option value="" disabled selected>Cargo</option>
+                    <option value="Coordinador">Coordinador</option>
+                    <option value="Maestro">Maestro</option>
+                    <option value="Secretario">Secretario</option>
+                    <option value="Director">Director</option>
+                    <option value="Contador">Contador</option>
+                  </select>
+                </div>
+                <div class="form-floating">
+                  <label for="salario">Salario</label>
+                  <input type="number" class="form-control" name="salario" placeholder="Salario" required>
+                </div>
+                <div class="form-floating">
+                  <label for="metodo_de_pago">Metodo de Pago</label>
+                  <input type="text" class="form-control" name="metodo_de_pago" placeholder="Metodo de Pago" required>
+                </div>
+                <div class="form-floating">
+                  <label for="bonus">Bonus</label>
+                  <input type="number" class="form-control" name="bonus" placeholder="Bonus" required>
+                </div>
+                <div class="form-floating">
+                  <label for="fecha_contratacion">Fecha de Contratacion</label>
+                  <input type="date" class="form-control" name="fecha_contratacion" placeholder="fecha_contratacion" required>
+                </div>
+                <div class="form-floating">
+                  <label for="fecha_pago">Fecha de Pago</label>
+                  <input type="date" class="form-control" name="fecha_pago" placeholder="fecha_pago" required>
+                </div>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="agregar" type="submit">Añadir Trabajador</button>
+                <button class="ver" onclick="window.location.href='/trabajadores3'">Ver Trabajadores</button>
+              </form>
+				  </div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+{% endblock %}

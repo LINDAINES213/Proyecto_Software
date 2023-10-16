@@ -1,8 +1,9 @@
-__pycache__
+__pycache__/*
 config.py
 venv/
-*.pyc
-
+*.pyc*
+*.cpython-311.pyc*
+*.cpython*
 
 # Editor directories and files
 .vscode/*

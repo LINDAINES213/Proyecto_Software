@@ -5,6 +5,7 @@ from flask_login import LoginManager, login_required, login_user, logout_user
 from flask_cors import CORS
 from dotenv import load_dotenv
 
+
 ################## Funcionalidades para Coordinador ###################
 from models.entities.User import User
 from models.entities.UserS import UserS
