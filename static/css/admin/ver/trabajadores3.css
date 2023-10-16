@@ -27,7 +27,7 @@ th {
 .tabla tr:nth-child(even) {
 	background-color: #f9f9f9;
 }
-		
+
 /* Estilo para el texto del encabezado */
 .tabla th span {
 	font-weight: bold;
@@ -52,7 +52,7 @@ th {
 table tr:nth-child(even) {
 	background-color: #f9f9f9;
 }
-    
+
 /* Estilo para el texto del encabezado */
 table th span {
     font-weight: bold;

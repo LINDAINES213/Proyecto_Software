@@ -1,32 +1,41 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="es">
+
+<head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/iniciodirector.css') }}">
-  </head>
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/inicioadmin.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
 <body>
-  {% extends './base.html' %}
-  {% block title %}Inicio{% endblock %}
-  {% block body %}
-  <div class="content">
-    <h2>Portal de Servicios Electrónicos</h2>
-    <h3>Bienvenido {{ current_user.nombre }}</h3>
-    <form action="/iniciodirector" method="GET">
-      <div class="sidebar">
-        <h1>Menú</h1>
-        <ul>
-          <li><a href="/formcolegiaturas">Pago de Colegiatura</a></li>
-          <li><a href="/formsalarios">Pago de Salario</a></li>
-          <li><a href="/pagoPD">Pago de Personal</a></li>
-          <li><a href="/ciruclares">Circulares</a></li>
-          <li><a href="/calificaciones">Calificaciones</a></li>        
-          <br>
-          <a class="btn btn-secondary" style="background-color: white; color:black; margin-left: 30%; text-align: center;" href="{{ url_for('logoutt') }}">Logout</a>
-        </ul>
-      </div>
-    </form>
-  </div>
+    {% block body %}
+    <div class="menu-wrapper" action="/iniciodirector" method="GET">
+        <div class="sidebar-header">
+            <div class="sideBar">
+                <h1 style="text-align: center;">Menu</h1>
+                <ul>
+                    <li><a href="/formcolegiaturas"><i class="fas fa-money-bill"></i><label>Pago de Colegiatura</label></a></li>
+                    <li><a href="/formsalarios"><i class="fas fa-money-bill-wave"></i><label>Pago de Salario</label></a></li>
+                    <li><a href="/pagoPD"><i class="fas fa-money-check"></i><label>Pago de Personal</label></a></li>
+                    <li><a href="/ciruclares"><i class="fas fa-file"></i><label>Circulares</label></a></li>
+                    <li><a href="/calificaciones"><i class="fas fa-graduation-cap"></i><label>Calificaciones</label></a></li><br>
+                    <a class="logout" href="{{ url_for('logoutt') }}">Logout</a>
+                </ul> <span class="cross-icon"><i class="fas fa-times"></i></span>
+                <br>
+
+            </div>
+            <div class="backdrop"></div>
+            <div class="content">
+                <header>
+                    <h3 style="color: #0092ff;">{{ current_user.nombre }} </h3>
+                </header>
+                <div class="content-data"> </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 {% endblock %}

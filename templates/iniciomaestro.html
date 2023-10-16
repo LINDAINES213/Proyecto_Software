@@ -1,30 +1,40 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="es">
+
+<head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/iniciomaestro.css') }}">
-  </head>
-  <body>
-    {% extends './base.html' %}
-    {% block title %}Home{% endblock %}
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/inicioadmin.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
     {% block body %}
-    <div class="content">
-      <h2>Portal de Servicios Electrónicos</h2>
-      <h3>Bienvenido {{ current_user.nombre }}</h3>
-      <form action="/iniciomaestro" method="GET">
-        <div class="sidebar">
-          <h1>Menu</h1>
-          <ul>
-            <li><a href="/vercirculares">Circulares</a></li>
-            <li><a href="/formsalarios">Pago de Salario</a></li>
-            <li><a href="/horario">Horario</a></li>
-            <li><a href="/cursosI">Cursos a Impartir</a></li>
-            <br>
-            <a class="btn btn-secondary" style="background-color: white; color:black; margin-left: 30%; text-align: center;" href="{{ url_for('logoutt') }}">Logout</a>      </ul>
+    <div class="menu-wrapper" action="/iniciomaestro" method="GET">
+        <div class="sidebar-header">
+            <div class="sideBar">
+                <h1 style="text-align: center;">Menu</h1>
+                <ul>
+                    <li><a href="/vercirculares"><i class="fas fa-file-alt"></i><label>Circulares</label></a></li>
+                    <li><a href="/formsalarios"><i class="fas fa-money-bill-wave"></i><label>Pago de Salario</label></a></li>
+                    <li><a href="/horario"><i class="fas fa-clock"></i><label>Horario</label></a></li>
+                    <li><a href="/cursosI"><i class="fas fa-chalkboard-teacher"></i><label>Cursos a Impartir</label></a></li>
+                    <br><a class="logout" href="{{ url_for('logoutt') }}">Logout</a>
+                </ul> <span class="cross-icon"><i class="fas fa-times"></i></span>
+                <br>
+
+            </div>
+            <div class="backdrop"></div>
+            <div class="content">
+                <header>
+                    <h3 style="color: #0092ff;">{{ current_user.nombre }} </h3>
+                </header>
+                <div class="content-data"> </div>
+            </div>
         </div>
-      </form>
     </div>
-  </body>
+</body>
 </html>
 {% endblock %}
