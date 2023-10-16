@@ -12,10 +12,10 @@
 
 .agregar{
   padding: 10px 20px; /* Ajusta el relleno según tus necesidades */
-  background-color: #00ffaa; /* Color de fondo del botón */
+  background-color: #4edd52; /* Color de fondo del botón */
   color: #fff; /* Color del texto */
   border: none; /* Elimina el borde */
-  border-radius: 15px; /* Radio de las esquinas para hacerlo redondeado */
+  border-radius: 5px; /* Radio de las esquinas para hacerlo redondeado */
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -30,7 +30,7 @@
 }
 
 .agregar:hover {
-  background-color: #1dd799; /* Color de fondo al pasar el mouse */
+  background-color: rgb(29, 188, 23); /* Color de fondo al pasar el mouse */
 }
 
 .ver{
@@ -39,7 +39,7 @@
   background-color: #0092ff; /* Color de fondo del botón */
   color: #fff; /* Color del texto */
   border: none; /* Elimina el borde */
-  border-radius: 15px; /* Radio de las esquinas para hacerlo redondeado */
+  border-radius: 5px; /* Radio de las esquinas para hacerlo redondeado */
   cursor: pointer;
   text-align: center;
   text-decoration: none;

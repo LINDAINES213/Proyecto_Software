@@ -1,58 +1,86 @@
-body {
-	margin: 15px;
-	padding: 0;
-	font-family: Arial, sans-serif;
-}
-
 table {
-	border-collapse: collapse;
-	border: #000;
-	width: 100%;
+    border-collapse: collapse;
+    width: 100%;
 }
 
 th, td {
-	border: 1px solid #dddddd;
-	padding: 8px;
-	text-align: center;
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: center;
+}
+
+td{
+	color: #001629;
 }
 
 th {
-	background-color: #4285F4;
-	color: #fff;
-	border: 1px solid #fff;
-	padding: 8px;
-	text-align: center;
+    background-color: #0092ff;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 8px;
+    text-align: center;
 }
+
+.titulo-tabla{
+	margin-bottom: 14px;
+	color: #001629;
+}
+
+/* Redondear los bordes exteriores de la tabla */
+table th:first-child {
+    border-top-left-radius: 10px;
+}
+
+table th:last-child {
+    border-top-right-radius: 10px;
+}
+
+table td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+table td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
 
 .tabla tr:nth-child(even) {
 	background-color: #f9f9f9;
 }
-		
+
 /* Estilo para el texto del encabezado */
-.tabla th span {
+th span {
 	font-weight: bold;
 }
 
+
 .edit-button {
-	padding: 4px 8px;
-	background-color: #4CAF50;
+	padding: 10px 15px;
+	background-color: #4edd52;
 	color: white;
 	border: none;
 	cursor: pointer;
+	border-radius: 5px;
+	font-size: 14px;
+	font-family: "Segoe UI Emoji", "Noto Emoji", sans-serif;
+	margin: 3px;
 }
 
 .delete-button {
-	padding: 4px 8px;
-	background-color: #f44336;
+	margin: 3px;
+	padding: 10px 15px;
+	background-color: #ff0000;
 	color: white;
 	border: none;
 	cursor: pointer;
+	border-radius: 5px;
+	font-size: 14px;
 }
 
 table tr:nth-child(even) {
 	background-color: #f9f9f9;
 }
-    
+
 /* Estilo para el texto del encabezado */
 table th span {
     font-weight: bold;
@@ -62,7 +90,7 @@ table th span {
 	display: inline-block;
 	padding: 10px 20px;
 	font-size: 16px;
-	background-color: #4285F4; /* Color de fondo del botón */
+	background-color: #0092ff; /* Color de fondo del botón */
 	color: #fff; /* Color del texto */
 	border: none;
 	border-radius: 5px; /* Bordes redondeados */

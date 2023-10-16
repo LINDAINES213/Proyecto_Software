@@ -7,12 +7,11 @@
     <title>Inicio</title>
     <link rel='stylesheet' href="{{ url_for('static', filename='css/inicioadmin.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
     {% block body %}
-    <div class="menu-wrapper" action="/inicioadmin" method="GET">
+    <div class="menu-wrapper">
         <div class="sidebar-header">
             <div class="sideBar">
                 <h1 style="text-align: center;">Menu</h1>
@@ -32,17 +31,17 @@
                     <br><a class="logout" href="{{ url_for('logoutt') }}">Logout</a>
                 </ul> <span class="cross-icon"><i class="fas fa-times"></i></span>
                 <br>
-
             </div>
             <div class="backdrop"></div>
             <div class="content">
                 <header>
-                    <h3 style="color: #0092ff;">{{ current_user.nombre }} </h3>  <a href="/inicioadmin" style="margin-right: 100px; text-decoration: none; color: #001629;"><i class="fas fa-home"></i> Inicio</a>
+                    <h3 class="nombre">{{ current_user.nombre }} </h3> <p class="inicio"> <a href="/inicioadmin"><i class="fas fa-home"></i> Inicio</a>
                 </header>
-                <div class="content-data"> </div>
-            </div>
-        </div>
-    </div>
+            <div class="content-data">  
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
 {% endblock %}

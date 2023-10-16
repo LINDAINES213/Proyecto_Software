@@ -13,6 +13,17 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+.nombre{
+	color: #0092ff; 
+	margin-left: 17px;
+}
+
+.inicio{
+	margin-right: 17px; 
+    text-decoration: none; 
+    color: #001629;
+}
+
 .sideBar {
     position: relative;
     z-index: 20;
@@ -176,6 +187,7 @@ header h1 {
     margin: 2%;
     padding: 20px;
     height: 84%;
+    border-radius: 10px;
     overflow-y: auto;
 }
 
