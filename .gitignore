@@ -1,6 +1,8 @@
 __pycache__
 config.py
 venv/
+*.pyc
+
 
 # Editor directories and files
 .vscode/*
