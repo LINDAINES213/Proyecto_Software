@@ -1,41 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-	<title>Editar Trabajador</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajadores</title>
+    <link rel="icon" href="https://www.talkinheads.net/wp-content/uploads/2023/03/multiple-users-silhouette.png" type="image/x-icon">
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/inicioadmin.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/editar/editar_trabajador.css') }}">
+
 </head>
+
 <body>
-	<h1>Editar Trabajador</h1>
-	<form action="/trabajadores2/{{ worker[0] }}/edit" method="POST">
-		<label for="dpi">DPI:</label>
-		<input type="text" id="dpi" name="dpi" value="{{ worker[0] }}" readonly>
-		<br>
-		<label for="nombres">Nombres:</label>
-		<input type="text" id="nombres" name="nombres" value="{{ worker[1] }}">
-		<br>
-		<label for="apellidos">Apellidos:</label>
-		<input type="text" id="apellidos" name="apellidos" value="{{ worker[2] }}">
-		<br>
-		<label for="cargo">Cargo:</label>
-		<input type="text" id="cargo" name="cargo" value="{{ worker[3] }}">
-		<br>
-		<label for="salario">Salario:</label>
-		<input type="number" id="salario" name="salario" value="{{ worker[4] }}">
-		<br>
-		<label for="metodo_de_pago">Método de Pago:</label>
-		<input type="text" id="metodo_de_pago" name="metodo_de_pago" value="{{ worker[5] }}">
-		<br>
-		<label for="bonus">Bonus:</label>
-		<input type="number" id="bonus" name="bonus" value="{{ worker[6] }}">
-		<br>
-		<label for="fecha_contratacion">Fecha de Contratacion:</label>
-		<input type="date" id="fecha_contratacion" name="fecha_contratacion" value="{{ worker[7] }}" readonly>
-		<br>
-		<label for="fecha_pago">Fecha de Pago:</label>
-		<input type="date" id="fecha_pago" name="fecha_pago" value="{{ worker[8] }}">
-		<br>
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Guardar</button>
-	</form>
+  {% block body %}
+  <div class="menu-wrapper">
+    <div class="sidebar-header">
+      <div class="sideBar">
+        <h1 style="text-align: center;">Menu</h1>
+        <ul>
+          <li><a href="/trabajadores"><i class="fas fa-users"></i><label>Trabajadores</label></a></li>
+          <li><a href="/maestros"><i class="fas fa-chalkboard-teacher"></i><label>Maestros</label></a></li>
+          <li><a href="/cursos"><i class="fas fa-book"></i><label>Cursos</label></a></li>
+          <li><a href="/estudiantes"><i class="fas fa-graduation-cap"></i><label>Estudiantes</label></a></li>
+          <li><a href="/grados"><i class="fas fa-award"></i><label>Grados</label></a></li>
+          <li><a href="/secciones"><i class="fas fa-columns"></i><label>Secciones</label></a></li>
+          <li><a href="/formcolegiaturas"><i class="fas fa-money-bill-wave"></i><label>Pago Colegiatura</label></a></li>
+          <li><a href="/pagoP"><i class="fas fa-hand-holding-usd"></i><label>Pago a Personal</label></a></li>
+          <li><a href="/salones"><i class="fas fa-door-closed"></i><label>Asignación de Salones</label></a></li>
+          <li><a href="/horario"><i class="fas fa-clock"></i><label>Asignación de Horarios</label></a></li>
+          <li><a href="/formsalarios"><i class="fas fa-coins"></i><label>Pago de Salario</label></a></li>
+          <li><a href="/crearUsuario"><i class="fas fa-user-plus"></i><label>Crear Usuario</label></a></li>
+          <br><a class="logout" href="{{ url_for('logoutt') }}">Logout</a>          
+        </ul> <span class="cross-icon"><i class="fas fa-times"></i></span><br>
+      </div>
+      <div class="backdrop"></div>
+      <div class="content">
+        <header>
+          <h3 class="nombre">{{ current_user.nombre }} </h3>  <a href="/inicioadmin" class="inicio"><i class="fas fa-home"></i> Inicio</a>
+        </header>
+        <div class="content-data"> 
+			<form action="/trabajadores2/{{ worker[0] }}/edit" method="POST">
+            {% with messages = get_flashed_messages() %}
+        
+            {% if messages %}
+            <br />
+            {% for message in messages %}
+            <div class="alert alert-primary alert-dismissible" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                
+            </div>
+            {% endfor %}
+            {% endif %}
+    
+            {% endwith %}
+            <div class="form">
+              <div class="title"><i class="fas fa-users"></i> Agregar trabajador</div>                
+              <div class="input-container ic1">
+                <input type="text" class="input" id="dpi" name="dpi" value="{{ worker[0] }}" placeholder="" readonly>
+                <div class="cut  cut-short"></div>
+                <label for="dpi" class="iLabel">DPI</label>
+              </div>
+            <div class="column">
+              <div class="input-container ic2">
+                <input type="text" class="input" id="nombres" name="nombres" value="{{ worker[1] }}" placeholder="" required>
+                <div class="cut cut-short"></div>
+                <label for="nombres" class="iLabel">Nombres</label>
+              </div>
+            
+              <div class="input-container ic2">
+                <input type="text" class="input" id="apellidos" name="apellidos" value="{{ worker[2] }}" placeholder="" required>
+                <div class="cut  cut-short"></div>
+                <label for="apellidos" class="iLabel">Apellidos</label>
+              </div>
+            </div>
+            <div class="column">
+              <div class="input-container ic2">
+                <input class="input" id="cargo" name="cargo" placeholder="" value="{{ worker[3] }}" required>
+				<div class="cut  cut-short"></div>
+                <label for="cargo" class="iLabel">Cargo</label>
+              </div>
+            
+              <div class="input-container ic2">
+                <input type="number" class="input" name="salario" value="{{ worker[4] }}" placeholder="" required>
+                <div class="cut cut-short"></div>
+                <label for="salario" class="iLabel">Salario</label>
+              </div>
+            </div>
+          
+            <div class="column">
+              <div class="input-container ic2">
+                <input type="text" class="input" id="metodo_de_pago" name="metodo_de_pago" value="{{ worker[5] }}" placeholder="" required>
+                <div class="cut"></div>
+                <label for="metodo_de_pago" class="iLabel">Metodo de Pago</label>
+              </div>
+            
+              <div class="input-container ic2">
+                <input type="number" class="input" id="bonus" name="bonus" placeholder="" value="{{ worker[6] }}" required>
+                <div class="cut cut-short"></div>
+                <label for="bonus" class="iLabel">Bonus</label>
+              </div>
+            </div>
+          
+            
+            <div class="column">
+              <div class="input-container ic2">
+                <input type="date" class="input" id="fecha_contratacion" name="fecha_contratacion" value="{{ worker[7] }}" placeholder="" readonly>
+                <div class="cut"></div>
+                <label for="fecha_contratacion" class="iLabel" style="color:#8282bf;">Fecha de Contratacion</label>
+              </div>
+            
+              <div class="input-container ic2">
+                <input type="date" class="input" id="fecha_pago" name="fecha_pago" placeholder="" value="{{ worker[8] }}" required>
+                <div class="cut"></div>
+                <label for="fecha_pago" class="iLabel" style="color:#8282bf;">Fecha de Pago</label>
+              </div>
+            </div>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="submit" style="background-color:#35c43a;" type="submit">Guardar</button>
+            </div>
+              </form>
+				  </div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
+{% endblock %}

@@ -5,9 +5,9 @@ function editWorker(dpi) {
 
 function deleteWorker(dpi) {
     // Enviar una solicitud de eliminación del trabajador con el ID
-    if (confirm("¿Estás seguro de que deseas eliminar este trabajador?")) {
-        window.location.href = '/trabajadores2/' + dpi + '/delete';
-    }
+    
+    window.location.href = '/trabajadores2/' + dpi + '/delete';
+
 }
 
 // Función para descargar la tabla en formato CSV
@@ -49,3 +49,11 @@ function descargarCSV() {
     // Eliminar el enlace temporal
     document.body.removeChild(link);
 }
+
+window.onbeforeunload = function(event) {
+    // Verificar si la ruta actual es la que deseas redirigir
+    if (window.location.pathname === "/trabajadores3") {
+      // Redirigir a la ruta deseada
+      window.location.href = "/inicioadmin";
+    }
+  };
