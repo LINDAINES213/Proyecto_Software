@@ -40,7 +40,7 @@
                     <h3 class="nombre">{{ current_user.nombre }} </h3>  <a href="/inicioadmin" class="inicio"><i class="fas fa-home"></i> Inicio</a>
                 </header>
             <div class="content-data"> 
-              <form class="login-form" action="/trabajadores2" method="POST">
+              <form action="/trabajadores2" method="POST">
                 {% with messages = get_flashed_messages() %}
         
                 {% if messages %}
@@ -55,52 +55,77 @@
                 {% endif %}
         
                 {% endwith %}
-                <h1>Añadir Trabajador</h1>
-                <div class="form-floating">
-                  <label for="dpi">DPI</label>
-                  <input type="text" class="form-control" id="dpi" name="dpi" placeholder="DPI" required>
+                <div class="form">
+                  <div class="title"><i class="fas fa-users"></i> Agregar trabajador</div>                
+                  <div class="input-container ic1">
+                    <input type="text" class="input" id="dpi" name="dpi" placeholder="" required>
+                    <div class="cut  cut-short"></div>
+                    <label for="dpi" class="iLabel">DPI</label>
+                  </div>
+                <div class="column">
+                  <div class="input-container ic2">
+                    <input type="text" class="input" id="nombres" name="nombres" placeholder="" required>
+                    <div class="cut cut-short"></div>
+                    <label for="nombres" class="iLabel">Nombres</label>
+                  </div>
+                
+                  <div class="input-container ic2">
+                    <input type="text" class="input" id="apellidos" name="apellidos" placeholder="" required>
+                    <div class="cut  cut-short"></div>
+                    <label for="apellidos" class="iLabel">Apellidos</label>
+                  </div>
                 </div>
-                <div class="form-floating">
-                  <label for="nombres">Nombres</label>
-                  <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres" required>
+                <div class="column">
+                  <div class="input-container ic2">
+                    <select class="input" id="cargo" name="cargo" placeholder="" required>
+                      <option value="" style="color:#8282bf;" disabled selected>Cargo</option>
+                      <option value="Coordinador">Coordinador</option>
+                      <option value="Maestro">Maestro</option>
+                      <option value="Secretario">Secretario</option>
+                      <option value="Director">Director</option>
+                      <option value="Contador">Contador</option>
+                    </select>
+                  </div>
+                
+                  <div class="input-container ic2">
+                    <input type="number" class="input" name="salario" placeholder="" required>
+                    <div class="cut cut-short"></div>
+                    <label for="salario" class="iLabel">Salario</label>
+                  </div>
                 </div>
-                <div class="form-floating">
-                  <label for="apellidos">Apellidos</label>
-                  <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" required>                 
+              
+                <div class="column">
+                  <div class="input-container ic2">
+                    <input type="text" class="input" id="metodo_de_pago" name="metodo_de_pago" placeholder="" required>
+                    <div class="cut"></div>
+                    <label for="metodo_de_pago" class="iLabel">Metodo de Pago</label>
+                  </div>
+                
+                  <div class="input-container ic2">
+                    <input type="number" class="input" id="bonus" name="bonus" placeholder="" required>
+                    <div class="cut cut-short"></div>
+                    <label for="bonus" class="iLabel">Bonus</label>
+                  </div>
                 </div>
-                <div class="form-floating">
-                  <select class="custom-select" name="cargo" placeholder="Cargo" id="cargo" required>
-                    <option value="" disabled selected>Cargo</option>
-                    <option value="Coordinador">Coordinador</option>
-                    <option value="Maestro">Maestro</option>
-                    <option value="Secretario">Secretario</option>
-                    <option value="Director">Director</option>
-                    <option value="Contador">Contador</option>
-                  </select>
-                </div>
-                <div class="form-floating">
-                  <label for="salario">Salario</label>
-                  <input type="number" class="form-control" name="salario" placeholder="Salario" required>
-                </div>
-                <div class="form-floating">
-                  <label for="metodo_de_pago">Metodo de Pago</label>
-                  <input type="text" class="form-control" name="metodo_de_pago" placeholder="Metodo de Pago" required>
-                </div>
-                <div class="form-floating">
-                  <label for="bonus">Bonus</label>
-                  <input type="number" class="form-control" name="bonus" placeholder="Bonus" required>
-                </div>
-                <div class="form-floating">
-                  <label for="fecha_contratacion">Fecha de Contratacion</label>
-                  <input type="date" class="form-control" name="fecha_contratacion" placeholder="fecha_contratacion" required>
-                </div>
-                <div class="form-floating">
-                  <label for="fecha_pago">Fecha de Pago</label>
-                  <input type="date" class="form-control" name="fecha_pago" placeholder="fecha_pago" required>
+              
+                
+                <div class="column">
+                  <div class="input-container ic2">
+                    <input type="date" class="input" id="fecha_contratacion" name="fecha_contratacion" placeholder="" required>
+                    <div class="cut"></div>
+                    <label for="fecha_contratacion" class="iLabel" style="color:#8282bf;">Fecha de Contratacion</label>
+                  </div>
+                
+                  <div class="input-container ic2">
+                    <input type="date" class="input" id="fecha_pago" name="fecha_pago" placeholder="" required>
+                    <div class="cut"></div>
+                    <label for="fecha_pago" class="iLabel" style="color:#8282bf;">Fecha de Pago</label>
+                  </div>
                 </div>
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <button class="agregar" type="submit">Añadir Trabajador</button>
-                <button class="ver" onclick="window.location.href='/trabajadores3'">Ver Trabajadores</button>
+                <button class="submit" style="background-color:#4edd52;" type="submit">Agregar Trabajador</button>
+                <button class="submit" onclick="window.location.href='/trabajadores3'">Ver Trabajadores</button>
+                </div>
               </form>
 				  </div>
 		</div>
