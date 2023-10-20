@@ -1,28 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-  <title>Inicio</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/crearUser.css') }}">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajadores</title>
+    <link rel="icon" href="https://www.talkinheads.net/wp-content/uploads/2023/03/multiple-users-silhouette.png" type="image/x-icon">
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/inicioadmin.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/crearUser.css') }}">
+  </head>
+
 <body>
-    <a href="/inicioadmin" style="font-size: 16px;margin-top: -600px; margin-right: 50px;">&#x2190 Regresar</a>
-    <h2>Usuario a Crear</h2>
-    <br>
-  <div class="container">
-    <button class="cssbuttons-io" onclick="window.location.href='/crearEstudiante'">
-      <span>
-        <path fill="none" d="M0 0h24v24H0z"></path>
-        <path fill="currentColor" d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"></path>
-        Estudiante
-      </span>
-    </button>
-    <button class="cssbuttons-io" onclick="window.location.href='/crearTrabajador'">
-      <span>
-        <path fill="none" d="M0 0h24v24H0z"></path>
-        <path fill="currentColor" d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"></path>
-        Trabajador
-      </span>
-    </button>
-  </div>
+  {% block body %}
+  <div class="menu-wrapper">
+    <div class="sidebar-header">
+      <div class="sideBar">
+        <h1 style="text-align: center;">Menu</h1>
+        <ul>
+          <li><a href="/trabajadores"><i class="fas fa-users"></i><label>Trabajadores</label></a></li>
+          <li><a href="/maestros"><i class="fas fa-chalkboard-teacher"></i><label>Maestros</label></a></li>
+          <li><a href="/cursos"><i class="fas fa-book"></i><label>Cursos</label></a></li>
+          <li><a href="/estudiantes"><i class="fas fa-graduation-cap"></i><label>Estudiantes</label></a></li>
+          <li><a href="/grados"><i class="fas fa-award"></i><label>Grados</label></a></li>
+          <li><a href="/secciones"><i class="fas fa-columns"></i><label>Secciones</label></a></li>
+          <li><a href="/formcolegiaturas"><i class="fas fa-money-bill-wave"></i><label>Pago Colegiatura</label></a></li>
+          <li><a href="/pagoP"><i class="fas fa-hand-holding-usd"></i><label>Pago a Personal</label></a></li>
+          <li><a href="/salones"><i class="fas fa-door-closed"></i><label>Asignación de Salones</label></a></li>
+          <li><a href="/horario"><i class="fas fa-clock"></i><label>Asignación de Horarios</label></a></li>
+          <li><a href="/formsalarios"><i class="fas fa-coins"></i><label>Pago de Salario</label></a></li>
+          <li><a href="/crearUsuario"><i class="fas fa-user-plus"></i><label>Crear Usuario</label></a></li>
+          <br><a class="logout" href="{{ url_for('logoutt') }}">Logout</a>          
+        </ul> <span class="cross-icon"><i class="fas fa-times"></i></span><br>
+      </div>
+      <div class="backdrop"></div>
+      <div class="content">
+        <header>
+          <h3 class="nombre">{{ current_user.nombre }} </h3>  <a href="/inicioadmin" class="inicio"><i class="fas fa-home"></i> Inicio</a>
+        </header>
+        <div class="content-data"> 
+          <h2>Usuario a Crear</h2>
+          <br>
+        <div class="container">
+          <button class="cssbuttons-io" onclick="window.location.href='/crearEstudiante'">
+            <span>
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path fill="currentColor" d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"></path>
+              Estudiante
+            </span>
+          </button>
+          <button class="cssbuttons-io" onclick="window.location.href='/crearTrabajador'">
+            <span>
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path fill="currentColor" d="M24 12l-5.657 5.657-1.414-1.414L21.172 12l-4.243-4.243 1.414-1.414L24 12zM2.828 12l4.243 4.243-1.414 1.414L0 12l5.657-5.657L7.07 7.757 2.828 12zm6.96 9H7.66l6.552-18h2.128L9.788 21z"></path>
+              Trabajador
+            </span>
+          </button>
+        </div>
+				</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
+{% endblock %}
