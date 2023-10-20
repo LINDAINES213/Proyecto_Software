@@ -66,7 +66,8 @@ def salarios():
 @login_required
 def salario(dpi):
     with connection.cursor() as cursor:
-        cursor.execute("""SELECT curso.id_curso, curso.curso, maestros.dpi, maestros.nombre, curso.hora_inicio, curso.hora_fin FROM curso JOIN maestros on curso.maestro = maestros.dpi
+        cursor.execute("""SELECT horarios.id_curso, curso.curso, maestros.dpi, maestros.nombre, horarios.dia, horarios.hora_inicio, horarios.hora_fin FROM curso 
+                       join maestros on curso.maestro = maestros.dpi join horarios on curso.id_curso = horarios.id_curso
                        WHERE maestros.dpi = %s""",(dpi,))
         rows = cursor.fetchall()
         return render_template('maestro/cursosimpartir2.html', rows=rows)
