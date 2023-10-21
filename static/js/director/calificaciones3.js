@@ -14,13 +14,13 @@ function descargarCSV() {
         const rowData = [];
         
         // Obtener los títulos de las columnas (encabezados) excluyendo la última columna
-        const headers = Array.from(row.querySelectorAll("th")).slice(0, -1);
+        const headers = Array.from(row.querySelectorAll("th")).slice(0);
         for (const header of headers) {
             rowData.push(header.innerText);
         }
   
         // Obtener los datos de las celdas excluyendo la última columna
-        const cells = Array.from(row.querySelectorAll("td")).slice(0, -1);
+        const cells = Array.from(row.querySelectorAll("td")).slice(0);
         for (const cell of cells) {
             rowData.push(cell.innerText);
         }

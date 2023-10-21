@@ -3,6 +3,7 @@
 <head>
 	<title>Calificaciones</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/director/calificaciones3.css') }}">
+  <script src="{{ url_for('static', filename='js/director/calificaciones3.js') }}"></script>
 </head>
 <body>
 	<a href="/inicioestudiante" style="font-size: 16px;margin-left: 5px;margin-bottom: 50px;">&#x2190 Regresar</a>
@@ -51,5 +52,7 @@
 			{% endfor %}
 		</tbody>
 	</table>
+  <br>
+	<button class="download-button" onclick="descargarCSV()">Descargar CSV</button>
 </body>
 </html>
