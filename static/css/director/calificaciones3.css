@@ -48,3 +48,27 @@
     table th span {
       font-weight: bold;
     }
+
+	.download-button {
+		display: inline-block;
+		padding: 10px 20px;
+		font-size: 16px;
+		background-color: #0092ff; /* Color de fondo del botón */
+		color: #fff; /* Color del texto */
+		border: none;
+		border-radius: 5px; /* Bordes redondeados */
+		cursor: pointer;
+		text-align: center;
+		text-decoration: none;
+		transition: background-color 0.3s ease; /* Transición de color de fondo */
+	}
+	
+	  /* Estilo al pasar el cursor por encima del botón */
+	.download-button:hover {
+		background-color: #0056b3; /* Cambia el color de fondo al pasar el cursor */
+	}
+	
+	  /* Estilo al hacer clic en el botón */
+	.download-button:active {
+		background-color: #004292; /* Cambia el color de fondo al hacer clic */
+	}

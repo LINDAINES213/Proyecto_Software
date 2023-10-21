@@ -33,7 +33,7 @@ function descargarCSV() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "cursosaimpartir.csv");
+    link.setAttribute("download", "calificaciones.csv");
     document.body.appendChild(link);
   
     // Simular el clic en el enlace para iniciar la descarga
