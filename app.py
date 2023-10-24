@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash, url_for, Response, session
+from flask import Flask, render_template, request, redirect, flash, url_for
 from database.db import get_connection
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_required, login_user, logout_user
@@ -42,7 +42,7 @@ from routes.perfil_contador.pagoC import colegiatura_bp
 from routes.perfil_contador.salarios import salarios_bp
 #######################################################################
 
-################## Funcionalidades para Estudiantes/Padres de Familia ###################
+######## Funcionalidades para Estudiantes/Padres de Familia ############
 from routes.perfil_estudiante.circulares import circularesEe_bp
 from routes.perfil_estudiante.calificacionesE import calificacionesE_bp
 #######################################################################
@@ -134,7 +134,7 @@ def inicioestudiante():
 def load_user(id):
     return ModelUser.get_by_idE(connection, id) or ModelUser.get_by_id(connection, id) 
 
-def get_cargo_from_database(dpi):
+'''def get_cargo_from_database(dpi):
     try:
         with connection.cursor() as cursor:
             cursor.execute("""SELECT cargo FROM usuarios.user
@@ -149,14 +149,14 @@ def get_cargo_from_database(dpi):
 
     except Exception as ex:
         print(f"Error al obtener el cargo del usuario: {ex}")
-        return None
+        return None'''
 
 @app.route('/logint', methods=['GET', 'POST'])
 def logint():
     if request.method == 'POST':
         dpi = request.form['dpi']
         contrasena = request.form['contrasena']
-        cargo = get_cargo_from_database(dpi)
+        #cargo = get_cargo_from_database(dpi)
         user = User(0, dpi, contrasena)
         logged_user = ModelUser.login(connection, user)
         if logged_user != None:
@@ -181,9 +181,6 @@ def logint():
     
     else:
         return render_template('auth/Trabajadores/loginT.html')
-    
-
-
     
 @app.route('/logine', methods=['GET', 'POST'])
 def logine():

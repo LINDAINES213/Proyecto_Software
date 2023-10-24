@@ -4,6 +4,7 @@ venv/
 *.pyc*
 *.cpython-311.pyc*
 *.cpython*
+node_modules/
 
 # Editor directories and files
 .vscode/*

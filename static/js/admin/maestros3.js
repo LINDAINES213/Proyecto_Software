@@ -1,8 +1,7 @@
 function eliminar_maestro(dpi) {
     // Enviar una solicitud de eliminación del trabajador con el ID
-    if (confirm("¿Estás seguro de que deseas eliminar este trabajador?")) {
-        window.location.href = '/maestros2/' + dpi + '/delete';
-    }
+    window.location.href = '/maestros2/' + dpi + '/delete';
+    
 }
 
 // Función para descargar la tabla en formato CSV

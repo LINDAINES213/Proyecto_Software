@@ -1,5 +1,5 @@
-from flask import Blueprint, redirect, render_template, request, flash, url_for, send_file
-from flask_login import login_required, logout_user
+from flask import Blueprint, render_template, request, flash
+from flask_login import login_required
 from database.db import get_connection
 
 
@@ -7,11 +7,13 @@ connection = get_connection()
 crearEstudiante_bp = Blueprint('crearEstudiante_blueprint', __name__)
 
 @crearEstudiante_bp.route('/crearUsuario')
+@login_required
 def inicio():
     return render_template('admin/crearuser.html')
 
 
 @crearEstudiante_bp.route('/crearEstudiante', methods=['GET','POST'])
+@login_required
 def crearEstudiante():
     if request.method == 'POST':
         id_estudiante = request.form['id_estudiante']

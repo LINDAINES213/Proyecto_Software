@@ -39,7 +39,7 @@
                     <h3 class="nombre">{{ current_user.nombre }} </h3> <a href="/inicioadmin" class="inicio"><i class="fas fa-home"></i> Inicio</a>
                 </header>
               <div class="content-data"> 
-                <form class="login-form" action="/maestros2" method="POST">
+                <form action="/maestros2" method="POST">
                 {% with messages = get_flashed_messages() %}
 
                 {% if messages %}
@@ -53,17 +53,21 @@
                 {% endif %}
 
                 {% endwith %}
-                <h1>Añadir Maestro</h1>
-                <div class="form-floating">
-                  <label for="dpi">DPI</label>
-                  <input type="text" class="form-control" id="dpi" name="dpi" placeholder="DPI" required>
+                <div class="form">
+                <div class="title"><i class="fas fa-chalkboard-teacher"></i> Agregar maestro</div>
+                <div class="input-container ic1">
+                  <input type="text" class="input" id="dpi" name="dpi" placeholder="" required>
+                  <div class="cut  cut-short"></div>
+                  <label for="dpi" class="iLabel">DPI</label>
                 </div>
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <button class="agregar" type="submit">Añadir Maestro</button>
-                <button class="ver" onclick="window.location.href='/maestros3'">Ver Maestros</button>
+                <button class="submit" style="background-color:#35c43a;" type="submit">Añadir maestro</button>
+                <button class="submit" onclick="window.location.href='/maestros3'">Ver maestros</button>
               </div>
+            </form>
 		        </div>
 	      </div>
+    </div>
     </div>
   </body>
 </html>

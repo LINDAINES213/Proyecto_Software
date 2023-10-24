@@ -7,10 +7,12 @@ connection = get_connection()
 crearUsuario_bp = Blueprint('crearUsuario_blueprint', __name__)
 
 @crearUsuario_bp.route('/crearUsuario')
+@login_required
 def inicio():
     return render_template('admin/crearuser.html')
 
 @crearUsuario_bp.route('/crearTrabajador', methods=['GET','POST'])
+@login_required
 def crearTrabajador():
     if request.method == 'POST':
         dpi = request.form['dpi']
@@ -38,6 +40,7 @@ def crearTrabajador():
     
 
 @crearUsuario_bp.route('/crearEstudiante', methods=['GET','POST'])
+@login_required
 def crearEstudiante():
     if request.method == 'POST':
         id_estudiante = request.form['id_estudiante']
@@ -62,20 +65,3 @@ def crearEstudiante():
                 return render_template('admin/crearEstudiante.html')
     else:
         return render_template('admin/crearEstudiante.html')
-
-
-
-    '''if request.method == 'POST':
-        dpi = request.form['dpi']
-        contrasena = request.form['contrasena']
-
-        with connection.cursor() as cursor:
-            cursor.execute("""INSERT INTO usuarios.user (dpi, contrasena)
-                                VALUES (%s, %s)""", (dpi, contrasena))
-            connection.commit()
-        cursor.close()
-        return render_template('confirmaciones.html')
-    else:
-        return render_template('admin/crearUsuario.html')'''
-    
-    
