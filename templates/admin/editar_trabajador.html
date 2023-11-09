@@ -128,3 +128,19 @@
 </body>
 </html>
 {% endblock %}
+
+
+<h1>Editar Curso</h1>
+	<form action="/cursos2/{{ cur[0] }}/edit" method="POST">
+		<label for="id_curso">ID Curso:</label>
+		<input type="text" id="id_curso" name="id_curso" value="{{ cur[0] }}" readonly>
+		<br>
+		<label for="curso">Curso:</label>
+		<input type="text" id="curso" name="curso" value="{{ cur[1] }}">
+		<br>
+		<label for="maestro">Maestro:</label>
+		<input type="text" id="maestro" name="maestro" value="{{ cur[2] }}" readonly>
+		<br>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Guardar</button>
+	</form>
