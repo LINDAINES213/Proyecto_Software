@@ -57,18 +57,18 @@
 						</tr>
 					</thead>
 					<tbody>
-						{% for row in rows %}
+						{% for row2 in rows2 %}
 							<tr>
-								<td>{{ row[0] }}</td>
-								<td>{{ row[1] }}</td>
-								<td>{{ row[2] }}</td>
-								<td>{{ row[3] }}</td>
-								<td>{{ row[4] }}</td>
-								<td>{{ row[5] }}</td>
-								<td>{{ row[6] }}</td>
+								<td>{{ row2[0] }}</td>
+								<td>{{ row2[1] }}</td>
+								<td>{{ row2[2] }}</td>
+								<td>{{ row2[3] }}</td>
+								<td>{{ row2[4] }}</td>
+								<td>{{ row2[5] }}</td>
+								<td>{{ row2[6] }}</td>
 								<td>
-									<button class="edit-button" onclick="editarEstudiante('{{ row[0] }}')"><i class="fas fa-pencil-alt"></i></button>
-									<button class="delete-button" onclick="eliminarEstudiante('{{ row[0] }}')"><i class="fas fa-trash"></i></button>
+									<button class="edit-button" onclick="editarEstudiante('{{ row2[0] }}')"><i class="fas fa-pencil-alt"></i></button>
+									<button class="delete-button" onclick="eliminarEstudiante('{{ row2[0] }}')"><i class="fas fa-trash"></i></button>
 								</td>
 							</tr>
 						{% endfor %}

@@ -23,18 +23,18 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for row in rows2 %}
+			{% for row2 in rows2 %}
 				<tr>
-					<td>{{ row[0] }}</td>
-					<td>{{ row[1] }}</td>
-					<td>{{ row[2] }}</td>
-					<td>{{ row[3] }}</td>
-					<td>{{ row[4] }}</td>
-					<td>{{ row[5] }}</td>
-					<td>{{ row[6] }}</td>
+					<td>{{ row2[0] }}</td>
+					<td>{{ row2[1] }}</td>
+					<td>{{ row2[2] }}</td>
+					<td>{{ row2[3] }}</td>
+					<td>{{ row2[4] }}</td>
+					<td>{{ row2[5] }}</td>
+					<td>{{ row2[6] }}</td>
 					<td>
-						<button class="pago-realizado" onclick="pagoRealizado(this)">Pagado</button>
-						<button class="pago-pendiente" onclick="pagoPendiente(this)">Pendiente</button>
+						<button class="pago-realizado" onclick="pagoRealizado2(this)">Pagado</button>
+						<button class="pago-pendiente" onclick="pagoPendiente2(this)">Pendiente</button>
 					</td>
 				</tr>
 			{% endfor %}

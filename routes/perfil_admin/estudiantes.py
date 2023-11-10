@@ -100,5 +100,5 @@ def estudiantes3():
     with connection.cursor() as cursor:
         cursor.execute("""SELECT id_estudiante, nombres, apellidos, fecha_nacimiento, edad, grado, seccion FROM estudiantes
                         ORDER BY id_estudiante ASC""")
-        rows = cursor.fetchall()
-        return render_template('admin/estudiantes3.html', rows=rows)
+        rows2 = cursor.fetchall()
+        return render_template('admin/estudiantes3.html', rows2=rows2)

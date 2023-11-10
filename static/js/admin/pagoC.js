@@ -1,13 +1,13 @@
 // Función para marcar una fila como pagada
-function pagoRealizado(button) {
+function pagoRealizado2(button) {
   // Obtener la fila padre del botón
-  var row = button.parentNode.parentNode;
+  var row2 = button.parentNode.parentNode;
 
   // Cambiar el color de fondo de la fila a verde claro
-  row.style.backgroundColor = "#B9E6C1";
+  row2.style.backgroundColor = "#B9E6C1";
 
   // Obtener el índice de la fila
-  var rowIndex = row.rowIndex;
+  var rowIndex = row2.rowIndex;
 
   // Guardar la fecha de pago en el almacenamiento local como una marca de tiempo
   var fechaPago = Date.now();
@@ -16,18 +16,18 @@ function pagoRealizado(button) {
   // Iniciar un temporizador para revertir la fila después de 2 minutos
   setTimeout(function() {
     revertirFila(rowIndex);
-  }, 120000); // 120000 ms = 2 minutos
+  }, 12000); // 120000 ms = 2 minutos
 }
 
-function pagoPendiente(button) {
+function pagoPendiente2(button) {
   // Obtener la fila padre del botón
-  var row = button.parentNode.parentNode;
+  var row2 = button.parentNode.parentNode;
 
   // Quitar el color de fondo de la fila
-  row.style.backgroundColor = "";
+  row2.style.backgroundColor = "";
 
   // Obtener el índice de la fila
-  var rowIndex = row.rowIndex;
+  var rowIndex = row2.rowIndex;
 
   // Eliminar la fecha de pago del almacenamiento local
   localStorage.removeItem("fechaPago_" + rowIndex);
@@ -36,13 +36,13 @@ function pagoPendiente(button) {
 window.onload = function() {
   // Iterar sobre todas las filas de la tabla
   var table = document.getElementsByTagName("table")[0];
-  var rows = table.getElementsByTagName("tr");
+  var rows2 = table.getElementsByTagName("tr");
 
-  for (var i = 0; i < rows.length; i++) {
-    var row = rows[i];
+  for (var i = 0; i < rows2.length; i++) {
+    var row2 = rows2[i];
 
     // Obtener el índice de la fila
-    var rowIndex = row.rowIndex;
+    var rowIndex = row2.rowIndex;
 
     // Verificar si la fecha de pago existe en el almacenamiento local
     var fechaPago = localStorage.getItem("fechaPago_" + rowIndex);
@@ -53,11 +53,11 @@ window.onload = function() {
       var tiempoTranscurrido = hoy - parseInt(fechaPago, 10);
 
       // Si ha pasado más de 2 minutos, quitar el color verde
-      if (tiempoTranscurrido > 120000) { // 120000 ms = 2 minutos
+      if (tiempoTranscurrido > 12000) { // 120000 ms = 2 minutos
         revertirFila(rowIndex);
       } else {
         // Cambiar el color de fondo de la fila a verde claro
-        row.style.backgroundColor = "#B9E6C1";
+        row2.style.backgroundColor = "#B9E6C1";
       }
     }
   }
@@ -66,21 +66,21 @@ window.onload = function() {
 // Función para descargar la tabla en formato CSV
 function descargarCSV() {
   const table = document.querySelector("table"); // Obtener la tabla
-  const rows = table.querySelectorAll("tr");
+  const rows2 = table.querySelectorAll("tr");
 
   // Crear un array para almacenar los datos de la tabla
   const data = [];
-  for (const row of rows) {
+  for (const row2 of rows2) {
       const rowData = [];
       
       // Obtener los títulos de las columnas (encabezados) excluyendo la última columna
-      const headers = Array.from(row.querySelectorAll("th")).slice(0, -1);
+      const headers = Array.from(row2.querySelectorAll("th")).slice(0, -1);
       for (const header of headers) {
           rowData.push(header.innerText);
       }
 
       // Obtener los datos de las celdas excluyendo la última columna
-      const cells = Array.from(row.querySelectorAll("td")).slice(0, -1);
+      const cells = Array.from(row2.querySelectorAll("td")).slice(0, -1);
       for (const cell of cells) {
           rowData.push(cell.innerText);
       }
