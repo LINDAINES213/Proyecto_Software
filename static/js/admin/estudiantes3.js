@@ -5,9 +5,7 @@ function editarEstudiante(id) {
 
 function eliminarEstudiante(id) {
     // Enviar una solicitud de eliminación del trabajador con el ID
-    if (confirm("¿Estás seguro de que deseas eliminar este trabajador?")) {
-        window.location.href = '/estudiantes2/' + id + '/delete';
-    }
+    window.location.href = '/estudiantes2/' + id + '/delete';
 }
 
 // Función para descargar la tabla en formato CSV

@@ -90,6 +90,7 @@ def eliminar_estudiante(id):
         return render_template('admin/eliminar_estudiante.html', id_estudiante=id)
 
     except Exception as ex:
+        connection.rollback()
         flash('Ocurrió un error al intentar eliminar el trabajador.', 'error')
         return redirect('/estudiantes')
 
@@ -97,7 +98,7 @@ def eliminar_estudiante(id):
 @login_required
 def estudiantes3():
     with connection.cursor() as cursor:
-        cursor.execute("""SELECT id_estudiante, nombres, apellidos, fecha_nacimiento, edad FROM estudiantes
+        cursor.execute("""SELECT id_estudiante, nombres, apellidos, fecha_nacimiento, edad, grado, seccion FROM estudiantes
                         ORDER BY id_estudiante ASC""")
         rows = cursor.fetchall()
         return render_template('admin/estudiantes3.html', rows=rows)
