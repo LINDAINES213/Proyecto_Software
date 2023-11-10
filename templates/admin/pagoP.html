@@ -2,8 +2,10 @@
 <html>
 <head>
 	<title>Trabajadores</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/ver/pagoP.css') }}">
 	<script src="{{ url_for('static', filename='js/admin/pagoP.js') }}"></script>
+
 </head>
 <body>
 	<a href="/inicioadmin" style="font-size: 16px;margin-left: 5px;margin-bottom: 50px;">&#x2190 Regresar</a>
@@ -43,5 +45,7 @@
 			{% endfor %}
 		</tbody>
 	</table>	  
+	<button onclick="descargarTablaComoPDF()">Descargar como PDF</button>
+
 </body>
 </html>
