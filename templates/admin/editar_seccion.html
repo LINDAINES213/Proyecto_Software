@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Editar Grado</title>
+	<title>Editar Sección</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/editar/editar_seccion.css') }}">
 </head>
 <body>
-	<h1>Editar Grado</h1>
+	<h1>Editar Sección</h1>
 	<form action="/secciones2/{{ seccion[0] }}/edit" method="POST">
         <label for="id_seccion">ID Seccion:</label>
 		<input type="number" id="id_seccion" name="id_seccion" value="{{ seccion[0] }}" readonly>

@@ -8,7 +8,7 @@
 	<div class="card">
 		<a href="/grados3" style="font-size: 16px;margin-left: 5px;">&#x2190 Regresar</a>
 		<p class="cookieHeading">Confirmar eliminación</p>
-		<p class="cookieDescription">¿Estás seguro de que deseas eliminar este estudiante?</p>
+		<p class="cookieDescription">¿Estás seguro de que deseas eliminar este grado?</p>
 		<form action="/grados2/{{ id_grado }}/delete" method="POST">
 			<div class="buttonContainer">
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
