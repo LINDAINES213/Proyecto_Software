@@ -1,54 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
-    <meta charset="UTF-8">
-    <title>Asignacion de Salones</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/salones.css') }}">
-
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Asignación de Salones</title>
+      <link rel='stylesheet' href="{{ url_for('static', filename='css/inicioadmin.css') }}" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/trabajadores.css') }}">
   </head>
   <body>
-    <a href="/inicioadmin" style="font-size: 16px;margin-top: -600px; margin-right: 50px;">&#x2190 Regresar</a>
-
-      {% extends './base.html' %}
-
-      {% block title %}Asignacion de Salones{% endblock %}
-      {% block body %}
-      <form class="login-form" action="/salones2" method="POST">
-        {% with messages = get_flashed_messages() %}
-
-        {% if messages %}
-        <br />
-        {% for message in messages %}
-        <div class="alert alert-primary alert-dismissible" role="alert">
-            <strong>{{ message }}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {% block body %}
+    <div class="menu-wrapper">
+      <div class="sidebar-header">
+        <div class="sideBar">
+          <h1 style="text-align: center;">Menu</h1>
+          <ul>
+            <li><a href="/trabajadores"><i class="fas fa-users"></i><label>Trabajadores</label></a></li>
+            <li><a href="/maestros"><i class="fas fa-chalkboard-teacher"></i><label>Maestros</label></a></li>
+            <li><a href="/cursos"><i class="fas fa-book"></i><label>Cursos</label></a></li>
+            <li><a href="/estudiantes"><i class="fas fa-graduation-cap"></i><label>Estudiantes</label></a></li>
+            <li><a href="/grados"><i class="fas fa-award"></i><label>Grados</label></a></li>
+            <li><a href="/secciones"><i class="fas fa-columns"></i><label>Secciones</label></a></li>
+            <li><a href="/pagoC"><i class="fas fa-money-bill-wave"></i><label>Pago Colegiatura</label></a></li>
+            <li><a href="/pagoP"><i class="fas fa-hand-holding-usd"></i><label>Pago a Personal</label></a></li>
+            <li><a href="/salones"><i class="fas fa-door-closed"></i><label>Asignación de Salones</label></a></li>
+            <li><a href="/horario"><i class="fas fa-clock"></i><label>Asignación de Horarios</label></a></li>
+            <li><a href="/formsalarios"><i class="fas fa-coins"></i><label>Pago de Salario</label></a></li>
+            <li><a href="/crearUsuario"><i class="fas fa-user-plus"></i><label>Crear Usuario</label></a></li>
+            <br><a class="logout" href="{{ url_for('logoutt') }}">Logout</a>
+          </ul> <span class="cross-icon"><i class="fas fa-times"></i></span>
+          <br>
         </div>
-        {% endfor %}
-        {% endif %}
-
-        {% endwith %}
-        <h1>Asignar Salon</h1>
-        <div class="form-floating">
-          <input type="text" class="form-control" id="id_salon" name="id_salon" placeholder="ID Salon" required>
-          <label for="id_salon">ID Salon</label>
+        <div class="backdrop"></div>
+        <div class="content">
+          <header>
+            <h3 class="nombre">{{ current_user.nombre }} </h3> <p class="inicio"> <a href="/inicioadmin" style="margin-right: 100px; text-decoration: none; color: #001629;"><i class="fas fa-home"></i> Inicio</a>
+          </header>
+          <div class="content-data">  
+            <form class="login-form" action="/salones2" method="POST">
+              {% with messages = get_flashed_messages() %}
+              {% if messages %}
+              <br/>
+              {% for message in messages %}
+              <div class="alert alert-primary alert-dismissible" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              {% endfor %}
+              {% endif %}
+              {% endwith %}
+              <div class="form">
+                <div class="title"><i class="fas fa-book"></i> Asignar Salón</div>
+                <div class="column">
+                  <div class="input-container ic2">
+                    <input type="text" class="input" id="id_salon" name="id_salon" placeholder="" required>
+                    <div class="cut cut-short"></div>
+                    <label for="id_salon" class="iLabel">ID Salón</label>
+                  </div>
+                  <div class="input-container ic2">
+                    <input type="text" class="input" id="salon" name="salon" placeholder="" required>
+                    <div class="cut cut-short"></div>
+                    <label for="salon" class="iLabel">Salón</label>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="input-container ic2">
+                    <input type="text" class="input" id="aforo" name="aforo" placeholder="" required>
+                    <div class="cut cut-short"></div>
+                    <label for="aforo" class="iLabel">Aforo</label>
+                  </div>
+                  <div class="input-container ic2">
+                    <input type="text" class="input" id="seccion_asignada" name="seccion_asignada" placeholder="" required>
+                    <div class="cut cut-short"></div>
+                    <label for="seccion_asignada" class="iLabel">Sección Asignada</label>
+                  </div>
+                </div>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="submit" style="background-color:#35c43a;" type="submit">Asignar salón</button>
+                <button class="submit" onclick="window.location.href='/secciones3'">Ver salones</button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="form-floating">
-          <input type="text" class="form-control" id="salon" name="salon" placeholder="Salon" required>
-          <label for="salon">Salon</label>
-        </div>
-        <div class="form-floating">
-          <input type="number" class="form-control" name="aforo" placeholder="aforo" required>
-          <label for="aforo">Aforo</label>
-        </div>
-        <div class="form-floating">
-            <input type="text" class="form-control" name="seccion_asignada" placeholder="seccion_asignada" required>
-            <label for="seccion_asignada">Seccion Asignada</label>
-        </div>
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Asignar Salon</button>
-        <button class="w-100 btn btn-lg btn-primary mt-3" onclick="window.location.href='/salones3'">Ver Salones</button>
-
-      </form>
-      {% endblock %}
-    </body>
-  </html>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}
