@@ -1,42 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Trabajadores</title>
+	<title>Pago a Personal</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+	<link rel="icon" href="https://www.talkinheads.net/wp-content/uploads/2023/03/multiple-users-silhouette.png" type="image/x-icon">
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/inicioadmin.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/ver/trabajadores3.css') }}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/ver/pagoP.css') }}">
 	<script src="{{ url_for('static', filename='js/admin/pagoP.js') }}"></script>
 
 </head>
 <body>
-	<a href="/inicioadmin" style="font-size: 16px;margin-left: 5px;margin-bottom: 50px;">&#x2190 Regresar</a>
-	<h1>Trabajadores</h1>
-	<table>
-		<thead>
-			<tr>
-				<th><span>ID</span></th>
-				<th><span>Nombres</span></th>
-				<th><span>Apellidos</span></th>
-				<th><span>Cargo</span></th>
-				<th><span>Salario</span></th>
-				<th><span>Metodo de Pago</span></th>
-				<th><span>Bonus</span></th>
-				<th><span>Fecha de Contratación</span></th>
-				<th><span>Fecha de Pago</span></th>
-				<th><span>Acciones</span></th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for row in rows %}
-				<tr>
-					<td>{{ row[0] }}</td>
-					<td>{{ row[1] }}</td>
-					<td>{{ row[2] }}</td>
-					<td>{{ row[3] }}</td>
-					<td>{{ row[4] }}</td>
-					<td>{{ row[5] }}</td>
-					<td>{{ row[6] }}</td>
-					<td>{{ row[7] }}</td>
-					<td>{{ row[8] }}</td>
+    {% block body %}
+    <div class="menu-wrapper">
+        <div class="sidebar-header">
+            <div class="sideBar">
+                <h1 style="text-align: center;">Menu</h1>
+                <ul>
+                    <li><a href="/trabajadores"><i class="fas fa-users"></i><label>Trabajadores</label></a></li>
+                    <li><a href="/maestros"><i class="fas fa-chalkboard-teacher"></i><label>Maestros</label></a></li>
+                    <li><a href="/cursos"><i class="fas fa-book"></i><label>Cursos</label></a></li>
+                    <li><a href="/estudiantes"><i class="fas fa-graduation-cap"></i><label>Estudiantes</label></a></li>
+                    <li><a href="/grados"><i class="fas fa-award"></i><label>Grados</label></a></li>
+                    <li><a href="/secciones"><i class="fas fa-columns"></i><label>Secciones</label></a></li>
+                    <li><a href="/pagoC"><i class="fas fa-money-bill-wave"></i><label>Pago Colegiatura</label></a></li>
+                    <li><a href="/pagoP"><i class="fas fa-hand-holding-usd"></i><label>Pago a Personal</label></a></li>
+                    <li><a href="/salones"><i class="fas fa-door-closed"></i><label>Asignación de Salones</label></a></li>
+                    <li><a href="/horario"><i class="fas fa-clock"></i><label>Asignación de Horarios</label></a></li>
+                    <li><a href="/formsalarios"><i class="fas fa-coins"></i><label>Pago de Salario</label></a></li>
+                    <li><a href="/crearUsuario"><i class="fas fa-user-plus"></i><label>Crear Usuario</label></a></li>
+                    <br><a class="logout" href="{{ url_for('logoutt') }}">Logout</a>
+                </ul> <span class="cross-icon"><i class="fas fa-times"></i></span>
+                <br>
+            </div>
+            <div class="backdrop"></div>
+            <div class="content">
+                <header>
+                    <h3 class="nombre">{{ current_user.nombre }} </h3> <a href="/inicioadmin" class="inicio"><i class="fas fa-home"></i> Inicio</a>
+                </header>
+				<div class="content-data">  
+					<h1 class="titulo-tabla"><i class="fas fa-users"></i> Trabajadores</h1>
+					<table>
+						<thead>
+							<tr>
+								<th><span>ID</span></th>
+								<th><span>Nombres</span></th>
+								<th><span>Apellidos</span></th>
+								<th><span>Cargo</span></th>
+								<th><span>Salario</span></th>
+								<th><span>Metodo de Pago</span></th>
+								<th><span>Bonus</span></th>
+								<th><span>Fecha de Contratación</span></th>
+								<th><span>Fecha de Pago</span></th>
+								<th><span>Acciones</span></th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for row in rows %}
+								<tr>
+									<td>{{ row[0] }}</td>
+									<td>{{ row[1] }}</td>
+									<td>{{ row[2] }}</td>
+									<td>{{ row[3] }}</td>
+									<td>{{ row[4] }}</td>
+									<td>{{ row[5] }}</td>
+									<td>{{ row[6] }}</td>
+									<td>{{ row[7] }}</td>
+									<td>{{ row[8] }}</td>
 					<td>
 						<button class="pago-realizado" onclick="pagoRealizado(this)">Pagado</button>
 						<button class="pago-pendiente" onclick="pagoPendiente(this)">Pendiente</button>
@@ -44,8 +75,9 @@
 				</tr>
 			{% endfor %}
 		</tbody>
-	</table>	  
+	</table>
+	<br/>
 	<button onclick="descargarTablaComoPDF()">Descargar como PDF</button>
-
 </body>
 </html>
+{% endblock %}
