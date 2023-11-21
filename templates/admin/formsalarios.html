@@ -1,50 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
-    <meta charset="UTF-8">
-    <title>Salario de Trabajadores</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/formsalarios.css') }}">
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Cursos</title>
+      <link rel='stylesheet' href="{{ url_for('static', filename='css/inicioadmin.css') }}" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/crear/trabajadores.css') }}">
   </head>
   <body>
-    <a href="/inicioadmin" style="font-size: 16px;margin-top: -600px; margin-right: 50px;">&#x2190 Regresar</a>
-
-      {% extends './base.html' %}
-
-      {% block title %}Ver Salario{% endblock %}
-      {% block body %}
-      <form class="login-form" action="/formsalarios" method="POST">
-        {% with messages = get_flashed_messages() %}
-
-        {% if messages %}
-        <br />
-        {% for message in messages %}
-        <div class="alert alert-primary alert-dismissible" role="alert">
-            <strong>{{ message }}</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {% block body %}
+    <div class="menu-wrapper">
+      <div class="sidebar-header">
+        <div class="sideBar">
+          <h1 style="text-align: center;">Menu</h1>
+          <ul>
+            <li><a href="/trabajadores"><i class="fas fa-users"></i><label>Trabajadores</label></a></li>
+            <li><a href="/maestros"><i class="fas fa-chalkboard-teacher"></i><label>Maestros</label></a></li>
+            <li><a href="/cursos"><i class="fas fa-book"></i><label>Cursos</label></a></li>
+            <li><a href="/estudiantes"><i class="fas fa-graduation-cap"></i><label>Estudiantes</label></a></li>
+            <li><a href="/grados"><i class="fas fa-award"></i><label>Grados</label></a></li>
+            <li><a href="/secciones"><i class="fas fa-columns"></i><label>Secciones</label></a></li>
+            <li><a href="/pagoC"><i class="fas fa-money-bill-wave"></i><label>Pago Colegiatura</label></a></li>
+            <li><a href="/pagoP"><i class="fas fa-hand-holding-usd"></i><label>Pago a Personal</label></a></li>
+            <li><a href="/salones"><i class="fas fa-door-closed"></i><label>Asignación de Salones</label></a></li>
+            <li><a href="/horario"><i class="fas fa-clock"></i><label>Asignación de Horarios</label></a></li>
+            <li><a href="/formsalarios"><i class="fas fa-coins"></i><label>Pago de Salario</label></a></li>
+            <li><a href="/crearUsuario"><i class="fas fa-user-plus"></i><label>Crear Usuario</label></a></li>
+            <br><a class="logout" href="{{ url_for('logoutt') }}">Logout</a>
+          </ul> <span class="cross-icon"><i class="fas fa-times"></i></span>
+          <br>
         </div>
-        {% endfor %}
-        {% endif %}
-
-        {% endwith %}
-        <h1>Ver Salario</h1>
-        <div class="form-floating">
-          <input type="text" class="form-control" id="dpi" name="dpi" placeholder="DPI" required>
-          <label for="dpi">DPI</label>
+        <div class="backdrop"></div>
+        <div class="content">
+          <header>
+            <h3 class="nombre">{{ current_user.nombre }} </h3> <p class="inicio"> <a href="/inicioadmin" style="margin-right: 100px; text-decoration: none; color: #001629;"><i class="fas fa-home"></i> Inicio</a>
+          </header>
+          <div class="content-data">  
+            <form class="login-form" action="/formsalarios" method="POST">
+              {% with messages = get_flashed_messages() %}
+              {% if messages %}
+              <br/>
+              {% for message in messages %}
+              <div class="alert alert-primary alert-dismissible" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+              {% endfor %}
+              {% endif %}
+              {% endwith %}
+              <div class="form">
+                <div class="title"><i class="fas fa-coins"></i> Salario</div>
+                <div class="input-container ic1">
+                  <input type="text" class="input" id="dpi" name="dpi" placeholder="" required>
+                  <div class="cut cut-short"></div>
+                  <label for="dpi" class="iLabel">DPI</label>
+                </div>
+                  <div class="input-container ic2">
+                    <input type="password" class="input" id="contrasena" name="contrasena" placeholder="" required>
+                    <div class="cut cut-short"></div>
+                    <label for="contrasena" class="iLabel">Contraseña</label>
+                  </div>
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="submit" style="background-color:#35c43a;" type="submit">Ver salario</button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="form-floating">
-          <input type="text" class="form-control" id="contrasena" name="contrasena" placeholder="contrasena" required>
-          <label for="contrasena">Contraseña del usuario</label>
-        </div>
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="w-100 btn btn-lg btn-primary mt-3" onclick="window.location.href='/salarios'">Ver Salario</button>
-
-      </form>
-      {% endblock %}
-            <label for="dpi">DPI:</label>
-            <input type="text" id="dpi" name="dpi" required>
-            <label for="contrasena">Contraseña del usuario:</label>
-            <input type="text" id="contrasena" name="contrasena" required>
-            <button type="submit">Ver Salario</button>
-      </form>
-    </body>
-  </html>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %} 
