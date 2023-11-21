@@ -136,29 +136,11 @@ def inicioestudiante():
 def load_user(id):
     return ModelUser.get_by_idE(connection, id) or ModelUser.get_by_id(connection, id) 
 
-'''def get_cargo_from_database(dpi):
-    try:
-        with connection.cursor() as cursor:
-            cursor.execute("""SELECT cargo FROM usuarios.user
-                                WHERE dpi = %s""", (dpi,))
-            row = cursor.fetchone()
-           
-            if row:
-                cargo = row[0]
-                return cargo
-            else:
-                return cargo
-
-    except Exception as ex:
-        print(f"Error al obtener el cargo del usuario: {ex}")
-        return None'''
-
 @app.route('/logint', methods=['GET', 'POST'])
 def logint():
     if request.method == 'POST':
         dpi = request.form['dpi']
         contrasena = request.form['contrasena']
-        #cargo = get_cargo_from_database(dpi)
         user = User(0, dpi, contrasena)
         logged_user = ModelUser.login(connection, user)
         if logged_user != None:
