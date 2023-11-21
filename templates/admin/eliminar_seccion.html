@@ -6,10 +6,10 @@
 </head>
 <body>
 	<div class="card">
-		<a href="/grados3" style="font-size: 16px;margin-left: 5px;">&#x2190 Regresar</a>
+		<a href="/secciones3" style="font-size: 16px;margin-left: 5px;">&#x2190 Regresar</a>
 		<p class="cookieHeading">Confirmar eliminación</p>
 		<p class="cookieDescription">¿Estás seguro de que deseas eliminar esta sección?</p>
-		<form action="/grados2/{{ id_grado }}/delete" method="POST">
+		<form action="/grados2/{{ id_seccion }}/delete" method="POST">
 			<div class="buttonContainer">
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 				<button class="button" type="submit">
