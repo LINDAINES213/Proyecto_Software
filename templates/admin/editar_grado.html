@@ -1,50 +1,139 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Editar Grado</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/editar/editar_grado.css') }}">
-</head>
-<body>
-	<h1>Editar Grado</h1>
-	<form action="/grados2/{{ grado[0] }}/edit" method="POST">
-		<label for="id_grado">ID Grado:</label>
-		<input type="number" id="id_grado" name="id_grado" value="{{ grado[0] }}" readonly>
-		<br>
-		<label for="grado">Grado:</label>
-		<input type="text" id="grado" name="grado" value="{{ grado[1] }}">
-		<br>
-		<label for="curso1">Curso 1:</label>
-		<input type="text" id="curso1" name="curso1" value="{{ grado[2] }}">
-		<br>
-		<label for="curso2">Curso 2:</label>
-		<input type="text" id="curso2" name="curso2" value="{{ grado[3] }}">
-		<br>
-		<label for="curso3">Curso 3:</label>
-		<input type="text" id="curso3" name="curso3" value="{{ grado[4] }}">
-		<br>
-        <label for="curso4">Curso 4:</label>
-		<input type="text" id="curso4" name="curso4" value="{{ grado[5] }}">
-		<br>
-        <label for="curso5">Curso 5:</label>
-		<input type="text" id="curso5" name="curso5" value="{{ grado[6] }}">
-		<br>
-        <label for="curso6">Curso 6:</label>
-		<input type="text" id="curso6" name="curso6" value="{{ grado[7] }}">
-		<br>
-        <label for="curso7">Curso 7:</label>
-		<input type="text" id="curso7" name="curso7" value="{{ grado[8] }}">
-		<br>
-        <label for="curso8">Curso 8:</label>
-		<input type="text" id="curso8" name="curso8" value="{{ grado[9] }}">
-		<br>
-        <label for="curso9">Curso 9:</label>
-		<input type="text" id="curso9" name="curso9" value="{{ grado[10] }}">
-		<br>
-        <label for="curso10">Curso 10:</label>
-		<input type="text" id="curso10" name="curso10" value="{{ grado[11] }}">
-		<br>
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Guardar</button>
-	</form>
-</body>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Trabajadores</title>
+		<link rel="icon" href="https://www.talkinheads.net/wp-content/uploads/2023/03/multiple-users-silhouette.png" type="image/x-icon">
+		<link rel='stylesheet' href="{{ url_for('static', filename='css/inicioadmin.css') }}" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/editar/editar_trabajador.css') }}">
+	</head>
+	<body>
+	{% block body %}
+	<div class="menu-wrapper">
+		<div class="sidebar-header">
+			<div class="sideBar">
+				<h1 style="text-align: center;">Menu</h1>
+				<ul>
+				<li><a href="/trabajadores"><i class="fas fa-users"></i><label>Trabajadores</label></a></li>
+				<li><a href="/maestros"><i class="fas fa-chalkboard-teacher"></i><label>Maestros</label></a></li>
+				<li><a href="/cursos"><i class="fas fa-book"></i><label>Cursos</label></a></li>
+				<li><a href="/estudiantes"><i class="fas fa-graduation-cap"></i><label>Estudiantes</label></a></li>
+				<li><a href="/grados"><i class="fas fa-award"></i><label>Grados</label></a></li>
+				<li><a href="/secciones"><i class="fas fa-columns"></i><label>Secciones</label></a></li>
+				<li><a href="/formcolegiaturas"><i class="fas fa-money-bill-wave"></i><label>Pago Colegiatura</label></a></li>
+				<li><a href="/pagoP"><i class="fas fa-hand-holding-usd"></i><label>Pago a Personal</label></a></li>
+				<li><a href="/salones"><i class="fas fa-door-closed"></i><label>Asignación de Salones</label></a></li>
+				<li><a href="/horario"><i class="fas fa-clock"></i><label>Asignación de Horarios</label></a></li>
+				<li><a href="/formsalarios"><i class="fas fa-coins"></i><label>Pago de Salario</label></a></li>
+				<li><a href="/crearUsuario"><i class="fas fa-user-plus"></i><label>Crear Usuario</label></a></li>
+				<br><a class="logout" href="{{ url_for('logoutt') }}">Logout</a>          
+				</ul> <span class="cross-icon"><i class="fas fa-times"></i></span><br>
+			</div>
+		<div class="backdrop"></div>
+		<div class="content">
+			<header>
+			<h3 class="nombre">{{ current_user.nombre }} </h3>  <a href="/inicioadmin" class="inicio"><i class="fas fa-home"></i> Inicio</a>
+			</header>
+			<div class="content-data"> 
+				<form action="/grados2/{{ grado[0] }}/edit" method="POST">
+				{% with messages = get_flashed_messages() %}
+			
+				{% if messages %}
+				<br />
+				{% for message in messages %}
+				<div class="alert alert-primary alert-dismissible" role="alert">
+					<strong>{{ message }}</strong>
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					
+				</div>
+				{% endfor %}
+				{% endif %}
+		
+				{% endwith %}
+				<div class="form">
+					<div class="title"><i class="fas fa-book"></i> Agregar grado</div>
+					<div class="column">
+					  <div class="input-container ic2">
+						<input type="text" class="input" id="id_grado" name="id_grado" placeholder="" value="{{ grado[0] }}" readonly>
+						<div class="cut cut-short"></div>
+						<label for="id_grado" class="iLabel">ID Grado</label>
+					  </div>
+					  <div class="input-container ic2">
+						<input type="text" class="input" id="grado" name="grado" placeholder="" value="{{ grado[1] }}" required>
+						<div class="cut cut-short"></div>
+						<label for="grado" class="iLabel">Grado</label>
+					  </div>
+					</div>
+					<div class="column">
+					  <div class="input-container ic2">
+						<input type="text" class="input" id="curso1" name="curso1" placeholder="" value="{{ grado[2] }}" required>
+						<div class="cut cut-short"></div>
+						<label for="curso1" class="iLabel">Curso 1</label>
+					  </div>
+					  <div class="input-container ic2">
+						<input type="text" class="input" id="curso2" name="curso2" placeholder="" value="{{ grado[3] }}" required>
+						<div class="cut cut-short"></div>
+						<label for="curso2" class="iLabel">Curso 2</label>
+					  </div>
+					</div>
+					<div class="column">
+					  <div class="input-container ic2">
+						<input type="text" class="input" id="curso3" name="curso3" placeholder="" value="{{ grado[4] }}" required>
+						<div class="cut cut-short"></div>
+						<label for="curso3" class="iLabel">Curso 3</label>
+					  </div>
+					  <div class="input-container ic2">
+						<input type="text" class="input" id="curso4" name="curso4" placeholder="" value="{{ grado[5] }}" required>
+						<div class="cut cut-short"></div>
+						<label for="curso4" class="iLabel">Curso 4</label>
+					  </div>
+					</div>
+					<div class="column">
+					  <div class="input-container ic2">
+						<input type="text" class="input" id="curso5" name="curso5" placeholder="" value="{{ grado[6] }}">
+						<div class="cut cut-short"></div>
+						<label for="curso5" class="iLabel">Curso 5</label>
+					  </div>
+					  <div class="input-container ic2">
+						<input type="text" class="input" id="curso6" name="curso6" placeholder="" value="{{ grado[7] }}">
+						<div class="cut cut-short"></div>
+						<label for="curso6" class="iLabel">Curso 6</label>
+					  </div>
+					</div>  
+					<div class="column">
+					  <div class="input-container ic2">
+						<input type="text" class="input" id="curso7" name="curso7" placeholder="" value="{{ grado[8] }}">
+						<div class="cut cut-short"></div>
+						<label for="curso7" class="iLabel">Curso 7</label>
+					  </div>
+					  <div class="input-container ic2">
+						<input type="text" class="input" id="curso8" name="curso8" placeholder="" value="{{ grado[9] }}">
+						<div class="cut cut-short"></div>
+						<label for="curso8" class="iLabel">Curso 8</label>
+					  </div>
+					</div>
+					<div class="column">
+					  <div class="input-container ic2">
+						<input type="text" class="input" id="curso9" name="curso9" placeholder="" value="{{ grado[10] }}">
+						<div class="cut cut-short"></div>
+						<label for="curso9" class="iLabel">Curso 9</label>
+					  </div>
+					  <div class="input-container ic2">
+						<input type="text" class="input" id="curso10" name="curso10" placeholder="" value="{{ grado[11] }}">
+						<div class="cut cut-short"></div>
+						<label for="curso10" class="iLabel">Curso 10</label>
+					  </div>
+					</div>
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+					<button class="submit" style="background-color:#35c43a;" type="submit">Guardar</button>
+				  </div>
+				</form>
+			</div>
+				</div>
+				</div>
+			</div>
+		</body>
 </html>
+{% endblock %}

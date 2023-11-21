@@ -54,7 +54,6 @@ def editar_grado(id):
                 return 'Grado no encontrado'
 
         elif request.method == 'POST':
-            # Actualizar los datos del salon en la base de datos
             id_grado = request.form['id_grado']
             grado = request.form['grado']
             curso1 = request.form['curso1']
