@@ -1,13 +1,11 @@
-function editar_curso(id) {
+function editar_horario(id) {
     // Redireccionar al formulario de edición con el ID del trabajador
     window.location.href = '/horario2/' + id + '/edit';
 }
 
-function eliminar_curso(id) {
+function eliminar_horario(id) {
     // Enviar una solicitud de eliminación del trabajador con el ID
-    if (confirm("¿Estás seguro de que deseas eliminar este trabajador?")) {
-        window.location.href = '/horario2/' + id + '/delete';
-    }
+    window.location.href = '/horario2/' + id + '/delete';
 }
 
 // Función para descargar la tabla en formato CSV
