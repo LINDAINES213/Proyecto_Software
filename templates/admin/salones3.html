@@ -58,8 +58,8 @@
 								<td>{{ row[2] }}</td>
 								<td>{{ row[3] }}</td>
 					<td>
-						<button class="edit-button" onclick="editar_salon('{{ row[0] }}')">Editar</button>
-						<button class="delete-button" onclick="eliminar_salon('{{ row[0] }}')">Eliminar</button>
+						<button class="edit-button" onclick="editar_salon('{{ row[0] }}')"><i class="fas fa-pencil-alt"></i></button>
+						<button class="delete-button" onclick="eliminar_salon('{{ row[0] }}')"><i class="fas fa-trash"></i></button>
 					</td>
 				</tr>
 			{% endfor %}

@@ -5,9 +5,7 @@ function editar_salon(id) {
 
 function eliminar_salon(id) {
     // Enviar una solicitud de eliminación del trabajador con el ID
-    if (confirm("¿Estás seguro de que deseas eliminar este salón?")) {
-        window.location.href = '/salones2/' + id + '/delete';
-    }
+    window.location.href = '/salones2/' + id + '/delete';
 }
 
 // Función para descargar la tabla en formato CSV
