@@ -21,6 +21,7 @@ from routes.perfil_admin.pagos import pagos_bp
 from routes.perfil_admin.crearUsuario import crearUsuario_bp
 from routes.perfil_admin.crearEstudiante import crearEstudiante_bp
 from routes.perfil_admin.horario import horarios_bp
+from routes.perfil_admin.usuarios import usuarios_bp
 #######################################################################
 
 ################## Funcionalidades para Director ###################
@@ -68,6 +69,7 @@ app.register_blueprint(pagos_bp)
 app.register_blueprint(crearUsuario_bp)
 app.register_blueprint(crearEstudiante_bp)
 app.register_blueprint(horarios_bp)
+app.register_blueprint(usuarios_bp)
 #############################################
 
 ###### Funcionalidades para Director ######
